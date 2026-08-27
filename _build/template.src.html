@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="d10b17b1-fb98-4bb3-9364-d4378bc9e871"></script>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Việt Nam - Độc Lập - Tự Do - Hạnh Phúc</title>
+<style>
+/*__FONTS__*/
+
+:root{
+  --f-display:'EB Garamond',Georgia,'Times New Roman',serif;
+  --f-body:'Be Vietnam Pro','Segoe UI',system-ui,-apple-system,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+
+  /* type scale — 16px body floor, nothing below 12px */
+  --fs-2xs:12px; --fs-xs:13px; --fs-sm:14px; --fs-md:16px; --fs-lg:18px; --fs-xl:21px;
+  --fs-sec:clamp(24px,6.2vw,30px);
+  --fs-hero:clamp(23px,5.9vw,31px);
+
+  /* 4/8 spacing rhythm */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px;
+
+  --c-page:#E4E0D5; --c-surface:#FBF8F1; --c-surface2:#FFFDF8; --c-surface3:#F6F1E4;
+  --c-ink:#1C1A16; --c-ink2:#55504A; --c-ink3:#635D55;
+  --c-line:#EAE2D1; --c-line2:#DFD5BE;
+  --c-red:#B21F17; --c-red-ink:#9E2A1E;
+  --c-gold-soft:#E0B24A;
+
+  --tap:44px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--c-page);color:var(--c-ink);-webkit-font-smoothing:antialiased;
+  font-family:var(--f-body);font-size:var(--fs-md);line-height:1.55}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit;margin:0}
+:where(button,a,[tabindex]):focus-visible{outline:2px solid var(--c-red-ink);outline-offset:3px;border-radius:2px}
+
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@keyframes crawl{from{background-position:0 0}to{background-position:0 -14px}}
+@keyframes sealIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+
+.page{min-height:100dvh;background:var(--c-page)}
+.doc{max-width:560px;margin:0 auto;background:var(--c-surface);box-shadow:0 24px 70px rgba(28,26,22,.16)}
+
+/* ---------- crest ---------- */
+.crest{background:var(--c-red);color:#FFF6E3;padding:var(--s5) var(--s5) var(--s4);text-align:center;
+  border-bottom:3px double var(--c-gold-soft);box-shadow:inset 0 0 0 1px rgba(255,223,0,.22)}
+.flag{width:56px;height:37px;background:#DA251D;border:1px solid rgba(255,223,0,.55);
+  box-shadow:0 4px 12px rgba(22,21,15,.28);display:flex;align-items:center;justify-content:center;
+  color:#FFDF00;font-size:24px;line-height:1;margin:0 auto}
+.crest-state{margin-top:var(--s3);font-family:var(--f-display);font-weight:700;
+  font-size:clamp(15px,3.9vw,19px);letter-spacing:.05em;line-height:1.3}
+.crest-motto{margin-top:var(--s2);display:flex;align-items:center;justify-content:center;gap:var(--s3)}
+.crest-motto span{width:clamp(18px,6vw,44px);height:1px;background:rgba(255,223,0,.55)}
+.crest-motto b{font-family:var(--f-display);font-weight:500;font-size:clamp(14px,3.6vw,17px);white-space:nowrap}
+
+/* ---------- hero ---------- */
+.hero{padding:var(--s6) var(--s5);text-align:center}
+
+.hero-frame{border:1px solid var(--c-line2);padding:7px;background:var(--c-surface2)}
+.hero-frame>div{border:1px solid #EFE8D8}
+.rule{margin-top:var(--s5);display:flex;align-items:center;justify-content:center;gap:var(--s3)}
+.rule span{width:clamp(24px,12vw,84px);height:1px;background:var(--c-line2)}
+.rule b{color:#8A6A1E;font-size:var(--fs-2xs);line-height:1}
+.hero-verse{margin-top:0;display:flex;flex-direction:column;gap:var(--s1);
+  font-family:var(--f-display);font-weight:700;font-size:var(--fs-hero);
+  line-height:1.2;letter-spacing:-.005em;color:var(--c-ink);text-wrap:balance}
+.hero-cite{margin-top:var(--s4);font-size:var(--fs-xs);line-height:1.55;color:var(--c-ink2)}
+
+/* ---------- future card (2045 — metallic, forward-looking) ---------- */
+.future{padding:0 0 var(--s2)}
+.future-grid{display:grid;grid-template-columns:34px minmax(0,1fr)}
+.future-rail{display:flex;flex-direction:column;align-items:center}
+.future-rail u{width:2px;flex:1;min-height:44px;display:block;
+  background-image:linear-gradient(#C79A3B 55%,transparent 0);background-size:2px 14px;
+  animation:crawl 1.4s linear infinite}
+.future-body{padding:0 0 var(--s4) var(--s4)}
+.future-card{background:var(--c-surface2);padding:var(--s4);
+  border:1px solid var(--c-gold-soft);
+  box-shadow:0 0 0 4px rgba(199,154,59,.10),0 14px 34px rgba(28,26,22,.12)}
+.future-live{display:flex;align-items:center;gap:var(--s2);font-family:var(--f-mono);
+  font-size:var(--fs-2xs);letter-spacing:.16em;color:#8A6A1E}
+.future-live span{width:7px;height:7px;border-radius:50%;background:#C79A3B;
+  animation:pulse 1.9s ease-in-out infinite}
+.future-slots{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+.future-slot{flex:1 1 100%;padding:var(--s3);border:1px dashed var(--c-line2);background:#FDFAF2}
+.future-slot b{display:block;font-family:var(--f-mono);font-size:var(--fs-xs);letter-spacing:.1em;
+  font-weight:500;color:#8A6A1E}
+.future-slot i{display:block;margin-top:var(--s1);font-size:var(--fs-sm);line-height:1.5;
+  color:var(--c-ink2);font-style:normal}
+.future-slot em{display:block;margin-top:var(--s2);padding-left:var(--s3);
+  border-left:2px solid var(--c-gold-soft);font-family:var(--f-display);font-weight:500;
+  font-size:var(--fs-md);line-height:1.5;color:var(--c-ink);font-style:normal}
+
+/* ---------- chapter ---------- */
+.chap{position:relative;padding:0 var(--s5)}
+.chap-hd{margin:var(--s8) 0 var(--s5);padding:var(--s7) var(--s5);text-align:center;
+  background:rgba(var(--tone-rgb),.10);border-top:3px solid var(--tone);
+  border-bottom:1px solid rgba(var(--tone-rgb),.35)}
+.chap-hd--bare{padding:0;margin:var(--s8) 0 var(--s5);height:3px;background:var(--tone);
+  border:0}
+.chap-quote{margin:0;font-family:var(--f-display);font-weight:500;
+  font-size:clamp(19px,4.9vw,25px);line-height:1.42;color:var(--c-ink);text-wrap:balance}
+.chap-quote::after{content:'';display:block;width:40px;height:1px;margin:var(--s4) auto 0;
+  background:var(--tone)}
+.chap-cite{display:block;margin-top:var(--s3);font-family:var(--f-mono);font-size:var(--fs-2xs);
+  letter-spacing:.14em;color:var(--tone-ink)}
+
+.era-hd{display:grid;grid-template-columns:34px minmax(0,1fr);padding:var(--s5) 0 var(--s2)}
+.era-row{display:flex;align-items:center;gap:var(--s3);padding-left:var(--s4)}
+.era-name{font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.12em;
+  color:var(--c-ink2);font-weight:500}
+.era-fill{flex:1;height:1px;background:var(--c-line2)}
+
+/* ---------- timeline row: colour interpolated from the milestone's year ---------- */
+.row{display:grid;grid-template-columns:34px minmax(0,1fr);
+  background:radial-gradient(130% 74% at 0% 46%, rgba(var(--tone-rgb),.11), transparent 66%)}
+.rail{display:flex;flex-direction:column;align-items:center;padding-top:var(--s5)}
+.rail-node{width:9px;height:9px;border-radius:50%;background:var(--tone);flex:none;
+  box-shadow:0 0 0 3px rgba(var(--tone-rgb),.16)}
+/* the connector fades into the NEXT milestone's colour — no hard era seams */
+.rail-line{width:2px;flex:1;margin-top:var(--s1);
+  background:linear-gradient(var(--tone),var(--tone-next))}
+.row-body{padding:0 0 var(--s5) var(--s4)}
+
+/* ---------- full card: the 9 sovereignty milestones (+ the 2026 climax) ---------- */
+.card{background:var(--c-surface2);border:1px solid rgba(var(--tone-rgb),.55);
+  border-left:3px solid var(--tone);
+  box-shadow:0 10px 28px rgba(28,26,22,.10);animation:rise .55s ease both}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:var(--s3) var(--s3) var(--s2);font-family:var(--f-mono);font-size:var(--fs-2xs);
+  color:var(--c-ink3);background:rgba(var(--tone-rgb),.07)}
+.card-code{display:inline-flex;align-items:center;gap:6px;font-weight:500;color:var(--tone-ink)}
+.card-body{padding:var(--s3)}
+.card-tags{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:var(--s2) var(--s3) var(--s3);font-family:var(--f-mono);font-size:var(--fs-2xs);
+  color:var(--c-ink3);border-top:1px solid var(--c-line)}
+.card-tags em{font-style:normal;color:var(--halo-ink)}
+
+/* sovereignty halo — antique gold before 1945, flag gold from 1945 (§4, §5).
+   The card keeps its era colour; only the ring is gold. */
+.card--core{border-color:var(--halo);border-left-color:var(--tone);
+  box-shadow:0 0 0 4px rgba(var(--halo-rgb),.13),0 10px 28px rgba(28,26,22,.10)}
+.card--pin{border:2px solid var(--halo);border-left:4px solid var(--tone);
+  box-shadow:0 0 0 5px rgba(var(--halo-rgb),.18),0 14px 36px rgba(28,26,22,.14);
+  animation:sealIn .6s ease both}
+.card--pin .ev-title{font-size:clamp(22px,5.7vw,26px)}
+
+.ribbon{padding:var(--s2) var(--s3);font-family:var(--f-mono);font-size:var(--fs-2xs);
+  font-weight:500;letter-spacing:.14em;text-align:center;background:var(--halo);color:#2A1F06}
+/* 2026 / 2045 — metallic sheen instead of extra brightness */
+.ribbon--sheen{background:linear-gradient(100deg,#C9A227,#EBC24A 24%,#F7E6A8 40%,#EBC24A 58%,#C9A227);
+  color:#2A1F06}
+.media{display:flex;flex-wrap:wrap;gap:var(--s2);padding:var(--s3) var(--s3) 0;
+  background:rgba(var(--halo-rgb),.12)}
+.media-video{padding:var(--s3);background:rgba(var(--halo-rgb),.12);
+  border-bottom:1px solid rgba(var(--halo-rgb),.4)}
+.media-video iframe{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--halo);background:#000}
+@supports not (aspect-ratio:16/9){.media-video iframe{height:200px}}
+.media-btn{flex:1 1 150px;min-height:56px;display:flex;align-items:center;gap:var(--s3);
+  padding:var(--s3);background:var(--c-surface2);border:1px solid var(--halo);
+  color:var(--c-ink);text-decoration:none;text-align:left;cursor:pointer;
+  font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:background .18s ease,transform .18s ease}
+.media-btn:hover{background:#FFF8E6;transform:translateY(-1px)}
+.media-btn svg{flex:none;width:26px;height:26px;fill:none;stroke:var(--halo-ink);
+  stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.media-btn b{flex:1;font-size:var(--fs-md);font-weight:600;line-height:1.3}
+.media-btn i{flex:none;font-style:normal;font-size:var(--fs-xl);line-height:1;color:var(--halo-ink)}
+.media-btn.is-open{background:#FFF8E6}
+.img-cap{display:block;padding:var(--s2) var(--s3);background:rgba(var(--tone-rgb),.09);
+  border-bottom:1px solid rgba(var(--tone-rgb),.28);font-size:var(--fs-xs);line-height:1.5;
+  color:var(--c-ink2);text-align:left}
+.brief .img-cap{border:0;margin-top:var(--s1);padding:var(--s2) 0;background:none}
+.badge-row{margin:var(--s3) 0}
+.ev-title{font-family:var(--f-display);font-weight:700;font-size:var(--fs-xl);
+  line-height:1.22;color:var(--c-ink)}
+.ev-time{margin-top:var(--s2);font-family:var(--f-mono);font-size:var(--fs-2xs);
+  letter-spacing:.08em;color:var(--c-ink2)}
+.ev-time b{font-weight:500;color:var(--c-ink3);margin-right:var(--s2)}
+.ev-field{display:block;margin-top:var(--s4)}
+.ev-field b{display:block;font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.1em;
+  font-weight:500;color:var(--c-ink3);margin-bottom:var(--s1)}
+.ev-field>span{display:block;font-size:var(--fs-md);line-height:1.65;color:var(--c-ink2)}
+.extra-tog{display:flex;width:100%;min-height:calc(var(--tap) + 4px);align-items:center;
+  justify-content:space-between;gap:var(--s2);margin-top:var(--s4);padding:var(--s3);
+  background:rgba(var(--halo-rgb),.10);border:1px solid rgba(var(--halo-rgb),.55);
+  font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.1em;color:var(--halo-ink);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:background .18s ease}
+.extra-tog:hover{background:rgba(var(--halo-rgb),.18)}
+.extra-tog i{font-style:normal;font-size:var(--fs-sm);line-height:1}
+.extra-tog.is-open{border-bottom-color:transparent}
+.ev-extra{padding:var(--s3);background:rgba(var(--halo-rgb),.10);
+  border:1px solid rgba(var(--halo-rgb),.55);border-top:0}
+.ev-extra>span{display:block;font-size:var(--fs-md);line-height:1.65;color:#3D3116}
+.brief .ev-extra{border-left:3px solid var(--halo);border-top:1px solid rgba(var(--halo-rgb),.55)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px var(--s2);
+  background:rgba(var(--halo-rgb),.13);border:1px solid var(--halo);
+  color:var(--halo-ink);font-family:var(--f-mono);font-size:var(--fs-2xs);font-weight:500;letter-spacing:.08em}
+
+.rail-node--core{width:15px;height:15px;background:var(--tone);border:2px solid var(--halo);
+  box-shadow:0 0 0 4px rgba(var(--halo-rgb),.18)}
+.rail-node--pin{width:19px;height:19px;background:var(--tone);border:3px solid var(--halo);
+  box-shadow:0 0 0 5px rgba(var(--halo-rgb),.24),0 0 14px rgba(var(--halo-rgb),.35)}
+
+/* ---------- brief: everything else — title + 2 lines, tap for the rest ---------- */
+.brief{display:block;width:100%;min-height:var(--tap);text-align:left;padding:var(--s3);
+  background:var(--c-surface);border:1px solid var(--c-line);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:background .18s ease,border-color .18s ease}
+.brief:hover{background:var(--c-surface2);border-color:rgba(var(--tone-rgb),.5)}
+.brief.is-open{background:var(--c-surface2);border-color:rgba(var(--tone-rgb),.65);
+  box-shadow:inset 3px 0 0 var(--tone)}
+.brief-top{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  font-family:var(--f-mono);font-size:var(--fs-2xs);color:var(--c-ink3)}
+.brief-title{display:block;margin-top:var(--s1);font-size:var(--fs-md);font-weight:500;
+  line-height:1.4;color:var(--c-ink)}
+.brief-mean{display:block;margin-top:var(--s2);font-size:var(--fs-sm);line-height:1.55;color:var(--c-ink2)}
+.brief-note{display:block;margin-top:var(--s2);font-size:var(--fs-xs);line-height:1.55;color:var(--c-ink3)}
+
+/* ---------- provenance ---------- */
+
+.origin-banner{margin:0;--tone:#8B623E;border-top:1px solid var(--c-line2);
+  background:var(--c-surface2)}
+.origin-banner figcaption{padding:var(--s5) var(--s5) var(--s6);
+  border-left:3px solid var(--tone)}
+
+.origin-banner b{display:block;font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.08em;
+  font-weight:500;color:var(--c-ink);margin-bottom:var(--s2)}
+.origin-banner span{display:block;font-size:var(--fs-sm);line-height:1.65;color:var(--c-ink2)}
+.sources{padding:var(--s6) var(--s5) var(--s8);border-top:1px solid var(--c-line2);
+  background:var(--c-surface3)}
+.sources h3{font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.14em;
+  color:var(--c-ink2);font-weight:500}
+.reflist{list-style:none;margin:var(--s4) 0 0;padding:0;border-top:1px solid var(--c-line2)}
+.reflist li{display:flex;flex-direction:column;gap:2px;padding:var(--s3) 0;
+  border-bottom:1px solid var(--c-line2)}
+.reflist b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink);line-height:1.4}
+.reflist span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2)}
+.refnote{margin-top:var(--s4);font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
+.sources b{color:var(--c-ink);font-weight:500}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;z-index:60;right:max(var(--s4),env(safe-area-inset-right));
+  bottom:max(var(--s4),env(safe-area-inset-bottom));
+  width:var(--tap);height:var(--tap);display:flex;align-items:center;justify-content:center;
+  background:var(--c-red);color:#FFF6E3;border:1px solid rgba(255,223,0,.45);
+  box-shadow:0 6px 20px rgba(28,26,22,.32);font-size:20px;line-height:1;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:background .18s ease,transform .18s ease}
+.totop:hover{background:#8E1811;transform:translateY(-2px)}
+@keyframes totopIn{0%{opacity:0;visibility:hidden}100%{opacity:1;visibility:visible}}
+@supports (animation-timeline: scroll()){
+  .totop{animation:totopIn linear both;animation-timeline:scroll();animation-range:120px 420px}
+}
+
+/* ---------- mobile-first tightening ---------- */
+@media (max-width:600px){
+  .doc{box-shadow:none}
+  .crest,.hero,.chap,.sources{padding-left:var(--s4);padding-right:var(--s4)}
+  .era-hd,.row,.future-grid{grid-template-columns:26px minmax(0,1fr)}
+  .era-row,.row-body,.future-body{padding-left:var(--s3)}
+  .card-tags{flex-direction:column;align-items:flex-start;gap:var(--s1)}
+}
+@media (max-width:380px){
+  :root{--fs-xl:19px;--s5:16px;--s6:20px}
+  .era-hd,.row,.future-grid{grid-template-columns:20px minmax(0,1fr)}
+}
+@supports (padding:max(0px)){
+  .page{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+}
+@supports (animation-timeline: view()){
+  .card{animation-timeline:view();animation-range:entry 0% cover 24%}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+<script src="ef1a166a-5f1d-44b3-a590-5e120ffe2f77"></script>
+</helmet>
+
+<div class="page">
+<div class="doc" id="top">
+
+  <div class="crest">
+    <div class="flag" aria-label="Quốc kỳ Việt Nam">★</div>
+    <div class="crest-state">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+    <div class="crest-motto"><span></span><b>Độc lập – Tự do – Hạnh phúc</b><span></span></div>
+  </div>
+
+  <div class="hero">
+    <h1 class="hero-verse"><span>Dân ta phải biết sử ta</span><span>Cho tường gốc tích nước nhà Việt Nam</span></h1>
+    <p class="hero-cite">Trích bài thơ “Lịch sử nước ta”, Chủ tịch Hồ Chí Minh</p>
+    <div class="rule"><span></span><b>◆</b><span></span></div>
+  </div>
+
+  <sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="3">
+  <section class="chap" style="--tone:{{ ch.tone }};--tone-ink:{{ ch.toneInk }};--tone-rgb:{{ ch.toneRgb }}">
+    <header class="chap-hd {{ ch.bareCls }}" aria-label="{{ ch.label }}">
+      <sc-if value="{{ ch.hasQuote }}" hint-placeholder-val="{{ true }}">
+        <blockquote class="chap-quote">{{ ch.quote }}</blockquote>
+        <span class="chap-cite">{{ ch.source }}</span>
+      </sc-if>
+    </header>
+
+    <sc-if value="{{ ch.isFuture }}" hint-placeholder-val="{{ false }}">
+      <div class="future">
+        <div class="future-grid">
+          <div class="future-rail"><u></u></div>
+          <div class="future-body">
+            <div class="future-card">
+              <div class="future-live"><span></span>HƯỚNG TỚI</div>
+              <div class="future-slots">
+                <div class="future-slot"><b>VN-2030</b><i>Kỷ niệm 100 năm thành lập Đảng</i><em>“Là nước đang phát triển, có công nghiệp hiện đại, thu nhập trung bình cao.”</em></div>
+                <div class="future-slot"><b>VN-2045</b><i>Kỷ niệm 100 năm thành lập nước</i><em>“Trở thành nước phát triển, thu nhập cao.”</em></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-for list="{{ ch.eras }}" as="era" hint-placeholder-count="3">
+      <div class="era-hd">
+        <div></div>
+        <div class="era-row">
+          <span class="era-name">{{ era.name }}</span>
+          <span class="era-fill"></span>
+        </div>
+      </div>
+
+      <sc-for list="{{ era.rows }}" as="ev" hint-placeholder-count="3">
+        <div class="row" style="--tone:{{ ev.tone }};--tone-rgb:{{ ev.toneRgb }};--tone-next:{{ ev.toneNext }};--tone-ink:{{ ev.toneInk }};--halo:{{ ev.halo }};--halo-rgb:{{ ev.haloRgb }};--halo-ink:{{ ev.haloInk }}">
+          <div class="rail">
+            <div class="rail-node {{ ev.nodeCls }}"></div>
+            <div class="rail-line"></div>
+          </div>
+          <div class="row-body">
+
+            <sc-if value="{{ ev.card }}" hint-placeholder-val="{{ true }}">
+              <article class="card {{ ev.cardCls }}">
+                <sc-if value="{{ ev.hasRibbon }}" hint-placeholder-val="{{ false }}">
+                  <div class="ribbon {{ ev.sheenCls }}">{{ ev.narrative }}</div>
+                </sc-if>
+                <div class="card-top"><span class="card-code"><span>{{ ev.glyph }}</span>{{ ev.code }}</span></div>
+                <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
+                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;height:200px" placeholder="{{ ev.photo }}"></image-slot>
+                </sc-if>
+                <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
+                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;height:200px" placeholder="{{ ev.photo }}"></image-slot>
+                </sc-if>
+                <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
+                  <div class="img-cap">{{ ev.caption }}</div>
+                </sc-if>
+                <sc-if value="{{ ev.hasMedia }}" hint-placeholder-val="{{ false }}">
+                  <div class="media">
+                    <sc-if value="{{ ev.hasDoc }}" hint-placeholder-val="{{ true }}">
+                      <a class="media-btn" href="{{ ev.docHref }}" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+                        <b>{{ ev.docLabel }}</b>
+                      </a>
+                    </sc-if>
+                    <sc-if value="{{ ev.hasVideo }}" hint-placeholder-val="{{ true }}">
+                      <button type="button" class="media-btn {{ ev.vidCls }}" sc-camel-on-click="{{ ev.toggleVid }}" aria-expanded="{{ ev.vidOpen }}">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
+                        <b>Nghe đọc</b><i>{{ ev.vidSign }}</i>
+                      </button>
+                    </sc-if>
+                  </div>
+                  <sc-if value="{{ ev.showVid }}" hint-placeholder-val="{{ false }}">
+                    <div class="media-video">
+                      <iframe src="{{ ev.embedSrc }}" title="{{ ev.title }}"
+                        allow="accelerometer; encrypted-media; picture-in-picture; web-share; fullscreen"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                  </sc-if>
+                </sc-if>
+                <div class="card-body">
+                  <h3 class="ev-title">{{ ev.title }}</h3>
+                  <div class="ev-time"><b>THỜI GIAN</b>{{ ev.date }}</div>
+                  <sc-if value="{{ ev.isCore }}" hint-placeholder-val="{{ true }}">
+                    <div class="badge-row"><span class="badge">◆ ĐỘC LẬP – CHỦ QUYỀN</span></div>
+                  </sc-if>
+                  <div class="ev-field"><b>Ý NGHĨA LỊCH SỬ</b><span>{{ ev.meaning }}</span></div>
+                  <sc-if value="{{ ev.hasExtra }}" hint-placeholder-val="{{ true }}">
+                    <button type="button" class="extra-tog {{ ev.extraCls }}" sc-camel-on-click="{{ ev.toggleExtra }}" aria-expanded="{{ ev.extraOpen }}">
+                      <span>NỘI DUNG LỊCH SỬ</span><i>{{ ev.extraSign }}</i>
+                    </button>
+                    <sc-if value="{{ ev.extraOpen }}" hint-placeholder-val="{{ false }}">
+                      <div class="ev-extra"><span>{{ ev.extra }}</span></div>
+                    </sc-if>
+                  </sc-if>
+                </div>
+                <div class="card-tags"><span>{{ ev.eraTag }}</span><em>✓ {{ ev.motto }}</em></div>
+              </article>
+            </sc-if>
+
+            <sc-if value="{{ ev.brief }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="brief {{ ev.openCls }}" sc-camel-on-click="{{ ev.toggle }}" aria-expanded="{{ ev.isOpen }}">
+                <span class="brief-top"><span>{{ ev.code }}</span><span>{{ ev.date }}</span></span>
+                <span class="brief-title">{{ ev.title }}</span>
+                <sc-if value="{{ ev.isOpen }}" hint-placeholder-val="{{ false }}">
+                  <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
+                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;height:190px;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
+                  </sc-if>
+                  <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
+                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;height:190px;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
+                  </sc-if>
+                  <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
+                    <span class="img-cap">{{ ev.caption }}</span>
+                  </sc-if>
+                  <span class="ev-field"><b>Ý NGHĨA LỊCH SỬ</b><span>{{ ev.meaning }}</span></span>
+                  <sc-if value="{{ ev.hasExtra }}" hint-placeholder-val="{{ false }}">
+                    <span class="ev-field ev-extra"><b>NỘI DUNG LỊCH SỬ</b><span>{{ ev.extra }}</span></span>
+                  </sc-if>
+                </sc-if>
+              </button>
+            <sc-if value="{{ ev.isOpen }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ ev.hasMedia }}" hint-placeholder-val="{{ false }}">
+                <div class="media">
+                  <sc-if value="{{ ev.hasDoc }}" hint-placeholder-val="{{ true }}">
+                    <a class="media-btn" href="{{ ev.docHref }}" target="_blank" rel="noopener">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+                      <b>{{ ev.docLabel }}</b>
+                    </a>
+                  </sc-if>
+                  <sc-if value="{{ ev.hasVideo }}" hint-placeholder-val="{{ true }}">
+                    <button type="button" class="media-btn {{ ev.vidCls }}" sc-camel-on-click="{{ ev.toggleVid }}" aria-expanded="{{ ev.vidOpen }}">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
+                      <b>Nghe đọc</b><i>{{ ev.vidSign }}</i>
+                    </button>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ ev.showVid }}" hint-placeholder-val="{{ false }}">
+                  <div class="media-video">
+                    <iframe src="{{ ev.embedSrc }}" title="{{ ev.title }}"
+                      allow="accelerometer; encrypted-media; picture-in-picture; web-share; fullscreen"
+                      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                  </div>
+                </sc-if>
+            </sc-if>
+            </sc-if>
+
+          </div>
+        </div>
+      </sc-for>
+    </sc-for>
+
+  </section>
+  </sc-for>
+
+  <figure class="origin-banner">
+        <figure class="origin-banner-inner">
+          <sc-if value="{{ hasOriginImg }}" hint-placeholder-val="{{ true }}">
+            <image-slot id="ck-origin" shape="rect" fit="cover" src="{{ originImg }}" style="display:block;width:100%;height:clamp(200px,54vw,300px)" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
+          </sc-if>
+          <sc-if value="{{ noOriginImg }}" hint-placeholder-val="{{ false }}">
+            <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;height:clamp(200px,54vw,300px)" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
+          </sc-if>
+            <figcaption>
+              <b>Hình minh hoạ: Lạc Long Quân – Âu Cơ</b>
+              <span>Theo truyền thuyết, Lạc Long Quân thuộc giống Rồng kết duyên cùng Âu Cơ dòng Tiên, sinh ra bọc trăm trứng nở thành trăm người con. Năm mươi người theo cha xuống biển, năm mươi người theo mẹ lên non; người con trưởng được tôn làm Hùng Vương, lập nên nước Văn Lang. Đây là truyền thuyết về cội nguồn “con Rồng cháu Tiên”, mang ý nghĩa biểu tượng, không phải ghi chép sử liệu.</span>
+          </figcaption>
+        </figure>
+  </figure>
+
+  <div class="sources">
+    <h3>TÀI LIỆU THAM KHẢO</h3>
+    <ul class="reflist">
+      <li><b>Đại Việt sử ký toàn thư</b><span>Bộ chính sử biên niên, bản khắc in Nội các quan bản</span></li>
+      <li><b>Khâm định Việt sử thông giám cương mục</b><span>Quốc sử quán triều Nguyễn</span></li>
+      <li><b>Đại Nam thực lục</b><span>Quốc sử quán triều Nguyễn</span></li>
+      <li><b>Văn kiện Đại hội đại biểu toàn quốc</b><span>Đảng Cộng sản Việt Nam, các khóa I–XIV</span></li>
+      <li><b>Cổng Thông tin điện tử Chính phủ</b><span>chinhphu.vn</span></li>
+      <li><b>Bảo tàng Lịch sử Quốc gia</b><span>baotanglichsu.vn</span></li>
+      <li><b>Thư viện số Quốc hội</b><span>Nghị quyết Quốc hội khóa VI, kỳ họp thứ nhất (02/7/1976)</span></li>
+      <li><b>Bộ Ngoại giao Việt Nam</b><span>mofa.gov.vn, quan hệ đối ngoại và các mốc hội nhập</span></li>
+      <li><b>Ban Thư ký ASEAN</b><span>asean.org, Cộng đồng ASEAN và RCEP</span></li>
+      <li><b>European Commission</b><span>Hiệp định EVFTA</span></li>
+      <li><b>Sách giáo khoa Lịch sử</b><span>Bộ Giáo dục và Đào tạo</span></li>
+    </ul>
+    <p class="refnote">Tác giả cố gắng sử dụng thông tin trong chính sử và các tài liệu tham khảo nêu trên.
+    Nếu phát hiện sai sót, xin liên hệ để được cập nhật.</p>
+  </div>
+
+</div>
+<a class="totop" href="#top" aria-label="Về đầu trang"><span>↑</span></a>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 560, &quot;height&quot;: 900 },
+  &quot;showMeaningAlways&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Chuỗi&quot; },
+  &quot;ctaHref&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;#&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Bán hàng&quot; }
+}">
+class Component extends DCLogic {
+  DATA = /*__DATA__*/;
+
+  // ---- historical palette (single source of truth) ----
+  HISTORICAL_COLORS = {
+    bronze:           [139,  98,  62],  // #8B623E  Đồng Đông Sơn
+    jade:             [113, 138, 118],  // #718A76  Xanh ngọc cổ
+    indigo:           [ 41,  75,  99],  // #294B63  Lam chàm
+    vermilionDark:    [120,  53,  48],  // #783530  Đỏ son trầm
+    revolutionaryRed: [200,  16,  46],  // #C8102E  Đỏ cách mạng
+    flagRed:          [218,  37,  29],  // #DA251D  Đỏ Quốc kỳ
+    flagGold:         [212, 163,  23],  // vàng Quốc kỳ hạ độ chói cho nền sáng
+    antiqueGold:      [196, 154,  82]   // #C49A52
+  };
+
+  // Anchors are interpolated by year — never switched on a threshold.
+  ANCHORS = [
+    [-700, 'bronze'], [-179, 'bronze'],
+    [ 938, 'jade'],
+    [1400, 'indigo'], [1600, 'indigo'],
+    [1858, 'vermilionDark'],
+    [1930, 'revolutionaryRed'],
+    [1945, 'flagRed'], [2060, 'flagRed']
+  ];
+
+  // 9 mốc "ĐỘC LẬP – TỰ DO – CHỦ QUYỀN – THỐNG NHẤT" (khớp theo năm/sự kiện).
+  CORE = {
+    4:  { m: 'Biểu tượng sớm của ý chí giành lại độc lập, chống ách đô hộ.' },
+    12: { m: 'Khôi phục nền độc lập, mở đầu thời kỳ tự chủ lâu dài của dân tộc.', pin: 'GIÀNH LẠI ĐỘC LẬP' },
+    18: { m: 'Khẳng định chủ quyền quốc gia và lãnh thổ.' },
+    23: { m: 'Bảo vệ nền độc lập và quyền tự quyết của Đại Việt.' },
+    28: { m: 'Tuyên cáo nền độc lập, khẳng định Đại Việt là một quốc gia có chủ quyền.', pin: 'TUYÊN CÁO NỀN ĐỘC LẬP' },
+    46: { m: 'Bước ngoặt về đường lối cứu nước, mở đường giành lại độc lập dân tộc và thống nhất đất nước.' },
+    54: { m: 'Chính thức tuyên bố nền độc lập của Việt Nam và quyền tự do của dân tộc.', pin: 'TUYÊN BỐ ĐỘC LẬP HIỆN ĐẠI' },
+    58: { m: 'Thắng lợi quyết định trong cuộc đấu tranh chống chủ nghĩa thực dân, bảo vệ quyền độc lập dân tộc.' },
+    64: { m: 'Hoàn thành quá trình đấu tranh giành độc lập và mở đường thống nhất quốc gia.', pin: 'HOÀN THÀNH THỐNG NHẤT ĐẤT NƯỚC' }
+  };
+
+  // 2026 — điểm cao trào hướng tương lai, xử lý ánh kim (không tăng độ chói).
+  CLIMAX = { 81: '' };   // thẻ nổi bật nhưng không kèm ruy băng chữ
+
+  // Câu dẫn mở đầu mỗi chương. Bỏ trống thì chương chỉ còn một vạch phân cách.
+  QUOTES = {
+    dung_nuoc:  { quote: '', source: '' },
+    giu_nuoc:   { quote: '', source: '' },
+    phat_trien: { quote: '', source: '' }
+  };
+
+  PHASES = [
+    { id: 'phat_trien', label: 'PHÁT TRIỂN ĐẤT NƯỚC', range: '1986–2026',
+      note: 'Đổi mới, hội nhập, vươn mình' },
+    { id: 'giu_nuoc',   label: 'GIỮ NƯỚC',            range: '40–1979',
+      note: 'Giành và bảo vệ độc lập, tự do' },
+    { id: 'dung_nuoc',  label: 'DỰNG NƯỚC',           range: 'TK VII TCN – 179 TCN',
+      note: 'Khởi nguồn quốc gia' }
+  ];
+
+  // darkest surface any tinted text sits on (tinted card-top / brief), plus headroom
+  SURFACE = [244, 238, 224];
+
+  // Populated at build time from the img/ folder (img/<id>.<ext>).
+  IMAGES = /*__IMAGES__*/;
+  ORIGIN_IMG = /*__ORIGIN_IMG__*/;
+
+  // Primary-source material attached to a milestone.
+  MEDIA = {
+    18: { doc: 'https://vietnamnet.vn/bai-tho-nam-quoc-son-ha-ban-tuyen-ngon-dau-tien-cua-viet-nam-787057.html',
+          docLabel: 'Đọc toàn văn', video: 'BNjG_WwxruA' },
+    28: { doc: 'https://vietnamnet.vn/binh-ngo-dai-cao-ban-tuyen-ngon-doc-lap-thu-2-787106.html',
+          docLabel: 'Đọc toàn văn', video: 'oMYbYEGbrxI' },
+    54: { doc: 'Tuyen%20Ngon%20Doc%20Lap.pdf',
+          docLabel: 'Đọc toàn văn', video: 'xRKUB3fUTJM' },
+    79: { doc: 'https://special.nhandan.vn/dien-van-Tong-Bi-thu-ky-niem-50-nam-thong-nhat-dat-nuoc/index.html',
+          docLabel: 'Diễn văn của Tổng Bí thư' }
+  };
+
+  // Chú thích ảnh minh hoạ, theo id sự kiện.
+  CAPTIONS = {
+    7:  'Đền thờ Triệu Việt Vương tại Dạ Trạch, Hưng Yên.',
+    10: 'Đền thờ Khúc Thừa Dụ tại thôn Cúc Bồ, xã Kiến Quốc, huyện Ninh Giang.',
+    11: 'Dương Đình Nghệ chỉ huy quân công phá thành Đại La.',
+    14: 'Chương trình nghệ thuật kỷ niệm 1055 năm Nhà nước Đại Cồ Việt và khai mạc Lễ hội Hoa Lư.',
+    15: 'Di tích lăng vua Lê Đại Hành tại thôn Yên Thượng, xã Trường Yên, huyện Hoa Lư, tỉnh Ninh Bình.',
+    16: 'Chiếu dời đô: “Trên vâng mệnh trời, dưới theo lòng dân”.',
+    19: 'Đền thờ các vị vua thời Trần tại Đông Triều, Quảng Ninh.',
+    20: 'Lược đồ kháng chiến chống Mông Cổ lần thứ nhất, trận Đông Bộ Đầu.',
+    21: 'Phù điêu Hội nghị Diên Hồng.',
+    22: 'Diễn biến và kết quả cuộc kháng chiến chống quân Nguyên lần thứ hai. Nguồn: SGK Lịch sử lớp 7.',
+    24: 'Di sản Thành nhà Hồ, dấu ấn văn hoá gắn với tên tuổi Hồ Quý Ly.',
+    30: 'Khu tưởng niệm các vua nhà Mạc tại huyện Kiến Thụy, dựng trên nền điện Tường Quang thuộc cố đô Dương Kinh xưa.',
+    33: 'Cổng vào Di tích lịch sử Rạch Gầm – Xoài Mút, huyện Châu Thành, tỉnh Tiền Giang.',
+    34: 'Hành quân thần tốc, vua Quang Trung đại phá 29 vạn quân Thanh chỉ trong năm ngày.',
+    37: 'Cuộc kháng chiến của nhân dân Nam Kỳ sau Hoà ước Nhâm Tuất năm 1862.',
+    38: 'Lễ trình Hoà ước và Thương ước tại kinh thành Huế năm 1875, chín năm trước Hoà ước Patenôtre.',
+    44: 'Bến Nhà Rồng, nay là Bảo tàng Hồ Chí Minh.',
+    65: 'Quốc hội quyết nghị lấy tên nước là Cộng hòa Xã hội chủ nghĩa Việt Nam.'
+  };
+
+  // Long-form notes per milestone.
+  EXTRAS = /*__EXTRAS__*/;
+
+  state = { openId: null, extra: {}, vid: {} };
+
+  yearOf(d) {
+    if (/TK\s*VII/i.test(d)) return -650;
+    const nums = (d.match(/\d+/g) || []).map(Number);
+    let y = 0;
+    for (const n of nums) if (n > y) y = n;
+    return /TCN/.test(d) ? -y : y;
+  }
+
+  // Continuous interpolation between anchors — no hard boundary anywhere.
+  toneAt(year) {
+    const A = this.ANCHORS, C = this.HISTORICAL_COLORS;
+    if (year <= A[0][0]) return C[A[0][1]].slice();
+    const last = A[A.length - 1];
+    if (year >= last[0]) return C[last[1]].slice();
+    for (let i = 0; i < A.length - 1; i++) {
+      const [y0, k0] = A[i], [y1, k1] = A[i + 1];
+      if (year >= y0 && year <= y1) {
+        const t = y1 === y0 ? 0 : (year - y0) / (y1 - y0);
+        const a = C[k0], b = C[k1];
+        return [0, 1, 2].map(j => Math.round(a[j] + (b[j] - a[j]) * t));
+      }
+    }
+    return C.flagRed.slice();
+  }
+
+  hex(c) { return '#' + c.map(v => Math.max(0, Math.min(255, v)).toString(16).padStart(2, '0')).join(''); }
+  rgb(c) { return c.join(','); }
+
+  relLum(c) {
+    const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]);
+  }
+
+  contrast(a, b) {
+    const l1 = this.relLum(a), l2 = this.relLum(b);
+    const hi = Math.max(l1, l2), lo = Math.min(l1, l2);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  // Era colours are chosen for the rail and borders; as TEXT they must still
+  // clear 4.5:1 on the cream surface, so darken until they do.
+  ink(c) {
+    let x = c.slice();
+    for (let i = 0; i < 30 && this.contrast(x, this.SURFACE) < 4.8; i++) {
+      x = x.map(v => Math.round(v * 0.88));
+    }
+    return this.hex(x);
+  }
+
+  code(d) {
+    const bc = /TCN/.test(d);
+    const nums = d.match(/\d+/g) || [];
+    let y = null;
+    for (const n of nums) if (!y || n.length > y.length) y = n;
+    const core = y ? y.padStart(4, '0') : 'TKVII';
+    return 'VN-' + core + (bc ? '·TCN' : '');
+  }
+
+  chapter(phase) {
+    const always = this.props.showMeaningAlways === true;
+    const all = this.DATA.events.filter(e => e.phase === phase.id);
+    const names = [...new Set(all.map(e => e.era))].reverse();
+    const eras = names.map(name => {
+      const rows = all.filter(e => e.era === name).reverse();
+      return {
+        name: name.toUpperCase(),
+        rows: rows.map(e => {
+          const core = this.CORE[e.id];
+          const isClimax = Object.prototype.hasOwnProperty.call(this.CLIMAX, e.id);
+          const ribbon = (core && core.pin) || this.CLIMAX[e.id] || '';
+          const isPin = !!(core && core.pin) || isClimax;
+          const media = this.MEDIA[e.id];
+          const extra = this.EXTRAS[e.id] || (core ? core.m
+            : (e.id === 1 || e.id === 2
+                ? 'Mốc ghi theo truyền thuyết và dã sử, chưa có xác chứng khảo cổ hoặc sử liệu độc lập.'
+                : ''));
+          const year = this.yearOf(e.date);
+          const tone = this.toneAt(year);
+          // §5 — 1945 is where antique gold becomes flag gold.
+          const halo = year >= 1945 ? this.HISTORICAL_COLORS.flagGold : this.HISTORICAL_COLORS.antiqueGold;
+          const isOpen = always || this.state.openId === e.id;
+          const card = !!core || isClimax;
+          return {
+            id: e.id, date: e.date, title: e.title, meaning: e.meaning,
+            code: this.code(e.date),
+            legend: e.id === 1 || e.id === 2,
+            hasExtra: !!extra, extra,
+            img: this.IMAGES[e.id] || '', hasImg: !!this.IMAGES[e.id], noImg: !this.IMAGES[e.id],
+            caption: this.CAPTIONS[e.id] || '', hasCaption: !!(this.CAPTIONS[e.id] && this.IMAGES[e.id]),
+            hasMedia: !!media,
+            hasDoc: !!(media && media.doc), docHref: (media && media.doc) || '',
+            docLabel: (media && media.docLabel) || 'Đọc toàn văn',
+            hasVideo: !!(media && media.video),
+            showVid: !!(media && media.video) && !!this.state.vid[e.id],
+            embedSrc: media ? 'https://www.youtube-nocookie.com/embed/' + media.video : '',
+            vidOpen: !!this.state.vid[e.id],
+            vidCls: this.state.vid[e.id] ? 'is-open' : '',
+            vidSign: this.state.vid[e.id] ? '−' : '+',
+            toggleVid: () => this.setState(s => ({ vid: { ...s.vid, [e.id]: !s.vid[e.id] } })),
+            slot: 'ck-' + e.id,
+            photo: 'Ảnh tư liệu: ' + e.title,
+            eraTag: 'GIAI ĐOẠN: ' + e.era.toUpperCase(),
+            glyph: phase.id === 'dung_nuoc' ? '❋' : (phase.id === 'giu_nuoc' ? '★' : '❯'),
+            motto: phase.id === 'dung_nuoc' ? 'KHỞI NGUỒN' : (phase.id === 'giu_nuoc' ? 'ĐỘC LẬP · TỰ DO' : 'ĐỔI MỚI · VƯƠN MÌNH'),
+            tone: this.hex(tone), toneRgb: this.rgb(tone), toneInk: this.ink(tone),
+            toneNext: this.hex(tone),
+            halo: this.hex(halo), haloRgb: this.rgb(halo), haloInk: this.ink(halo),
+            card, brief: !card,
+            isCore: !!core, isPin,
+            hasRibbon: !!ribbon, narrative: ribbon,
+            sheenCls: isClimax ? 'ribbon--sheen' : '',
+            cardCls: isPin ? 'card--pin' : (core ? 'card--core' : ''),
+            nodeCls: isPin ? 'rail-node--pin' : (core ? 'rail-node--core' : ''),
+            isOpen,
+            openCls: isOpen ? 'is-open' : '',
+            extraOpen: !!this.state.extra[e.id],
+            extraCls: this.state.extra[e.id] ? 'is-open' : '',
+            extraSign: this.state.extra[e.id] ? '−' : '+',
+            toggleExtra: () => this.setState(s => ({ extra: { ...s.extra, [e.id]: !s.extra[e.id] } })),
+            toggle: () => this.setState(s => ({ openId: s.openId === e.id ? null : e.id }))
+          };
+        })
+      };
+    }).filter(x => x.rows.length > 0);
+    return { eras };
+  }
+
+  renderVals() {
+    const chapters = this.PHASES.map(p => ({
+      ...p,
+      eras: this.chapter(p).eras,
+      isOrigin: p.id === 'dung_nuoc',
+      quote: (this.QUOTES[p.id] || {}).quote || '',
+      source: (this.QUOTES[p.id] || {}).source || '',
+      hasQuote: !!((this.QUOTES[p.id] || {}).quote),
+      bareCls: ((this.QUOTES[p.id] || {}).quote) ? '' : 'chap-hd--bare',
+      originImg: this.ORIGIN_IMG, hasOriginImg: !!this.ORIGIN_IMG, noOriginImg: !this.ORIGIN_IMG,
+      isFuture: p.id === 'phat_trien'
+    }));
+
+    // Second pass: each connector fades into the NEXT milestone shown below it,
+    // so era and chapter boundaries never produce a visible colour seam.
+    const flat = [];
+    chapters.forEach(ch => ch.eras.forEach(er => er.rows.forEach(r => flat.push(r))));
+    flat.forEach((r, i) => { r.toneNext = (flat[i + 1] || r).tone; });
+
+    // Chapter rule takes the colour of its own first milestone.
+    chapters.forEach(ch => {
+      const first = ch.eras.find(e => e.rows.length);
+      ch.tone = first ? first.rows[0].tone : this.hex(this.HISTORICAL_COLORS.bronze);
+      ch.toneInk = first ? first.rows[0].toneInk : this.ink(this.HISTORICAL_COLORS.bronze);
+      ch.toneRgb = first ? first.rows[0].toneRgb : this.rgb(this.HISTORICAL_COLORS.bronze);
+    });
+
+    return {
+      chapters,
+      originImg: this.ORIGIN_IMG,
+      hasOriginImg: !!this.ORIGIN_IMG,
+      noOriginImg: !this.ORIGIN_IMG,
+      ctaHref: this.props.ctaHref || '#'
+    };
+  }
+}
+</script>
+</body></html>
