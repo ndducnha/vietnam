@@ -37,6 +37,7 @@
   --c-red:#B21F17; --c-red-ink:#9E2A1E;
   --c-gold-soft:#E0B24A;
 
+  --cardpad:12px;
   --tap:44px;
 }
 
@@ -45,6 +46,8 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--c-page);color:var(--c-ink);-webkit-font-smoothing:antialiased;
   font-family:var(--f-body);font-size:var(--fs-md);line-height:1.55}
 h1,h2,h3,p{margin:0}
+/* tên riêng và đường dẫn dài không được đẩy vỡ khung trên máy hẹp */
+.ev-title,.brief-title,.card-title,.reflist b,.reflist span{overflow-wrap:break-word}
 button{font:inherit;color:inherit;margin:0}
 :where(button,a,[tabindex]):focus-visible{outline:2px solid var(--c-red-ink);outline-offset:3px;border-radius:2px}
 
@@ -145,7 +148,7 @@ button{font:inherit;color:inherit;margin:0}
   padding:var(--s3) var(--s3) var(--s2);font-family:var(--f-mono);font-size:var(--fs-2xs);
   color:var(--c-ink3);background:rgba(var(--tone-rgb),.07)}
 .card-code{display:inline-flex;align-items:center;gap:6px;font-weight:500;color:var(--tone-ink)}
-.card-body{padding:var(--s3)}
+.card-body{padding:var(--cardpad)}
 .card-tags{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s2);
   padding:var(--s2) var(--s3) var(--s3);font-family:var(--f-mono);font-size:var(--fs-2xs);
   color:var(--c-ink3);border-top:1px solid var(--c-line)}
@@ -243,7 +246,7 @@ button{font:inherit;color:inherit;margin:0}
 .origin-banner b{display:block;font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.08em;
   font-weight:500;color:var(--c-ink);margin-bottom:var(--s2)}
 .origin-banner span{display:block;font-size:var(--fs-sm);line-height:1.65;color:var(--c-ink2)}
-.sources{padding:var(--s6) var(--s5) var(--s8);border-top:1px solid var(--c-line2);
+.sources{padding:var(--s6) var(--s5) calc(var(--s8) + var(--tap));border-top:1px solid var(--c-line2);
   background:var(--c-surface3)}
 .sources h3{font-family:var(--f-mono);font-size:var(--fs-2xs);letter-spacing:.14em;
   color:var(--c-ink2);font-weight:500}
@@ -269,7 +272,9 @@ button{font:inherit;color:inherit;margin:0}
   .totop{animation:totopIn linear both;animation-timeline:scroll();animation-range:120px 420px}
 }
 
-/* ---------- mobile-first tightening ---------- */
+/* ---------- thu hẹp dần theo bề ngang máy ----------
+   Mục tiêu: giữ 35 ký tự trở lên mỗi dòng ngay cả trên máy 320px,
+   bằng cách nhả bớt lề và cột rail chứ không thu nhỏ cỡ chữ. */
 @media (max-width:600px){
   .doc{box-shadow:none}
   .crest,.hero,.chap,.sources{padding-left:var(--s4);padding-right:var(--s4)}
@@ -277,9 +282,22 @@ button{font:inherit;color:inherit;margin:0}
   .era-row,.row-body,.future-body{padding-left:var(--s3)}
   .card-tags{flex-direction:column;align-items:flex-start;gap:var(--s1)}
 }
-@media (max-width:380px){
-  :root{--fs-xl:19px;--s5:16px;--s6:20px}
+@media (max-width:400px){
+  :root{--fs-xl:20px;--s5:16px;--s6:20px}
+  /* khối chữ dài phá lề thẻ để lấy thêm bề ngang, đổi lấy dòng dài hơn */
+  .card-body .extra-tog,.card-body .ev-extra{
+    margin-left:calc(var(--cardpad) * -1);margin-right:calc(var(--cardpad) * -1)}
+  .crest,.hero,.chap,.sources{padding-left:var(--s3);padding-right:var(--s3)}
   .era-hd,.row,.future-grid{grid-template-columns:20px minmax(0,1fr)}
+  .era-row,.row-body,.future-body{padding-left:var(--s2)}
+  .future-slot{flex:1 1 100%}
+}
+@media (max-width:340px){
+  :root{--fs-xl:19px;--cardpad:8px}
+  .crest,.hero,.chap,.sources{padding-left:var(--s2);padding-right:var(--s2)}
+  .era-hd,.row,.future-grid{grid-template-columns:16px minmax(0,1fr)}
+  .brief{padding:var(--s2)}
+  .ev-extra,.extra-tog{padding:var(--s2)}
 }
 @supports (padding:max(0px)){
   .page{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
@@ -360,10 +378,10 @@ button{font:inherit;color:inherit;margin:0}
                 </sc-if>
                 <div class="card-top"><span class="card-code"><span>{{ ev.glyph }}</span>{{ ev.code }}</span></div>
                 <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
-                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;height:200px" placeholder="{{ ev.photo }}"></image-slot>
+                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
                 </sc-if>
                 <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
-                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;height:200px" placeholder="{{ ev.photo }}"></image-slot>
+                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
                 </sc-if>
                 <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
                   <div class="img-cap">{{ ev.caption }}</div>
@@ -417,10 +435,10 @@ button{font:inherit;color:inherit;margin:0}
                 <span class="brief-title">{{ ev.title }}</span>
                 <sc-if value="{{ ev.isOpen }}" hint-placeholder-val="{{ false }}">
                   <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
-                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;height:190px;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
+                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
                   </sc-if>
                   <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
-                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;height:190px;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
+                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
                   </sc-if>
                   <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
                     <span class="img-cap">{{ ev.caption }}</span>
@@ -468,10 +486,10 @@ button{font:inherit;color:inherit;margin:0}
   <figure class="origin-banner">
         <figure class="origin-banner-inner">
           <sc-if value="{{ hasOriginImg }}" hint-placeholder-val="{{ true }}">
-            <image-slot id="ck-origin" shape="rect" fit="cover" src="{{ originImg }}" style="display:block;width:100%;height:clamp(200px,54vw,300px)" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
+            <image-slot id="ck-origin" shape="rect" fit="cover" src="{{ originImg }}" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
           </sc-if>
           <sc-if value="{{ noOriginImg }}" hint-placeholder-val="{{ false }}">
-            <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;height:clamp(200px,54vw,300px)" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
+            <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
           </sc-if>
             <figcaption>
               <b>Hình minh hoạ: Lạc Long Quân – Âu Cơ</b>
