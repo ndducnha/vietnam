@@ -48,6 +48,10 @@ thay vì dựng ra trang hỏng.
 Thêm ảnh: đặt file vào `img/` với tên là **số thứ tự mốc** (ví dụ `img/54.jpg`
 cho mốc Tuyên ngôn Độc lập), chấp nhận `.jpg .jpeg .png .webp .avif .gif`, rồi chạy lại `./build.sh`.
 
+`build.sh` tự nén ảnh trước khi dựng: đưa về WebP, bề ngang tối đa 1200px, chất lượng 80.
+Ảnh nào vốn đã nhỏ hơn bản nén thì giữ nguyên. Bước này chạy lại nhiều lần vô hại.
+Bản gốc trước khi nén vẫn lấy lại được từ lịch sử git.
+
 ## Nguồn
 
 Nội dung biên soạn dựa trên chính sử và tài liệu tham khảo liệt kê ở cuối trang.

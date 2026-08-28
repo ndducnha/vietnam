@@ -1,3 +1,5 @@
 #!/bin/sh
-# Rebuild index.html from _build/ after adding images to img/ or editing _build/extras.json
-cd "$(dirname "$0")" && python3 _build/assemble.py
+# Dựng lại index.html. Chạy sau khi thêm ảnh vào img/ hoặc sửa _build/*.json
+cd "$(dirname "$0")" || exit 1
+python3 _build/optimize.py || exit 1
+python3 _build/assemble.py
