@@ -56,18 +56,14 @@ gaps = ', '.join(str(i) for i in missing[:6]) + ('…' if len(missing) > 6 else 
 print(f'  images: {len(images)}/81 events wired, plate={"yes" if origin_img else "no"}'
       + (f', missing {gaps}' if missing else ''))
 
-extras = json.loads((D / 'extras.json').read_text(encoding='utf-8')) if (D / 'extras.json').exists() else {}
-extras = {int(k): v for k, v in extras.items()}
-print(f'  extras: {len(extras)}/81 written')
 
 tpl = (D / 'template.src.html').read_text(encoding='utf-8')
-for ph in ('/*__FONTS__*/', '/*__DATA__*/', '/*__IMAGES__*/', '/*__EXTRAS__*/', '/*__ORIGIN_IMG__*/'):
+for ph in ('/*__FONTS__*/', '/*__DATA__*/', '/*__IMAGES__*/', '/*__ORIGIN_IMG__*/'):
     assert ph in tpl, 'placeholder missing: ' + ph
 tpl = (tpl.replace('/*__FONTS__*/', fonts_css())
           .replace('/*__DATA__*/', data_block)
           .replace('/*__IMAGES__*/', json.dumps(images, ensure_ascii=False))
-          .replace('/*__ORIGIN_IMG__*/', json.dumps(origin_img, ensure_ascii=False))
-          .replace('/*__EXTRAS__*/', json.dumps(extras, ensure_ascii=False, indent=2)))
+          .replace('/*__ORIGIN_IMG__*/', json.dumps(origin_img, ensure_ascii=False)))
 (D / 'template.html').write_text(tpl, encoding='utf-8')
 
 # --- repack: the bundler escapes "</" so the JSON can't terminate its host <script> ---
