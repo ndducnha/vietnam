@@ -76,12 +76,19 @@ print(f'  images: {len(images)}/81 events wired, plate={"yes" if origin_img else
 
 
 tpl = (D / 'template.src.html').read_text(encoding='utf-8')
-for ph in ('/*__FONTS__*/', '/*__DATA__*/', '/*__IMAGES__*/', '/*__ORIGIN_IMG__*/'):
+imgsrc = json.loads((D / 'imgsrc.json').read_text(encoding='utf-8'))
+missing_src = [i for i in range(1, 82) if str(i) not in imgsrc]
+if missing_src:
+    sys.exit(f'FATAL: thiếu nguồn ảnh cho {missing_src}')
+print(f'  imgsrc: {len(imgsrc)}/81 ảnh có nguồn')
+
+for ph in ('/*__FONTS__*/', '/*__DATA__*/', '/*__IMAGES__*/', '/*__ORIGIN_IMG__*/', '/*__IMGSRC__*/'):
     assert ph in tpl, 'placeholder missing: ' + ph
 tpl = (tpl.replace('/*__FONTS__*/', fonts_css())
           .replace('/*__DATA__*/', data_block)
           .replace('/*__IMAGES__*/', json.dumps(images, ensure_ascii=False))
-          .replace('/*__ORIGIN_IMG__*/', json.dumps(origin_img, ensure_ascii=False)))
+          .replace('/*__ORIGIN_IMG__*/', json.dumps(origin_img, ensure_ascii=False))
+          .replace('/*__IMGSRC__*/', json.dumps(imgsrc, ensure_ascii=False, indent=2)))
 (D / 'template.html').write_text(tpl, encoding='utf-8')
 
 # --- repack: the bundler escapes "</" so the JSON can't terminate its host <script> ---

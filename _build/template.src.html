@@ -173,7 +173,7 @@ button{font:inherit;color:inherit;margin:0}
 .media-btn b{flex:1;font-size:var(--fs-md);font-weight:600;line-height:1.3}
 .media-btn i{flex:none;font-style:normal;font-size:var(--fs-xl);line-height:1;color:var(--halo-ink)}
 .media-btn.is-open{background:#FFF8E6}
-.img-cap{display:block;padding:var(--s2) var(--s3);background:rgba(var(--tone-rgb),.09);
+.img-cap{display:flex;gap:8px;align-items:baseline;padding:var(--s2) var(--s3);background:rgba(var(--tone-rgb),.09);
   border-bottom:1px solid rgba(var(--tone-rgb),.28);font-size:var(--fs-xs);line-height:1.5;
   color:var(--c-ink2);text-align:left}
 .brief .img-cap{border:0;margin-top:var(--s1);padding:var(--s2) 0;background:none}
@@ -231,6 +231,30 @@ button{font:inherit;color:inherit;margin:0}
 .reflist b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink);line-height:1.4}
 .reflist span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2)}
 .refintro{margin:var(--s3) 0 0;font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
+.fold{margin-top:var(--s4);border:1px solid var(--c-line2);border-radius:10px;overflow:hidden}
+.fold+.fold{margin-top:var(--s3)}
+.fold summary{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  padding:14px var(--s4);min-height:44px;cursor:pointer;list-style:none;
+  background:rgba(0,0,0,.02)}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::after{content:'+';margin-left:auto;font-size:18px;line-height:1;
+  color:var(--c-ink2);font-family:var(--f-mono)}
+.fold[open] summary::after{content:'\2212'}
+.fold summary b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink)}
+.fold summary span{font-size:var(--fs-xs);color:var(--c-ink2)}
+.fold-body{padding:0 var(--s4) var(--s4);border-top:1px solid var(--c-line2)}
+.fold-body .reflist{border-top:0}
+.fold-body .refintro i{font-style:normal;font-family:var(--f-mono)}
+.imglist{margin-top:var(--s3)}
+.imgrow{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--c-line2)}
+.imgrow>b{flex:none;min-width:34px;font-family:var(--f-mono);font-size:var(--fs-xs);
+  font-weight:500;color:var(--c-ink2);padding-top:2px}
+.imgrow>div{min-width:0;display:flex;flex-direction:column;gap:2px}
+.imgrow span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink)}
+.imgrow a,.imgrow i{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2);
+  font-style:normal;overflow-wrap:anywhere}
+.imgrow a{text-decoration:underline;text-underline-offset:2px}
+.img-ref{flex:none;margin-left:auto;font-style:normal;font-family:var(--f-mono);opacity:.7}
 .refnote{margin-top:var(--s4);font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
 .sources b{color:var(--c-ink);font-weight:500}
 
@@ -354,8 +378,8 @@ button{font:inherit;color:inherit;margin:0}
                 <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                   <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
                 </sc-if>
-                <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
-                  <div class="img-cap">{{ ev.caption }}</div>
+                <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
+                  <div class="img-cap"><span>{{ ev.caption }}</span><i class="img-ref">[{{ ev.id }}]</i></div>
                 </sc-if>
                 <sc-if value="{{ ev.hasMedia }}" hint-placeholder-val="{{ false }}">
                   <div class="media">
@@ -404,8 +428,8 @@ button{font:inherit;color:inherit;margin:0}
                   <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                     <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
                   </sc-if>
-                  <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
-                    <span class="img-cap">{{ ev.caption }}</span>
+                  <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
+                    <span class="img-cap"><span>{{ ev.caption }}</span><i class="img-ref">[{{ ev.id }}]</i></span>
                   </sc-if>
                   <span class="ev-field"><b>MÔ TẢ</b><span>{{ ev.description }}</span></span>
                   <span class="ev-field ev-source"><b>NGUỒN</b><span>{{ ev.source }}</span></span>
@@ -454,29 +478,67 @@ button{font:inherit;color:inherit;margin:0}
             <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
           </sc-if>
             <figcaption>
-              <b>Hình minh hoạ: Lạc Long Quân – Âu Cơ</b>
+              <b>Hình minh hoạ: Lạc Long Quân – Âu Cơ <i class="img-ref">[*]</i></b>
               <span>Theo truyền thuyết, Lạc Long Quân thuộc giống Rồng kết duyên cùng Âu Cơ dòng Tiên, sinh ra bọc trăm trứng nở thành trăm người con. Năm mươi người theo cha xuống biển, năm mươi người theo mẹ lên non; người con trưởng được tôn làm Hùng Vương, lập nên nước Văn Lang. Đây là truyền thuyết về cội nguồn “con Rồng cháu Tiên”, không phải ghi chép sử liệu.</span>
           </figcaption>
         </figure>
   </figure>
 
   <div class="sources">
-    <h3>TÀI LIỆU THAM KHẢO</h3>
-    <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
-    các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
-    <ul class="reflist">
-      <li><b>Bảo tàng Lịch sử quốc gia</b><span>baotanglichsu.vn — chuyên khảo và bài nghiên cứu lịch sử (34 mốc)</span></li>
-      <li><b>Tư liệu – Văn kiện Đảng</b><span>tulieuvankien.dangcongsan.vn — văn kiện, biên niên sự kiện, văn kiện Đại hội Đảng (11 mốc)</span></li>
-      <li><b>Báo điện tử Đảng Cộng sản Việt Nam</b><span>dangcongsan.vn — chuyên đề lịch sử Đảng và dân tộc (10 mốc)</span></li>
-      <li><b>Bộ Quốc phòng</b><span>mod.gov.vn — lịch sử quân sự và nghệ thuật quân sự Việt Nam (10 mốc)</span></li>
-      <li><b>Báo Điện tử Chính phủ</b><span>baochinhphu.vn — sự kiện và văn kiện Chính phủ (7 mốc)</span></li>
-      <li><b>Quốc hội Việt Nam</b><span>quochoi.vn — Tổng tuyển cử 1946, Quốc hội khóa VI (2 mốc)</span></li>
-      <li><b>Bộ Ngoại giao</b><span>mofa.gov.vn — hội nhập quốc tế, ASEAN, Hội đồng Bảo an (2 mốc)</span></li>
-      <li><b>Trung tâm WTO và Hội nhập, VCCI</b><span>trungtamwto.vn — BTA, WTO (2 mốc)</span></li>
-      <li><b>Ban Quản lý Lăng Chủ tịch Hồ Chí Minh</b><span>bqllang.gov.vn — Mặt trận Việt Minh (1 mốc)</span></li>
-      <li><b>Bộ Công Thương</b><span>moit.gov.vn — Hiệp định EVFTA (1 mốc)</span></li>
-      <li><b>Cơ sở dữ liệu quốc gia về văn bản pháp luật</b><span>vanban.chinhphu.vn — Nghị quyết 202/2025/QH15 (1 mốc)</span></li>
-    </ul>
+    <h3>NGUỒN &amp; TÀI LIỆU</h3>
+
+    <details class="fold">
+      <summary><b>Tài liệu tham khảo</b><span>11 cơ quan · 81 mốc</span></summary>
+      <div class="fold-body">
+        <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
+        các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
+        <ul class="reflist">
+          <li><b>Bảo tàng Lịch sử quốc gia</b><span>baotanglichsu.vn — chuyên khảo và bài nghiên cứu lịch sử (34 mốc)</span></li>
+          <li><b>Tư liệu – Văn kiện Đảng</b><span>tulieuvankien.dangcongsan.vn — văn kiện, biên niên sự kiện, văn kiện Đại hội Đảng (11 mốc)</span></li>
+          <li><b>Báo điện tử Đảng Cộng sản Việt Nam</b><span>dangcongsan.vn — chuyên đề lịch sử Đảng và dân tộc (10 mốc)</span></li>
+          <li><b>Bộ Quốc phòng</b><span>mod.gov.vn — lịch sử quân sự và nghệ thuật quân sự Việt Nam (10 mốc)</span></li>
+          <li><b>Báo Điện tử Chính phủ</b><span>baochinhphu.vn — sự kiện và văn kiện Chính phủ (7 mốc)</span></li>
+          <li><b>Quốc hội Việt Nam</b><span>quochoi.vn — Tổng tuyển cử 1946, Quốc hội khóa VI (2 mốc)</span></li>
+          <li><b>Bộ Ngoại giao</b><span>mofa.gov.vn — hội nhập quốc tế, ASEAN, Hội đồng Bảo an (2 mốc)</span></li>
+          <li><b>Trung tâm WTO và Hội nhập, VCCI</b><span>trungtamwto.vn — BTA, WTO (2 mốc)</span></li>
+          <li><b>Ban Quản lý Lăng Chủ tịch Hồ Chí Minh</b><span>bqllang.gov.vn — Mặt trận Việt Minh (1 mốc)</span></li>
+          <li><b>Bộ Công Thương</b><span>moit.gov.vn — Hiệp định EVFTA (1 mốc)</span></li>
+          <li><b>Cơ sở dữ liệu quốc gia về văn bản pháp luật</b><span>vanban.chinhphu.vn — Nghị quyết 202/2025/QH15 (1 mốc)</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary><b>Nguồn ảnh minh hoạ</b><span>81 ảnh</span></summary>
+      <div class="fold-body">
+        <p class="refintro">Số <i>[n]</i> dưới mỗi ảnh trong trang ứng với một dòng dưới đây.
+        Ảnh được dùng cho mục đích giáo dục, phi thương mại; bản quyền thuộc về nguồn đã dẫn.</p>
+        <div class="imglist">
+          <sc-for list="{{ imgRefs }}" as="im" hint-placeholder-count="3">
+            <div class="imgrow">
+              <b>[{{ im.n }}]</b>
+              <div>
+                <span>{{ im.title }}</span>
+                <sc-if value="{{ im.hasUrl }}" hint-placeholder-val="{{ true }}">
+                  <a href="{{ im.url }}" target="_blank" rel="noopener">{{ im.label }}</a>
+                </sc-if>
+                <sc-if value="{{ im.noUrl }}" hint-placeholder-val="{{ false }}">
+                  <i>{{ im.label }}</i>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+          <div class="imgrow">
+            <b>[*]</b>
+            <div>
+              <span>Hình minh hoạ Lạc Long Quân – Âu Cơ</span>
+              <i>Tranh minh hoạ cho truyền thuyết, không phải ảnh tư liệu lịch sử.</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
     <p class="refnote">Tác giả cố gắng sử dụng thông tin trong chính sử và các tài liệu tham khảo nêu trên.
     Nếu phát hiện sai sót, xin liên hệ để được cập nhật.</p>
   </div>
@@ -589,6 +651,10 @@ class Component extends DCLogic {
     65: 'Quốc hội quyết nghị lấy tên nước là Cộng hòa Xã hội chủ nghĩa Việt Nam.'
   };
 
+
+  // Nguồn ảnh minh hoạ, theo id sự kiện. Số [n] dưới mỗi ảnh trỏ về mục
+  // "Nguồn ảnh minh hoạ" ở cuối trang, nơi liệt kê đầy đủ đường dẫn.
+  IMGSRC = /*__IMGSRC__*/;
 
   state = { openId: null, extra: {}, vid: {} };
 
@@ -736,8 +802,24 @@ class Component extends DCLogic {
       ch.toneRgb = first ? first.rows[0].toneRgb : this.rgb(this.HISTORICAL_COLORS.bronze);
     });
 
+    // Danh mục nguồn ảnh cuối trang; [n] dưới mỗi ảnh trỏ về đúng dòng thứ n.
+    const byId = {};
+    this.DATA.events.forEach(e => { byId[e.id] = e.title; });
+    const imgRefs = Object.keys(this.IMGSRC)
+      .map(Number).sort((a, b) => a - b)
+      .map(n => {
+        const v = this.IMGSRC[n];
+        const isUrl = /^https?:\/\//.test(v);
+        return {
+          n, title: byId[n] || '',
+          url: isUrl ? v : '', hasUrl: isUrl, noUrl: !isUrl,
+          label: isUrl ? v.split('/')[2].replace(/^www\./, '') : v
+        };
+      });
+
     return {
       chapters,
+      imgRefs,
       originImg: this.ORIGIN_IMG,
       hasOriginImg: !!this.ORIGIN_IMG,
       noOriginImg: !this.ORIGIN_IMG,

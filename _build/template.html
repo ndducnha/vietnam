@@ -178,7 +178,7 @@ button{font:inherit;color:inherit;margin:0}
 .media-btn b{flex:1;font-size:var(--fs-md);font-weight:600;line-height:1.3}
 .media-btn i{flex:none;font-style:normal;font-size:var(--fs-xl);line-height:1;color:var(--halo-ink)}
 .media-btn.is-open{background:#FFF8E6}
-.img-cap{display:block;padding:var(--s2) var(--s3);background:rgba(var(--tone-rgb),.09);
+.img-cap{display:flex;gap:8px;align-items:baseline;padding:var(--s2) var(--s3);background:rgba(var(--tone-rgb),.09);
   border-bottom:1px solid rgba(var(--tone-rgb),.28);font-size:var(--fs-xs);line-height:1.5;
   color:var(--c-ink2);text-align:left}
 .brief .img-cap{border:0;margin-top:var(--s1);padding:var(--s2) 0;background:none}
@@ -236,6 +236,30 @@ button{font:inherit;color:inherit;margin:0}
 .reflist b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink);line-height:1.4}
 .reflist span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2)}
 .refintro{margin:var(--s3) 0 0;font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
+.fold{margin-top:var(--s4);border:1px solid var(--c-line2);border-radius:10px;overflow:hidden}
+.fold+.fold{margin-top:var(--s3)}
+.fold summary{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  padding:14px var(--s4);min-height:44px;cursor:pointer;list-style:none;
+  background:rgba(0,0,0,.02)}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::after{content:'+';margin-left:auto;font-size:18px;line-height:1;
+  color:var(--c-ink2);font-family:var(--f-mono)}
+.fold[open] summary::after{content:'\2212'}
+.fold summary b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink)}
+.fold summary span{font-size:var(--fs-xs);color:var(--c-ink2)}
+.fold-body{padding:0 var(--s4) var(--s4);border-top:1px solid var(--c-line2)}
+.fold-body .reflist{border-top:0}
+.fold-body .refintro i{font-style:normal;font-family:var(--f-mono)}
+.imglist{margin-top:var(--s3)}
+.imgrow{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--c-line2)}
+.imgrow>b{flex:none;min-width:34px;font-family:var(--f-mono);font-size:var(--fs-xs);
+  font-weight:500;color:var(--c-ink2);padding-top:2px}
+.imgrow>div{min-width:0;display:flex;flex-direction:column;gap:2px}
+.imgrow span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink)}
+.imgrow a,.imgrow i{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2);
+  font-style:normal;overflow-wrap:anywhere}
+.imgrow a{text-decoration:underline;text-underline-offset:2px}
+.img-ref{flex:none;margin-left:auto;font-style:normal;font-family:var(--f-mono);opacity:.7}
 .refnote{margin-top:var(--s4);font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
 .sources b{color:var(--c-ink);font-weight:500}
 
@@ -359,8 +383,8 @@ button{font:inherit;color:inherit;margin:0}
                 <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                   <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
                 </sc-if>
-                <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
-                  <div class="img-cap">{{ ev.caption }}</div>
+                <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
+                  <div class="img-cap"><span>{{ ev.caption }}</span><i class="img-ref">[{{ ev.id }}]</i></div>
                 </sc-if>
                 <sc-if value="{{ ev.hasMedia }}" hint-placeholder-val="{{ false }}">
                   <div class="media">
@@ -409,8 +433,8 @@ button{font:inherit;color:inherit;margin:0}
                   <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                     <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
                   </sc-if>
-                  <sc-if value="{{ ev.hasCaption }}" hint-placeholder-val="{{ false }}">
-                    <span class="img-cap">{{ ev.caption }}</span>
+                  <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
+                    <span class="img-cap"><span>{{ ev.caption }}</span><i class="img-ref">[{{ ev.id }}]</i></span>
                   </sc-if>
                   <span class="ev-field"><b>MÔ TẢ</b><span>{{ ev.description }}</span></span>
                   <span class="ev-field ev-source"><b>NGUỒN</b><span>{{ ev.source }}</span></span>
@@ -459,29 +483,67 @@ button{font:inherit;color:inherit;margin:0}
             <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
           </sc-if>
             <figcaption>
-              <b>Hình minh hoạ: Lạc Long Quân – Âu Cơ</b>
+              <b>Hình minh hoạ: Lạc Long Quân – Âu Cơ <i class="img-ref">[*]</i></b>
               <span>Theo truyền thuyết, Lạc Long Quân thuộc giống Rồng kết duyên cùng Âu Cơ dòng Tiên, sinh ra bọc trăm trứng nở thành trăm người con. Năm mươi người theo cha xuống biển, năm mươi người theo mẹ lên non; người con trưởng được tôn làm Hùng Vương, lập nên nước Văn Lang. Đây là truyền thuyết về cội nguồn “con Rồng cháu Tiên”, không phải ghi chép sử liệu.</span>
           </figcaption>
         </figure>
   </figure>
 
   <div class="sources">
-    <h3>TÀI LIỆU THAM KHẢO</h3>
-    <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
-    các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
-    <ul class="reflist">
-      <li><b>Bảo tàng Lịch sử quốc gia</b><span>baotanglichsu.vn — chuyên khảo và bài nghiên cứu lịch sử (34 mốc)</span></li>
-      <li><b>Tư liệu – Văn kiện Đảng</b><span>tulieuvankien.dangcongsan.vn — văn kiện, biên niên sự kiện, văn kiện Đại hội Đảng (11 mốc)</span></li>
-      <li><b>Báo điện tử Đảng Cộng sản Việt Nam</b><span>dangcongsan.vn — chuyên đề lịch sử Đảng và dân tộc (10 mốc)</span></li>
-      <li><b>Bộ Quốc phòng</b><span>mod.gov.vn — lịch sử quân sự và nghệ thuật quân sự Việt Nam (10 mốc)</span></li>
-      <li><b>Báo Điện tử Chính phủ</b><span>baochinhphu.vn — sự kiện và văn kiện Chính phủ (7 mốc)</span></li>
-      <li><b>Quốc hội Việt Nam</b><span>quochoi.vn — Tổng tuyển cử 1946, Quốc hội khóa VI (2 mốc)</span></li>
-      <li><b>Bộ Ngoại giao</b><span>mofa.gov.vn — hội nhập quốc tế, ASEAN, Hội đồng Bảo an (2 mốc)</span></li>
-      <li><b>Trung tâm WTO và Hội nhập, VCCI</b><span>trungtamwto.vn — BTA, WTO (2 mốc)</span></li>
-      <li><b>Ban Quản lý Lăng Chủ tịch Hồ Chí Minh</b><span>bqllang.gov.vn — Mặt trận Việt Minh (1 mốc)</span></li>
-      <li><b>Bộ Công Thương</b><span>moit.gov.vn — Hiệp định EVFTA (1 mốc)</span></li>
-      <li><b>Cơ sở dữ liệu quốc gia về văn bản pháp luật</b><span>vanban.chinhphu.vn — Nghị quyết 202/2025/QH15 (1 mốc)</span></li>
-    </ul>
+    <h3>NGUỒN &amp; TÀI LIỆU</h3>
+
+    <details class="fold">
+      <summary><b>Tài liệu tham khảo</b><span>11 cơ quan · 81 mốc</span></summary>
+      <div class="fold-body">
+        <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
+        các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
+        <ul class="reflist">
+          <li><b>Bảo tàng Lịch sử quốc gia</b><span>baotanglichsu.vn — chuyên khảo và bài nghiên cứu lịch sử (34 mốc)</span></li>
+          <li><b>Tư liệu – Văn kiện Đảng</b><span>tulieuvankien.dangcongsan.vn — văn kiện, biên niên sự kiện, văn kiện Đại hội Đảng (11 mốc)</span></li>
+          <li><b>Báo điện tử Đảng Cộng sản Việt Nam</b><span>dangcongsan.vn — chuyên đề lịch sử Đảng và dân tộc (10 mốc)</span></li>
+          <li><b>Bộ Quốc phòng</b><span>mod.gov.vn — lịch sử quân sự và nghệ thuật quân sự Việt Nam (10 mốc)</span></li>
+          <li><b>Báo Điện tử Chính phủ</b><span>baochinhphu.vn — sự kiện và văn kiện Chính phủ (7 mốc)</span></li>
+          <li><b>Quốc hội Việt Nam</b><span>quochoi.vn — Tổng tuyển cử 1946, Quốc hội khóa VI (2 mốc)</span></li>
+          <li><b>Bộ Ngoại giao</b><span>mofa.gov.vn — hội nhập quốc tế, ASEAN, Hội đồng Bảo an (2 mốc)</span></li>
+          <li><b>Trung tâm WTO và Hội nhập, VCCI</b><span>trungtamwto.vn — BTA, WTO (2 mốc)</span></li>
+          <li><b>Ban Quản lý Lăng Chủ tịch Hồ Chí Minh</b><span>bqllang.gov.vn — Mặt trận Việt Minh (1 mốc)</span></li>
+          <li><b>Bộ Công Thương</b><span>moit.gov.vn — Hiệp định EVFTA (1 mốc)</span></li>
+          <li><b>Cơ sở dữ liệu quốc gia về văn bản pháp luật</b><span>vanban.chinhphu.vn — Nghị quyết 202/2025/QH15 (1 mốc)</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary><b>Nguồn ảnh minh hoạ</b><span>81 ảnh</span></summary>
+      <div class="fold-body">
+        <p class="refintro">Số <i>[n]</i> dưới mỗi ảnh trong trang ứng với một dòng dưới đây.
+        Ảnh được dùng cho mục đích giáo dục, phi thương mại; bản quyền thuộc về nguồn đã dẫn.</p>
+        <div class="imglist">
+          <sc-for list="{{ imgRefs }}" as="im" hint-placeholder-count="3">
+            <div class="imgrow">
+              <b>[{{ im.n }}]</b>
+              <div>
+                <span>{{ im.title }}</span>
+                <sc-if value="{{ im.hasUrl }}" hint-placeholder-val="{{ true }}">
+                  <a href="{{ im.url }}" target="_blank" rel="noopener">{{ im.label }}</a>
+                </sc-if>
+                <sc-if value="{{ im.noUrl }}" hint-placeholder-val="{{ false }}">
+                  <i>{{ im.label }}</i>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+          <div class="imgrow">
+            <b>[*]</b>
+            <div>
+              <span>Hình minh hoạ Lạc Long Quân – Âu Cơ</span>
+              <i>Tranh minh hoạ cho truyền thuyết, không phải ảnh tư liệu lịch sử.</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
     <p class="refnote">Tác giả cố gắng sử dụng thông tin trong chính sử và các tài liệu tham khảo nêu trên.
     Nếu phát hiện sai sót, xin liên hệ để được cập nhật.</p>
   </div>
@@ -1489,6 +1551,92 @@ class Component extends DCLogic {
   };
 
 
+  // Nguồn ảnh minh hoạ, theo id sự kiện. Số [n] dưới mỗi ảnh trỏ về mục
+  // "Nguồn ảnh minh hoạ" ở cuối trang, nơi liệt kê đầy đủ đường dẫn.
+  IMGSRC = {
+  "1": "https://dantri.com.vn/thoi-su/phu-tho-to-chuc-lai-khu-di-tich-lich-su-den-hung-20260709135250990.htm",
+  "2": "SGK Lịch sử lớp 6",
+  "3": "https://vi.wikipedia.org/wiki/%C3%82u_L%E1%BA%A1c",
+  "4": "https://vi.wikipedia.org/wiki/Tr%C6%B0ng_Nh%E1%BB%8B",
+  "5": "https://muctim.tuoitre.vn/ban-dung-o-dau-tren-con-duong-cach-mang-57080.htm",
+  "6": "https://nhandan.vn/khai-mac-le-hoi-van-xuan-khai-quoc-post945346.html",
+  "7": "https://baoninhbinh.org.vn/xa-nam-minh-voi-cong-tac-phat-huy-bao-ton-cac-gia-tri-di-tich-lich-su-van-hoa-260427095512764.html",
+  "8": "https://danviet.vn/mai-hac-de-chi-huy-30-van-lien-quan-dong-nam-a-chong-lai-phuong-bac-20220318162818744-d1007831.html",
+  "9": "https://danviet.vn/bo-cai-dai-vuong-la-ten-cua-vi-vua-nao-trong-lich-su-viet-nam-d1396709.html",
+  "10": "https://danviet.vn/hao-truong-que-hai-duong-nay-la-hai-phong-co-meo-choi-trau-chua-tung-thay-dem-quan-danh-thang-vao-thanh-tong-binh-d1454259.html",
+  "11": "https://danviet.vn/duong-dinh-nghe-thu-linh-tai-nang-va-cai-chet-oan-nghiet-20210709222726402-d962396.html",
+  "12": "https://baotanglichsu.vn/VI/Articles/3098/16483/ngo-quyen-nguoi-mo-djau-ky-nguyen-djoc-lap-cho-djat-nuoc-thoat-khoi-nghin-nam-bac-thuoc.html",
+  "13": "https://vi.wikipedia.org/wiki/Ng%C3%B4_Quy%E1%BB%81n",
+  "14": "https://en.baochinhphu.vn/trang-an-complex-eyes-to-become-intl-tourism-site-111230713085459815.htm",
+  "15": "https://trangandanhthang.vn/di-tich-va-thang-canh/page/6/",
+  "16": "https://vietnamnet.vn/chieu-doi-do-tren-vang-menh-troi-duoi-theo-long-dan-787497.html",
+  "17": "https://vtcnews.vn/vi-vua-nhan-tu-bac-nhat-su-viet-khien-phuong-bac-phai-kieng-ne-ar918640.html",
+  "18": "https://nguyenhungvabanbe.com/ve-tac-gia-va-nguon-goc-bai-tho-nam-quoc-son-ha",
+  "19": "https://thuyphuongdng.violet.vn/entry/nha-tran-thanh-lap-9870923.html",
+  "20": "https://dcs.nhandan.vn/ngay-nay-nam-xua/ngay-nay-nam-xua-29-1-659478.html",
+  "21": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_tin:%C4%90%E1%BB%81n_th%E1%BB%9D_%C4%90%E1%BB%A9c_Th%C3%A1nh_Tr%E1%BA%A7n,_Qu%E1%BA%ADn_1,_th%C3%A1ng_12_n%C4%83m_2021_(ph%C3%B9_%C4%91i%C3%AAu_h%E1%BB%99i_ngh%E1%BB%8B_Di%C3%AAn_H%E1%BB%93ng)_(2).jpg",
+  "22": "https://revelogue.com/hich-tuong-si/",
+  "23": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_tin:C%E1%BB%8Dc_B%E1%BA%A1ch_%C4%90%E1%BA%B1ng.jpg",
+  "24": "https://vi.wikipedia.org/wiki/Th%C3%A0nh_nh%C3%A0_H%E1%BB%93",
+  "25": "https://khoahoc.vietjack.com/question/824271/doc-thong-tin-va-quan-sat-luoc-do-182-hay-mo-ta-nhung-net-chinh-cua-cuoc-khang-chien-chong",
+  "26": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_tin:Le_Loi_statue.JPG",
+  "27": "https://baotanglichsu.vn/vi/Articles/3096/7/Page27",
+  "28": "https://nguoihanoi.vn/ngo-thi-tri-tam-long-ke-si-trung-hieu-79505.html",
+  "29": "https://nhanhieucot.com/nha-nhieu-chuyen/nha-gioi-thieu/bo-luat-hong-duc-nhung-tien-bo-trong-cong-cuoc-bao-ve-va-thuc-day-tieng-noi-cua-phu-nu/",
+  "30": "https://mactrieu.vn/bql-di-tich-to-chuc-le-gio-vua-hien-tong-mac-phuc-hai-vi-vua-thu-3-cua-nha-mac",
+  "31": "https://en.wikipedia.org/wiki/Principality_of_Thu%E1%BA%ADn_Th%C3%A0nh",
+  "32": "https://vinpearl.com/vi/bao-tang-quang-trung-niem-tu-hao-cua-nguoi-dan-dat-vo",
+  "33": "https://baotanglichsu.vn/VI/Articles/3091/19881/di-tich-lich-su-rach-gam-xoai-mut.html",
+  "34": "https://en.wikipedia.org/wiki/Battle_of_Ng%E1%BB%8Dc_H%E1%BB%93i-%C4%90%E1%BB%91ng_%C4%90a",
+  "35": "https://tuoitre.vn/220-nam-quoc-hieu-viet-nam-nhieu-lan-thay-doi-va-hoi-sinh-20240423154151153.htm",
+  "36": "https://archives.org.vn/cuoc-cong-chiem-da-nang-1858-1860-qua-tai-lieu-luu-tru-phap.htm",
+  "37": "https://baodongthap.vn/hoa-si-nguyen-phi-hoanh-dai-bieu-quoc-hoi-khoa-i-1946-1960-don-vi-tinh-my-tho-a14483.html",
+  "38": "https://archives.org.vn/gioi-thieu-tai-lieu-nghiep-vu/le-trinh-hoa-uoc-va-thuong-uoc-giap-tuat-o-kinh-thanh-hue-nam-1875.htm",
+  "39": "https://nienlich.vn/tin-tuc/ngay-nay-nam-xua/wowtimes-2022-ngay-nay-nam-xua-ngay-13-7-1885-vua-ham-nghi-da-ra-chieu-can-vuong-keu-goi-nhan-dan-ra-suc-pho-vua-cuu-nuoc-thoat-khoi-canh-ngoai-xam",
+  "40": "https://thanhnien.vn/140-nam-phong-trao-can-vuong-1885-2025-quyet-tu-chien-dau-o-can-cu-ba-dinh-185251224224526748.htm",
+  "41": "https://thanhnien.vn/viet-nam-nhung-chuyen-bien-dau-the-ky-20-phut-sa-co-cua-hum-thieng-yen-the-1851466221.htm",
+  "42": "https://trithuc.itrithuc.vn/articles/7-1905-mo-dau-phong--53534.html",
+  "43": "https://nghiencuulichsu.com/2017/04/07/buoc-dau-tim-hieu-tac-dong-cua-tan-van-tan-thu-doi-voi-si-phu-tri-thuc-viet-nam-dau-the-ki-xx/",
+  "44": "https://thanhnien.vn/nhung-ky-vat-va-tu-lieu-vo-gia-ve-chu-tich-ho-chi-minh-185260606210311423.htm",
+  "45": "https://www.hinhanhlichsu.org/2017/12/nguyen-thai-hoc-1902-1930-khoi-nghia.html",
+  "46": "https://www.qdnd.vn/van-hoa/doi-song/trung-bay-150-hien-vat-tai-lieu-hinh-anh-chu-de-dang-cong-san-viet-nam-nhung-moc-son-lich-su-811733",
+  "47": "https://baolamdong.vn/xo-viet-nghe-tinh-dinh-cao-cua-cao-trao-cach-mang-1930-1931-376563.html",
+  "48": "https://baotanglichsu.vn/vi/Articles/3097/14/Page44",
+  "49": "https://special.vietnamplus.vn/ngay-23-11-1940-cuoc-khoi-nghia-nam-ky-bung-no-o-nhieu-tinh-nam-bo-cung-voi-khoi-nghia-bac-son-khoi-nghia-nam-ky-la-nhung-tieng-sung-bao-hieu-cho-cuoc-khoi-nghia-toan-quoc-la-cu/",
+  "50": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_tin:Ho_Chi_Minh_(third_from_left_standing)_and_the_OSS_in_1945.jpg",
+  "51": "https://thuvienphapluat.vn/hoi-dap-phap-luat/doi-viet-nam-tuyen-truyen-giai-phong-quan-khi-thanh-lap-ai-lam-doi-truong-138038858.html",
+  "52": "https://baotanglichsu.vn/VI/Articles/3097/16905/nhung-ngay-chuan-bi-cho-le-djoc-lap-2-9-1945.html",
+  "53": "https://english.vov.vn/en/politics/domestic/august-1945-revolution-ushers-in-a-new-era-for-vietnam-773302.vov",
+  "54": "https://www.qdnd.vn/80-nam-cach-mang-thang-tam-va-quoc-khanh-2-9/ban-tuyen-ngon-doc-lap-va-tri-tue-loi-lac-cua-chu-tich-ho-chi-minh-844275",
+  "55": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_tin:H%E1%BB%8Dp_l%E1%BA%A7n_th%E1%BB%A9_nh%E1%BA%A5t,_QH_VNDCCH.jpg",
+  "56": "https://loibacday.com/news/nhung-mau-chuyen-ve-bac-ho/toan-van-loi-keu-goi-toan-quoc-khang-chien-cua-chu-tich-ho-chi-minh-ngay-19-thang-12-nam-1946-9.html",
+  "57": "https://special.vietnamplus.vn/chu-tich-ho-chi-minh-dai-tuong-vo-nguyen-giap-cung-cac-dong-chi-trong-bo-tu-lenh-chien-dich-bien-gioi-1950-ban-ke-hoach-tac-chien-anh-tu-lieu-ttxvn/",
+  "58": "https://baochinhphu.vn/thi-sang-tac-tranh-co-dong-tuyen-truyen-ky-niem-65-nam-ngay-chien-thang-lich-su-dien-bien-phu-102247217.htm",
+  "59": "https://en.wikipedia.org/wiki/1954_Geneva_Conference",
+  "60": "https://baotanglichsu.vn/VI/Articles/3097/theo-dong-lich-su/Page17",
+  "61": "https://www.qdnd.vn/chinh-tri/tiep-lua-truyen-thong/nho-mai-tran-danh-tet-mau-than-nam-ay-717285",
+  "62": "https://congdankhuyenhoc.vn/ha-noi-dien-bien-phu-tren-khong-chien-thang-cua-y-chi-va-tri-tue-viet-nam-179221210150718851.htm",
+  "63": "https://baochinhphu.vn/trien-lam-hiep-dinh-paris-canh-cua-hoa-binh-102230117153402288.htm",
+  "64": "https://en.qdnd.vn/military/war-files/party-serves-as-the-decisive-factor-of-the-1975-spring-victory-516291",
+  "65": "https://www.qdnd.vn/tu-lieu-ho-so/ngay-nay-nam-xua/ngay-30-6-1990-quoc-hoi-viet-nam-khoa-viii-thong-qua-luat-cong-doan-697912",
+  "66": "https://vnexpress.net/thu-tuong-campuchia-tri-an-bo-doi-tinh-nguyen-viet-nam-4413519.html",
+  "67": "https://vietnam.vnanet.vn/english/tin-tuc/cao-bang-in-the-northern-border-defense-war-197068.html",
+  "68": "https://www.qdnd.vn/chinh-tri/tin-tuc/cac-ky-dai-hoi-cua-dang-va-nhung-dau-an-lich-su-dai-hoi-lan-thu-vi-khoi-xuong-va-lanh-dao-su-nghiep-doi-moi-dat-nuoc-813798",
+  "69": "https://vtcnews.vn/toan-canh-trung-quoc-danh-chiem-dao-gac-ma-khien-64-chien-si-hy-sinh-ar386152.html",
+  "70": "https://dantri.com.vn/thoi-su/khang-dinh-co-che-bao-hien-bang-toa-an-hien-phap-1358046657.htm",
+  "71": "https://www.qdnd.vn/tu-lieu-ho-so/ngay-nay-nam-xua/ngay-28-7-1995-viet-nam-chinh-thuc-gia-nhap-hiep-hoi-cac-quoc-gia-dong-nam-a-700392",
+  "72": "https://dantri.com.vn/the-gioi/bua-tiec-trong-dem-lich-su-my-bo-cam-van-viet-nam-1435941146.htm",
+  "73": "https://www.qdnd.vn/chinh-tri/cac-van-de/40-nam-dang-lanh-dao-nen-doi-ngoai-viet-nam-bai-3-doi-ngoai-kinh-te-dong-luc-quan-trong-thuc-day-phat-trien-dat-nuoc-1021008",
+  "74": "https://baotintuc.vn/chinh-tri/nhung-dong-gop-cua-viet-nam-tai-hdba-lien-hop-quoc-nhiem-ky-20082009-20190525080407599.htm",
+  "75": "https://baochinhphu.vn/hoat-dong-noi-bat-cua-lanh-dao-chinh-phu-trong-tuan-102194224.htm",
+  "76": "https://dhannd.bocongan.gov.vn/nhung-gia-tri-khong-the-phu-nhan-ve-bao-dam-quyen-con-nguoi-o-viet-nam-a-551",
+  "77": "https://dansinh.dantri.com.vn/dien-dan-dan-sinh/thu-tuong-nam-chu-tich-asean-2020-thanh-cong-toan-dien-vang-doi-va-thuc-chat-20201211220436013.htm",
+  "78": "https://baochinhphu.vn/viet-nam-hoa-ky-thiet-lap-quan-he-doi-tac-chien-luoc-toan-dien-vi-hoa-binh-hop-tac-va-phat-trien-ben-vung-102230910195319202.htm",
+  "79": "https://special.nhandan.vn/dien-van-Tong-Bi-thu-ky-niem-50-nam-thong-nhat-dat-nuoc/index.html",
+  "80": "https://www.youtube.com/watch?v=is3rh9s2gWU",
+  "81": "https://nongthonvaphattrien.vn/viet-nam-khat-vong-vuon-minh-a35465.html"
+};
+
   state = { openId: null, extra: {}, vid: {} };
 
   yearOf(d) {
@@ -1635,8 +1783,24 @@ class Component extends DCLogic {
       ch.toneRgb = first ? first.rows[0].toneRgb : this.rgb(this.HISTORICAL_COLORS.bronze);
     });
 
+    // Danh mục nguồn ảnh cuối trang; [n] dưới mỗi ảnh trỏ về đúng dòng thứ n.
+    const byId = {};
+    this.DATA.events.forEach(e => { byId[e.id] = e.title; });
+    const imgRefs = Object.keys(this.IMGSRC)
+      .map(Number).sort((a, b) => a - b)
+      .map(n => {
+        const v = this.IMGSRC[n];
+        const isUrl = /^https?:\/\//.test(v);
+        return {
+          n, title: byId[n] || '',
+          url: isUrl ? v : '', hasUrl: isUrl, noUrl: !isUrl,
+          label: isUrl ? v.split('/')[2].replace(/^www\./, '') : v
+        };
+      });
+
     return {
       chapters,
+      imgRefs,
       originImg: this.ORIGIN_IMG,
       hasOriginImg: !!this.ORIGIN_IMG,
       noOriginImg: !this.ORIGIN_IMG,
