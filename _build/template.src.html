@@ -241,7 +241,6 @@ button{font:inherit;color:inherit;margin:0}
   color:var(--c-ink2);font-family:var(--f-mono)}
 .fold[open] summary::after{content:'\2212'}
 .fold summary b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink)}
-.fold summary span{font-size:var(--fs-xs);color:var(--c-ink2)}
 .fold-body{padding:0 var(--s4) var(--s4);border-top:1px solid var(--c-line2)}
 .fold-body .reflist{border-top:0}
 .fold-body .refintro i{font-style:normal;font-family:var(--f-mono)}
@@ -255,7 +254,11 @@ button{font:inherit;color:inherit;margin:0}
   font-style:normal;overflow-wrap:anywhere}
 .imgrow a{text-decoration:underline;text-underline-offset:2px}
 .img-ref{flex:none;margin-left:auto;font-style:normal;font-family:var(--f-mono);opacity:.7}
-.refnote{margin-top:var(--s4);font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
+.disclaimer{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--c-line2)}
+.disclaimer h4{font-family:var(--f-mono);font-size:var(--fs-xs);font-weight:500;
+  letter-spacing:.12em;color:var(--c-ink2);margin-bottom:var(--s3)}
+.disclaimer p{font-size:var(--fs-xs);line-height:1.75;color:var(--c-ink2);text-align:justify}
+.disclaimer p+p{margin-top:var(--s3)}
 .sources b{color:var(--c-ink);font-weight:500}
 
 /* ---------- back to top ---------- */
@@ -488,7 +491,7 @@ button{font:inherit;color:inherit;margin:0}
     <h3>NGUỒN &amp; TÀI LIỆU</h3>
 
     <details class="fold">
-      <summary><b>Tài liệu tham khảo</b><span>11 cơ quan · 81 mốc</span></summary>
+      <summary><b>Tài liệu tham khảo</b></summary>
       <div class="fold-body">
         <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
         các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
@@ -509,7 +512,7 @@ button{font:inherit;color:inherit;margin:0}
     </details>
 
     <details class="fold">
-      <summary><b>Nguồn ảnh minh hoạ</b><span>81 ảnh</span></summary>
+      <summary><b>Nguồn ảnh minh hoạ</b></summary>
       <div class="fold-body">
         <p class="refintro">Số <i>[n]</i> dưới mỗi ảnh trong trang ứng với một dòng dưới đây.
         Ảnh được dùng cho mục đích giáo dục, phi thương mại; bản quyền thuộc về nguồn đã dẫn.</p>
@@ -539,8 +542,27 @@ button{font:inherit;color:inherit;margin:0}
       </div>
     </details>
 
-    <p class="refnote">Tác giả cố gắng sử dụng thông tin trong chính sử và các tài liệu tham khảo nêu trên.
-    Nếu phát hiện sai sót, xin liên hệ để được cập nhật.</p>
+    <div class="disclaimer">
+      <h4>MIỄN TRỪ TRÁCH NHIỆM</h4>
+      <p>Trang này là sản phẩm cá nhân, phi thương mại, được thực hiện ngoài phạm vi công việc
+      và không phải ấn phẩm chính thức của bất kỳ tổ chức nào. Tác giả hiện công tác tại
+      Trường Đại học VinUni và Trung tâm Mã số, Mã vạch Quốc gia; ý tưởng của trang xuất phát
+      từ nguyên lý truy xuất nguồn gốc trong lĩnh vực mã số, mã vạch, được vận dụng sang việc
+      truy nguyên nguồn gốc thông tin lịch sử, theo đó mỗi mốc và mỗi hình ảnh đều được gắn với
+      nguồn công bố tương ứng. Mọi quan điểm trình bày tại đây là của cá nhân tác giả, không
+      đại diện cho quan điểm chính thức của các tổ chức nêu trên.</p>
+      <p>Nội dung 81 mốc được biên soạn trên cơ sở chính sử, văn kiện của Đảng và tài liệu do
+      các cơ quan Nhà nước công bố, đã liệt kê tại mục Tài liệu tham khảo. Trang không phải là
+      nguồn sử liệu gốc và không thay thế cho các tài liệu đó; khi cần trích dẫn, đề nghị người
+      đọc sử dụng trực tiếp tài liệu gốc. Tác giả đã nỗ lực đối chiếu nhưng không cam kết và
+      không bảo đảm nội dung là đầy đủ, chính xác tuyệt đối hoặc được cập nhật tại mọi thời
+      điểm, đồng thời không chịu trách nhiệm đối với bất kỳ thiệt hại hay hệ quả nào phát sinh
+      từ việc sử dụng thông tin trên trang.</p>
+      <p>Hình ảnh minh hoạ được sử dụng cho mục đích giáo dục, phi lợi nhuận và có dẫn nguồn
+      đầy đủ tại mục Nguồn ảnh minh hoạ; quyền tác giả thuộc về các chủ thể đã dẫn. Nếu phát
+      hiện sai sót về nội dung hoặc có yêu cầu liên quan đến quyền tác giả, xin liên hệ để tác
+      giả đính chính hoặc gỡ bỏ trong thời gian sớm nhất.</p>
+    </div>
   </div>
 
 </div>
