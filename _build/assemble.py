@@ -15,15 +15,33 @@ FACES = [
 ]
 
 def fonts_css():
+    """Ghi 6 file woff2 ra fonts/ và trả về @font-face trỏ tới chúng.
+
+    Trước đây font nhúng base64 khiến index.html phình 118 KB và phải tải
+    xong mới hiện được gì. Tách ra file rời thì font tải song song, được
+    trình duyệt cache riêng nên lần vào sau gần như tức thì.
+    """
+    out_dir = IMG_ROOT / 'fonts'
+    out_dir.mkdir(exist_ok=True)
     out, tot = [], 0
     for fam, w, rel in FACES:
         raw = (D / rel).read_bytes(); tot += len(raw)
-        b64 = base64.b64encode(raw).decode()
+        name = pathlib.Path(rel).name
+        (out_dir / name).write_bytes(raw)
         out.append(
             "@font-face{font-family:'%s';font-style:normal;font-weight:%d;font-display:swap;"
-            "src:url(data:font/woff2;base64,%s) format('woff2')}" % (fam, w, b64))
-    print(f'  fonts: {len(FACES)} faces, {tot/1024:.1f} KB raw -> {tot*4/3/1024:.1f} KB base64')
+            "src:url(fonts/%s) format('woff2')}" % (fam, w, name))
+    print(f'  fonts: {len(FACES)} file rời trong fonts/, {tot/1024:.1f} KB')
     return '\n'.join(out)
+
+
+def template_line(lines):
+    """Vị trí dòng JSON chứa template. Dò theo thẻ chứ không cố định số dòng,
+    vì chỉ cần thêm một dòng vào phần <head> là chỉ số cứng sẽ lệch."""
+    for i, l in enumerate(lines):
+        if l.lstrip().startswith('<script type="__bundler/template"'):
+            return i + 1
+    sys.exit('FATAL: không tìm thấy thẻ __bundler/template')
 
 # --- canonical milestone list (edit _build/events.json, never the baseline) ---
 events = json.loads((D / 'events.json').read_text(encoding='utf-8'))
@@ -68,11 +86,12 @@ tpl = (tpl.replace('/*__FONTS__*/', fonts_css())
 
 # --- repack: the bundler escapes "</" so the JSON can't terminate its host <script> ---
 lines = BASE.read_text(encoding='utf-8').split('\n')
-lines[386] = json.dumps(tpl, ensure_ascii=False).replace('</', '<\\u002F')
+lines[template_line(lines)] = json.dumps(tpl, ensure_ascii=False).replace('</', '<\\u002F')
 SRC.write_text('\n'.join(lines), encoding='utf-8')
 
 # --- verify the round trip parses back identically ---
-back = json.loads(SRC.read_text(encoding='utf-8').split('\n')[386])
+_out = SRC.read_text(encoding='utf-8').split('\n')
+back = json.loads(_out[template_line(_out)])
 assert back == tpl, 'FATAL: repack round-trip mismatch'
 print(f'  template: {len(tpl)/1024:.1f} KB')
 print(f'  index.html: {SRC.stat().st_size/1024:.1f} KB  (round-trip verified)')
