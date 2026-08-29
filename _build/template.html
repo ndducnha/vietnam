@@ -141,6 +141,9 @@ button{font:inherit;color:inherit;margin:0}
 .row-body{padding:0 0 var(--s5) var(--s4)}
 
 /* ---------- full card: the 9 sovereignty milestones (+ the 2026 climax) ---------- */
+.ev-img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;background:var(--c-line)}
+.ev-img--brief{margin-top:12px}
+.ev-img--plate{aspect-ratio:4/3}
 .card{background:var(--c-surface2);border:1px solid rgba(var(--tone-rgb),.55);
   border-left:3px solid var(--tone);
   box-shadow:0 10px 28px rgba(28,26,22,.10);animation:rise .55s ease both}
@@ -348,7 +351,7 @@ button{font:inherit;color:inherit;margin:0}
               <article class="card {{ ev.cardCls }}">
                 <div class="card-top"><span class="card-code"><span>{{ ev.glyph }}</span>{{ ev.code }}</span></div>
                 <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
-                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
+                  <img class="ev-img" src="{{ ev.img }}" alt="{{ ev.photo }}" loading="lazy" decoding="async">
                 </sc-if>
                 <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                   <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
@@ -394,7 +397,7 @@ button{font:inherit;color:inherit;margin:0}
                 <span class="brief-title">{{ ev.title }}</span>
                 <sc-if value="{{ ev.isOpen }}" hint-placeholder-val="{{ false }}">
                   <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
-                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
+                    <img class="ev-img ev-img--brief" src="{{ ev.img }}" alt="{{ ev.photo }}" loading="lazy" decoding="async">
                   </sc-if>
                   <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                     <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
@@ -443,7 +446,7 @@ button{font:inherit;color:inherit;margin:0}
   <figure class="origin-banner">
         <figure class="origin-banner-inner">
           <sc-if value="{{ hasOriginImg }}" hint-placeholder-val="{{ true }}">
-            <image-slot id="ck-origin" shape="rect" fit="cover" src="{{ originImg }}" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
+            <img class="ev-img ev-img--plate" src="{{ originImg }}" alt="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ" loading="lazy" decoding="async">
           </sc-if>
           <sc-if value="{{ noOriginImg }}" hint-placeholder-val="{{ false }}">
             <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
@@ -1358,7 +1361,7 @@ class Component extends DCLogic {
   SURFACE = [244, 238, 224];
 
   // Populated at build time from the img/ folder (img/<id>.<ext>).
-  IMAGES = {"1": "img/1.webp", "10": "img/10.webp", "11": "img/11.webp", "12": "img/12.webp", "13": "img/13.webp", "14": "img/14.webp", "15": "img/15.webp", "16": "img/16.webp", "17": "img/17.webp", "18": "img/18.webp", "19": "img/19.webp", "2": "img/2.webp", "20": "img/20.webp", "21": "img/21.jpeg", "22": "img/22.webp", "23": "img/23.webp", "24": "img/24.webp", "25": "img/25.webp", "26": "img/26.webp", "27": "img/27.jpeg", "28": "img/28.jpeg", "29": "img/29.webp", "3": "img/3.webp", "30": "img/30.webp", "31": "img/31.webp", "32": "img/32.webp", "33": "img/33.webp", "34": "img/34.webp", "35": "img/35.webp", "36": "img/36.webp", "37": "img/37.webp", "38": "img/38.webp", "39": "img/39.webp", "4": "img/4.webp", "40": "img/40.webp", "41": "img/41.webp", "42": "img/42.webp", "43": "img/43.jpeg", "44": "img/44.webp", "45": "img/45.webp", "46": "img/46.jpeg", "47": "img/47.webp", "48": "img/48.webp", "49": "img/49.webp", "5": "img/5.webp", "50": "img/50.jpg", "51": "img/51.webp", "52": "img/52.jpg", "53": "img/53.webp", "54": "img/54.webp", "55": "img/55.webp", "56": "img/56.webp", "57": "img/57.webp", "58": "img/58.webp", "59": "img/59.webp", "6": "img/6.webp", "60": "img/60.webp", "61": "img/61.webp", "62": "img/62.webp", "63": "img/63.webp", "64": "img/64.webp", "65": "img/65.webp", "66": "img/66.webp", "67": "img/67.webp", "68": "img/68.webp", "69": "img/69.webp", "7": "img/7.webp", "70": "img/70.webp", "71": "img/71.webp", "72": "img/72.webp", "73": "img/73.webp", "74": "img/74.webp", "75": "img/75.webp", "76": "img/76.webp", "77": "img/77.webp", "78": "img/78.webp", "79": "img/79.webp", "8": "img/8.webp", "80": "img/80.webp", "81": "img/81.webp", "9": "img/9.webp"};
+  IMAGES = {"1": "img/1.webp", "10": "img/10.webp", "11": "img/11.webp", "12": "img/12.webp", "13": "img/13.webp", "14": "img/14.webp", "15": "img/15.webp", "16": "img/16.webp", "17": "img/17.webp", "18": "img/18.webp", "19": "img/19.webp", "2": "img/2.webp", "20": "img/20.webp", "21": "img/21.jpeg", "22": "img/22.webp", "23": "img/23.webp", "24": "img/24.webp", "25": "img/25.webp", "26": "img/26.webp", "27": "img/27.webp", "28": "img/28.webp", "29": "img/29.webp", "3": "img/3.webp", "30": "img/30.webp", "31": "img/31.webp", "32": "img/32.webp", "33": "img/33.webp", "34": "img/34.webp", "35": "img/35.webp", "36": "img/36.webp", "37": "img/37.webp", "38": "img/38.webp", "39": "img/39.webp", "4": "img/4.webp", "40": "img/40.webp", "41": "img/41.webp", "42": "img/42.webp", "43": "img/43.jpeg", "44": "img/44.webp", "45": "img/45.webp", "46": "img/46.jpeg", "47": "img/47.webp", "48": "img/48.webp", "49": "img/49.webp", "5": "img/5.webp", "50": "img/50.jpg", "51": "img/51.webp", "52": "img/52.jpg", "53": "img/53.webp", "54": "img/54.webp", "55": "img/55.webp", "56": "img/56.webp", "57": "img/57.webp", "58": "img/58.webp", "59": "img/59.webp", "6": "img/6.webp", "60": "img/60.webp", "61": "img/61.webp", "62": "img/62.webp", "63": "img/63.webp", "64": "img/64.webp", "65": "img/65.webp", "66": "img/66.webp", "67": "img/67.webp", "68": "img/68.webp", "69": "img/69.webp", "7": "img/7.webp", "70": "img/70.webp", "71": "img/71.webp", "72": "img/72.webp", "73": "img/73.webp", "74": "img/74.webp", "75": "img/75.webp", "76": "img/76.webp", "77": "img/77.webp", "78": "img/78.webp", "79": "img/79.webp", "8": "img/8.webp", "80": "img/80.webp", "81": "img/81.webp", "9": "img/9.webp"};
   ORIGIN_IMG = "img/plate.webp";
 
   // Primary-source material attached to a milestone.

@@ -7,7 +7,7 @@ Chạy lại nhiều lần vô hại: ảnh đã đạt chuẩn sẽ bị bỏ q
 import pathlib, sys
 from PIL import Image
 
-MAXW, Q = 1200, 80
+MAXW, Q = 900, 78
 EXT = ('.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif')
 IMG = pathlib.Path(__file__).resolve().parent.parent / 'img'
 

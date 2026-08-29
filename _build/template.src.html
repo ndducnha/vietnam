@@ -136,6 +136,9 @@ button{font:inherit;color:inherit;margin:0}
 .row-body{padding:0 0 var(--s5) var(--s4)}
 
 /* ---------- full card: the 9 sovereignty milestones (+ the 2026 climax) ---------- */
+.ev-img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;background:var(--c-line)}
+.ev-img--brief{margin-top:12px}
+.ev-img--plate{aspect-ratio:4/3}
 .card{background:var(--c-surface2);border:1px solid rgba(var(--tone-rgb),.55);
   border-left:3px solid var(--tone);
   box-shadow:0 10px 28px rgba(28,26,22,.10);animation:rise .55s ease both}
@@ -343,7 +346,7 @@ button{font:inherit;color:inherit;margin:0}
               <article class="card {{ ev.cardCls }}">
                 <div class="card-top"><span class="card-code"><span>{{ ev.glyph }}</span>{{ ev.code }}</span></div>
                 <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
-                  <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
+                  <img class="ev-img" src="{{ ev.img }}" alt="{{ ev.photo }}" loading="lazy" decoding="async">
                 </sc-if>
                 <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                   <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2" placeholder="{{ ev.photo }}"></image-slot>
@@ -389,7 +392,7 @@ button{font:inherit;color:inherit;margin:0}
                 <span class="brief-title">{{ ev.title }}</span>
                 <sc-if value="{{ ev.isOpen }}" hint-placeholder-val="{{ false }}">
                   <sc-if value="{{ ev.hasImg }}" hint-placeholder-val="{{ true }}">
-                    <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" src="{{ ev.img }}" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
+                    <img class="ev-img ev-img--brief" src="{{ ev.img }}" alt="{{ ev.photo }}" loading="lazy" decoding="async">
                   </sc-if>
                   <sc-if value="{{ ev.noImg }}" hint-placeholder-val="{{ false }}">
                     <image-slot id="{{ ev.slot }}" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:3/2;margin-top:12px" placeholder="{{ ev.photo }}"></image-slot>
@@ -438,7 +441,7 @@ button{font:inherit;color:inherit;margin:0}
   <figure class="origin-banner">
         <figure class="origin-banner-inner">
           <sc-if value="{{ hasOriginImg }}" hint-placeholder-val="{{ true }}">
-            <image-slot id="ck-origin" shape="rect" fit="cover" src="{{ originImg }}" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
+            <img class="ev-img ev-img--plate" src="{{ originImg }}" alt="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ" loading="lazy" decoding="async">
           </sc-if>
           <sc-if value="{{ noOriginImg }}" hint-placeholder-val="{{ false }}">
             <image-slot id="ck-origin" shape="rect" fit="cover" style="display:block;width:100%;aspect-ratio:4/3" placeholder="Ảnh minh hoạ: Lạc Long Quân – Âu Cơ"></image-slot>
