@@ -188,6 +188,8 @@ button{font:inherit;color:inherit;margin:0}
 .ev-field>span{display:block;font-size:var(--fs-md);line-height:1.65;color:var(--c-ink2)}
 .ev-source{padding:var(--s3);background:var(--c-surface3);border-left:3px solid var(--c-line2)}
 .ev-source>span{font-size:var(--fs-sm);color:var(--c-ink3)}
+.src-link{display:inline-block;margin-top:var(--s1);font-family:var(--f-mono);
+  font-size:var(--fs-2xs);color:var(--c-red-ink);text-decoration:underline}
 
 .rail-node--core{width:15px;height:15px;background:var(--tone);border:2px solid var(--halo);
   box-shadow:0 0 0 4px rgba(var(--halo-rgb),.18)}
@@ -228,6 +230,7 @@ button{font:inherit;color:inherit;margin:0}
   border-bottom:1px solid var(--c-line2)}
 .reflist b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink);line-height:1.4}
 .reflist span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2)}
+.refintro{margin:var(--s3) 0 0;font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
 .refnote{margin-top:var(--s4);font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
 .sources b{color:var(--c-ink);font-weight:500}
 
@@ -381,7 +384,11 @@ button{font:inherit;color:inherit;margin:0}
                   <h3 class="ev-title">{{ ev.title }}</h3>
                   <div class="ev-time"><b>THỜI GIAN</b>{{ ev.date }}</div>
                   <div class="ev-field"><b>MÔ TẢ</b><span>{{ ev.description }}</span></div>
-                  <div class="ev-field ev-source"><b>NGUỒN</b><span>{{ ev.source }}</span></div>
+                  <div class="ev-field ev-source"><b>NGUỒN</b><span>{{ ev.source }}</span>
+                    <sc-if value="{{ ev.hasUrl }}" hint-placeholder-val="{{ false }}">
+                      <a class="src-link" href="{{ ev.sourceUrl }}" target="_blank" rel="noopener">{{ ev.sourceHost }}</a>
+                    </sc-if>
+                  </div>
                 </div>
               </article>
             </sc-if>
@@ -455,18 +462,20 @@ button{font:inherit;color:inherit;margin:0}
 
   <div class="sources">
     <h3>TÀI LIỆU THAM KHẢO</h3>
+    <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
+    các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
     <ul class="reflist">
-      <li><b>Đại Việt sử ký toàn thư</b><span>Bộ chính sử biên niên, bản khắc in Nội các quan bản</span></li>
-      <li><b>Khâm định Việt sử thông giám cương mục</b><span>Quốc sử quán triều Nguyễn</span></li>
-      <li><b>Đại Nam thực lục</b><span>Quốc sử quán triều Nguyễn</span></li>
-      <li><b>Văn kiện Đại hội đại biểu toàn quốc</b><span>Đảng Cộng sản Việt Nam, các khóa I–XIV</span></li>
-      <li><b>Cổng Thông tin điện tử Chính phủ</b><span>chinhphu.vn</span></li>
-      <li><b>Bảo tàng Lịch sử Quốc gia</b><span>baotanglichsu.vn</span></li>
-      <li><b>Thư viện số Quốc hội</b><span>Nghị quyết Quốc hội khóa VI, kỳ họp thứ nhất (02/7/1976)</span></li>
-      <li><b>Bộ Ngoại giao Việt Nam</b><span>mofa.gov.vn, quan hệ đối ngoại và các mốc hội nhập</span></li>
-      <li><b>Ban Thư ký ASEAN</b><span>asean.org, Cộng đồng ASEAN và RCEP</span></li>
-      <li><b>European Commission</b><span>Hiệp định EVFTA</span></li>
-      <li><b>Sách giáo khoa Lịch sử</b><span>Bộ Giáo dục và Đào tạo</span></li>
+      <li><b>Bảo tàng Lịch sử quốc gia</b><span>baotanglichsu.vn — chuyên khảo và bài nghiên cứu lịch sử (34 mốc)</span></li>
+      <li><b>Tư liệu – Văn kiện Đảng</b><span>tulieuvankien.dangcongsan.vn — văn kiện, biên niên sự kiện, văn kiện Đại hội Đảng (11 mốc)</span></li>
+      <li><b>Báo điện tử Đảng Cộng sản Việt Nam</b><span>dangcongsan.vn — chuyên đề lịch sử Đảng và dân tộc (10 mốc)</span></li>
+      <li><b>Bộ Quốc phòng</b><span>mod.gov.vn — lịch sử quân sự và nghệ thuật quân sự Việt Nam (10 mốc)</span></li>
+      <li><b>Báo Điện tử Chính phủ</b><span>baochinhphu.vn — sự kiện và văn kiện Chính phủ (7 mốc)</span></li>
+      <li><b>Quốc hội Việt Nam</b><span>quochoi.vn — Tổng tuyển cử 1946, Quốc hội khóa VI (2 mốc)</span></li>
+      <li><b>Bộ Ngoại giao</b><span>mofa.gov.vn — hội nhập quốc tế, ASEAN, Hội đồng Bảo an (2 mốc)</span></li>
+      <li><b>Trung tâm WTO và Hội nhập, VCCI</b><span>trungtamwto.vn — BTA, WTO (2 mốc)</span></li>
+      <li><b>Ban Quản lý Lăng Chủ tịch Hồ Chí Minh</b><span>bqllang.gov.vn — Mặt trận Việt Minh (1 mốc)</span></li>
+      <li><b>Bộ Công Thương</b><span>moit.gov.vn — Hiệp định EVFTA (1 mốc)</span></li>
+      <li><b>Cơ sở dữ liệu quốc gia về văn bản pháp luật</b><span>vanban.chinhphu.vn — Nghị quyết 202/2025/QH15 (1 mốc)</span></li>
     </ul>
     <p class="refnote">Tác giả cố gắng sử dụng thông tin trong chính sử và các tài liệu tham khảo nêu trên.
     Nếu phát hiện sai sót, xin liên hệ để được cập nhật.</p>
@@ -664,6 +673,8 @@ class Component extends DCLogic {
           return {
             id: e.id, date: e.date, title: e.title,
             description: e.description, source: e.source,
+            sourceUrl: e.sourceUrl || '', hasUrl: !!e.sourceUrl,
+            sourceHost: e.sourceUrl ? e.sourceUrl.split('/')[2] : '',
             code: this.code(e.date),
             img: this.IMAGES[e.id] || '', hasImg: !!this.IMAGES[e.id], noImg: !this.IMAGES[e.id],
             caption: this.CAPTIONS[e.id] || '', hasCaption: !!(this.CAPTIONS[e.id] && this.IMAGES[e.id]),

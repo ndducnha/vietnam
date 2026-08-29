@@ -193,6 +193,8 @@ button{font:inherit;color:inherit;margin:0}
 .ev-field>span{display:block;font-size:var(--fs-md);line-height:1.65;color:var(--c-ink2)}
 .ev-source{padding:var(--s3);background:var(--c-surface3);border-left:3px solid var(--c-line2)}
 .ev-source>span{font-size:var(--fs-sm);color:var(--c-ink3)}
+.src-link{display:inline-block;margin-top:var(--s1);font-family:var(--f-mono);
+  font-size:var(--fs-2xs);color:var(--c-red-ink);text-decoration:underline}
 
 .rail-node--core{width:15px;height:15px;background:var(--tone);border:2px solid var(--halo);
   box-shadow:0 0 0 4px rgba(var(--halo-rgb),.18)}
@@ -233,6 +235,7 @@ button{font:inherit;color:inherit;margin:0}
   border-bottom:1px solid var(--c-line2)}
 .reflist b{font-size:var(--fs-sm);font-weight:600;color:var(--c-ink);line-height:1.4}
 .reflist span{font-size:var(--fs-xs);line-height:1.5;color:var(--c-ink2)}
+.refintro{margin:var(--s3) 0 0;font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
 .refnote{margin-top:var(--s4);font-size:var(--fs-sm);line-height:1.7;color:var(--c-ink2)}
 .sources b{color:var(--c-ink);font-weight:500}
 
@@ -386,7 +389,11 @@ button{font:inherit;color:inherit;margin:0}
                   <h3 class="ev-title">{{ ev.title }}</h3>
                   <div class="ev-time"><b>THỜI GIAN</b>{{ ev.date }}</div>
                   <div class="ev-field"><b>MÔ TẢ</b><span>{{ ev.description }}</span></div>
-                  <div class="ev-field ev-source"><b>NGUỒN</b><span>{{ ev.source }}</span></div>
+                  <div class="ev-field ev-source"><b>NGUỒN</b><span>{{ ev.source }}</span>
+                    <sc-if value="{{ ev.hasUrl }}" hint-placeholder-val="{{ false }}">
+                      <a class="src-link" href="{{ ev.sourceUrl }}" target="_blank" rel="noopener">{{ ev.sourceHost }}</a>
+                    </sc-if>
+                  </div>
                 </div>
               </article>
             </sc-if>
@@ -460,18 +467,20 @@ button{font:inherit;color:inherit;margin:0}
 
   <div class="sources">
     <h3>TÀI LIỆU THAM KHẢO</h3>
+    <p class="refintro">Toàn bộ 81 mốc đều dẫn nguồn từ chính sử, văn kiện Đảng và tài liệu của
+    các cơ quan Nhà nước. Số trong ngoặc là số mốc lấy thông tin từ nguồn đó.</p>
     <ul class="reflist">
-      <li><b>Đại Việt sử ký toàn thư</b><span>Bộ chính sử biên niên, bản khắc in Nội các quan bản</span></li>
-      <li><b>Khâm định Việt sử thông giám cương mục</b><span>Quốc sử quán triều Nguyễn</span></li>
-      <li><b>Đại Nam thực lục</b><span>Quốc sử quán triều Nguyễn</span></li>
-      <li><b>Văn kiện Đại hội đại biểu toàn quốc</b><span>Đảng Cộng sản Việt Nam, các khóa I–XIV</span></li>
-      <li><b>Cổng Thông tin điện tử Chính phủ</b><span>chinhphu.vn</span></li>
-      <li><b>Bảo tàng Lịch sử Quốc gia</b><span>baotanglichsu.vn</span></li>
-      <li><b>Thư viện số Quốc hội</b><span>Nghị quyết Quốc hội khóa VI, kỳ họp thứ nhất (02/7/1976)</span></li>
-      <li><b>Bộ Ngoại giao Việt Nam</b><span>mofa.gov.vn, quan hệ đối ngoại và các mốc hội nhập</span></li>
-      <li><b>Ban Thư ký ASEAN</b><span>asean.org, Cộng đồng ASEAN và RCEP</span></li>
-      <li><b>European Commission</b><span>Hiệp định EVFTA</span></li>
-      <li><b>Sách giáo khoa Lịch sử</b><span>Bộ Giáo dục và Đào tạo</span></li>
+      <li><b>Bảo tàng Lịch sử quốc gia</b><span>baotanglichsu.vn — chuyên khảo và bài nghiên cứu lịch sử (34 mốc)</span></li>
+      <li><b>Tư liệu – Văn kiện Đảng</b><span>tulieuvankien.dangcongsan.vn — văn kiện, biên niên sự kiện, văn kiện Đại hội Đảng (11 mốc)</span></li>
+      <li><b>Báo điện tử Đảng Cộng sản Việt Nam</b><span>dangcongsan.vn — chuyên đề lịch sử Đảng và dân tộc (10 mốc)</span></li>
+      <li><b>Bộ Quốc phòng</b><span>mod.gov.vn — lịch sử quân sự và nghệ thuật quân sự Việt Nam (10 mốc)</span></li>
+      <li><b>Báo Điện tử Chính phủ</b><span>baochinhphu.vn — sự kiện và văn kiện Chính phủ (7 mốc)</span></li>
+      <li><b>Quốc hội Việt Nam</b><span>quochoi.vn — Tổng tuyển cử 1946, Quốc hội khóa VI (2 mốc)</span></li>
+      <li><b>Bộ Ngoại giao</b><span>mofa.gov.vn — hội nhập quốc tế, ASEAN, Hội đồng Bảo an (2 mốc)</span></li>
+      <li><b>Trung tâm WTO và Hội nhập, VCCI</b><span>trungtamwto.vn — BTA, WTO (2 mốc)</span></li>
+      <li><b>Ban Quản lý Lăng Chủ tịch Hồ Chí Minh</b><span>bqllang.gov.vn — Mặt trận Việt Minh (1 mốc)</span></li>
+      <li><b>Bộ Công Thương</b><span>moit.gov.vn — Hiệp định EVFTA (1 mốc)</span></li>
+      <li><b>Cơ sở dữ liệu quốc gia về văn bản pháp luật</b><span>vanban.chinhphu.vn — Nghị quyết 202/2025/QH15 (1 mốc)</span></li>
     </ul>
     <p class="refnote">Tác giả cố gắng sử dụng thông tin trong chính sử và các tài liệu tham khảo nêu trên.
     Nếu phát hiện sai sót, xin liên hệ để được cập nhật.</p>
@@ -497,8 +506,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "TK VII TCN",
       "title": "Hùng Vương lập nước Văn Lang",
-      "description": "Theo thư tịch cổ và truyền thuyết, các Vua Hùng lập nước Văn Lang, đóng đô ở Phong Châu, chia nước làm mười lăm bộ. Cư dân Lạc Việt định cư trên châu thổ sông Hồng, lấy nghề trồng lúa nước làm nền tảng, đạt trình độ đúc đồng cao với trống đồng Đông Sơn. Khảo cổ học xác nhận văn hoá Đông Sơn tồn tại trên địa bàn này từ khoảng thế kỷ VII trước Công nguyên.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Vào khoảng thế kỷ thứ 7 trước Công nguyên, trên cơ sở phát triển rực rỡ của văn hóa Đông Sơn, nhà nước đầu tiên đã ra đời, đó là nhà nước Văn Lang. Kinh đô đặt tại Phong Châu, nay thuộc Việt Trì, Phú Thọ.",
+      "source": "Nhà nước Văn Lang - Âu Lạc, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/4043/nha-nuoc-van-lang-au-lac"
     },
     {
       "id": 2,
@@ -507,8 +517,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "257 TCN",
       "title": "An Dương Vương lập nước Âu Lạc, xây thành Cổ Loa",
-      "description": "Thục Phán hợp nhất hai khối cư dân Âu Việt và Lạc Việt, lập nước Âu Lạc, xưng An Dương Vương và dời trung tâm về vùng Cổ Loa. Thành Cổ Loa được đắp nhiều vòng khép kín, kết hợp hào nước với sông tự nhiên, là công trình quân sự quy mô lớn nhất thời dựng nước.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Khoảng thế kỷ thứ 3 trước Công nguyên, nhà nước Văn Lang suy yếu. Thục Phán An Dương Vương hợp nhất hai khối cư dân Âu Việt và Lạc Việt, lập nên nhà nước Âu Lạc, đóng đô ở Cổ Loa, nay thuộc Hà Nội.",
+      "source": "Nhà nước Văn Lang - Âu Lạc, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/4043/nha-nuoc-van-lang-au-lac"
     },
     {
       "id": 3,
@@ -517,8 +528,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "179 TCN",
       "title": "Triệu Đà thôn tính Âu Lạc",
-      "description": "Triệu Đà, người cát cứ vùng Nam Việt, nhiều lần đem quân đánh Âu Lạc nhưng không thắng. Sau đó ông dùng kế giảng hoà và cho con là Trọng Thuỷ sang ở rể để dò xét nội tình. Khi thời cơ đến, quân Nam Việt tiến đánh, Âu Lạc thất thủ, An Dương Vương thua chạy về phương Nam.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Triệu Đà nhiều lần đem quân đánh Âu Lạc nhưng đều thất bại vì Âu Lạc có lực lượng quân sự mạnh, thành lũy kiên cố và vũ khí lợi hại, nhất là nỏ Liên Châu. Không thắng được bằng vũ lực, Triệu Đà đổi kế, xin giảng hòa và cầu hôn cho con là Trọng Thủy lấy Mỵ Châu, con gái An Dương Vương, đưa con ở rể tại Cổ Loa để dò xét tình hình, chia rẽ nội bộ và làm suy yếu triều đình Âu Lạc. Sau khi nắm được bí mật quân sự và phòng thủ của Âu Lạc, Triệu Đà bất ngờ tiến đánh và chiếm được Cổ Loa.",
+      "source": "Nỏ thần Liên Châu - Nỗi khiếp đảm của giặc ngoại xâm phương Bắc, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3096/15792/no-than-lien-chau-noi-khiep-djam-cua-giac-ngoai-xam-phuong-bac.html"
     },
     {
       "id": 4,
@@ -527,8 +539,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "40–43",
       "title": "Khởi nghĩa Hai Bà Trưng",
-      "description": "Trưng Trắc cùng em là Trưng Nhị phát động khởi nghĩa ở Mê Linh, chống ách cai trị hà khắc của Thái thú Tô Định. Nghĩa quân nhanh chóng làm chủ sáu mươi lăm thành trì, Tô Định phải bỏ chạy về nước. Trưng Trắc lên ngôi vương, đóng đô ở Mê Linh, xá thuế cho dân hai năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 40, trên mảnh đất Mê Linh, Hai Bà Trưng giương cao ngọn cờ tụ nghĩa, kêu gọi hào kiệt bốn phương cùng nhân dân cả nước đứng lên đánh đuổi quân Đông Hán. Được sự hưởng ứng của Lạc Hầu, Lạc Tướng và nhân dân khắp 65 huyện thành, chỉ trong thời gian ngắn Hai Bà đã đánh đuổi quân Tô Định ra khỏi bờ cõi. Trưng Trắc được suy tôn lên ngôi vua, lấy hiệu là Trưng Nữ Vương, định đô ở Mê Linh.",
+      "source": "Cuộc khởi nghĩa Hai Bà Trưng (năm 40 - 43 sau Công nguyên), Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/13485/cuoc-khoi-nghia-hai-ba-trung-nam-40-43-sau-cong-nguyen.html"
     },
     {
       "id": 5,
@@ -537,8 +550,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "248",
       "title": "Khởi nghĩa Bà Triệu",
-      "description": "Triệu Thị Trinh cùng anh là Triệu Quốc Đạt dấy binh ở vùng núi Nưa, Cửu Chân, chống ách đô hộ của nhà Ngô. Nghĩa quân đánh phá nhiều thành ấp, khiến chính quyền đô hộ một thời gian không giữ được trật tự trong quận.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Triệu Thị Trinh quê miền núi Quân Yên, nay thuộc Yên Định, Thanh Hóa, cùng anh là Triệu Quốc Đạt dấy binh ở núi Nưa năm 248 chống quân Ngô. Khởi nghĩa lan từ Cửu Chân sang Giao Chỉ, nghĩa quân đánh chiếm thành Tư Phố và xây dựng căn cứ Bồ Điền, khiến toàn thể Châu Giao đều chấn động. Nhà Ngô sai Lục Dận đem tám nghìn quân sang đàn áp, Triệu Thị Trinh tự vẫn ngày 22 tháng 2 năm 248.",
+      "source": "Cuộc khởi nghĩa của Triệu Thị Trinh, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/14281/cuoc-khoi-nghia-cua-trieu-thi-trinh.html"
     },
     {
       "id": 6,
@@ -547,8 +561,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "542–544",
       "title": "Lý Bí lập nước Vạn Xuân, xưng Lý Nam Đế",
-      "description": "Lý Bí, một hào trưởng từng làm quan cho nhà Lương, tập hợp lực lượng nổi dậy và đánh đuổi Thứ sử Tiêu Tư. Sau khi làm chủ đất nước, ông lên ngôi, xưng Lý Nam Đế, đặt quốc hiệu Vạn Xuân với mong muốn nền độc lập bền vững muôn đời. Nhà nước mới dựng kinh đô ở vùng cửa sông Tô Lịch, đặt niên hiệu Thiên Đức và tổ chức bộ máy quan chế riêng.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Cuộc khởi nghĩa do Lý Bí lãnh đạo bùng nổ tháng Giêng năm 542, đánh đuổi quân Lương và đẩy lui cuộc xâm lấn của Lâm Ấp ở phía nam. Tháng 2 năm 544, Lý Bí tuyên bố dựng nước độc lập, đặt quốc hiệu Vạn Xuân, lên ngôi xưng Nam Đế, đặt niên hiệu Thiên Đức, dựng kinh đô ở vùng sông Tô Lịch và cho xây chùa Khai Quốc, nay là chùa Trấn Quốc.",
+      "source": "Tháng 2/544 - Lý Nam Đế tuyên bố dựng nước độc lập, Quốc hiệu Vạn Xuân, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/2001/68142/thang-2-544-ly-nam-dje-tuyen-bo-dung-nuoc-djoc-lap-quoc-hieu-van-xuan.html"
     },
     {
       "id": 7,
@@ -557,8 +572,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "550–571",
       "title": "Triệu Quang Phục đánh bại quân Lương",
-      "description": "Sau khi Lý Nam Đế mất, Triệu Quang Phục rút quân về đầm Dạ Trạch, dựa vào địa hình lầy lội để kháng chiến lâu dài, được dân gian gọi là Dạ Trạch Vương. Nghĩa quân ban ngày ẩn náu, ban đêm dùng thuyền nhỏ đánh úp doanh trại địch. Khi nhà Lương suy yếu vì nội loạn, ông phản công giành lại thành Long Biên và xưng Triệu Việt Vương.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Trước thế mạnh của quân Lương, Lý Nam Đế lui về động Khuất Lão ở Phú Thọ và trao quyền chỉ huy quân sự cho Triệu Quang Phục. Triệu Quang Phục lập căn cứ ở đầm Dạ Trạch, thực hiện lối đánh lâu dài, lấy tiêu hao, mai phục và tập kích bất ngờ làm cách đánh chủ yếu.",
+      "source": "Tháng 2/544 - Lý Nam Đế tuyên bố dựng nước độc lập, Quốc hiệu Vạn Xuân, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/2001/68142/thang-2-544-ly-nam-dje-tuyen-bo-dung-nuoc-djoc-lap-quoc-hieu-van-xuan.html"
     },
     {
       "id": 8,
@@ -567,8 +583,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "713–722",
       "title": "Khởi nghĩa Mai Thúc Loan (Mai Hắc Đế)",
-      "description": "Mai Thúc Loan quê Hoan Châu, xuất thân từ tầng lớp dân phu bị bắt gánh vải nộp cống cho nhà Đường. Ông tập hợp dân các châu vùng Nghệ An, Hà Tĩnh nổi dậy, xưng đế và được gọi là Mai Hắc Đế. Nghĩa quân liên kết được lực lượng nhiều châu, tiến ra chiếm phủ thành Tống Bình và giữ trong một thời gian trước khi nhà Đường đưa đại quân sang đàn áp.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm Quý Sửu 713, Mai Thúc Loan phát động khởi nghĩa ở Hoan Châu, tức vùng Nghệ - Tĩnh ngày nay, chống ách đô hộ nhà Đường. Ông tự xưng là Hắc Đế và cho xây kinh đô Vạn An ở vùng Sa Nam, nay thuộc Nam Đàn, Nghệ An. Vương triều tồn tại gần mười năm, truyền qua ba đời vua, đến năm Quý Hợi 723 thì kinh đô Vạn An thất thủ trước quân Đường do Dương Tư Húc và Quang Sở Khách chỉ huy.",
+      "source": "Những điều ít biết về vương triều của Mai Hắc Đế, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3096/6906/nhung-djieu-it-biet-ve-vuong-trieu-cua-mai-hac-dje.html"
     },
     {
       "id": 9,
@@ -577,8 +594,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "~766–791",
       "title": "Khởi nghĩa Phùng Hưng (Bố Cái Đại Vương)",
-      "description": "Phùng Hưng là hào trưởng đất Đường Lâm, nổi tiếng sức khoẻ và uy tín trong vùng. Ông cùng em là Phùng Hải khởi binh, dần làm chủ nhiều châu rồi vây và chiếm phủ thành Tống Bình, tức vùng Hà Nội ngày nay. Sau khi làm chủ, ông cai quản đất nước một thời gian.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Phùng Hưng quê ở đất Đường Lâm, nay thuộc Sơn Tây, Hà Nội, phát động khởi nghĩa chống ách đô hộ nhà Đường vào khoảng niên hiệu Đại Lịch 766-779. Tháng 4 năm Tân Mùi 791, nghĩa quân chia làm năm đạo vây đánh thành Tống Bình, nhưng Phùng Hưng qua đời ngay trong năm 791; con là Phùng An nối nghiệp được hai năm. Nhân dân suy tôn ông là Bố Cái Đại Vương.",
+      "source": "Chuyện về Phùng Hưng của đất Đường Lâm hai vua, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/12335/chuyen-ve-phung-hung-cua-djat-djuong-lam-hai-vua.html"
     },
     {
       "id": 10,
@@ -587,8 +605,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "905",
       "title": "Khúc Thừa Dụ giành quyền tự chủ",
-      "description": "Nhân lúc nhà Đường suy yếu, Khúc Thừa Dụ, một hào trưởng đất Hồng Châu, chiếm giữ phủ thành Tống Bình và tự xưng Tiết độ sứ, buộc nhà Đường phải công nhận. Con ông là Khúc Hạo tiếp nối sự nghiệp, tiến hành cải cách hành chính, định lại hộ khẩu, quân bình thuế ruộng và giảm sưu dịch cho dân. Chính quyền họ Khúc đặt cơ sở cho một bộ máy cai trị do người Việt điều hành.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đầu thế kỷ X, Khúc Thừa Dụ, một hào trưởng ở Hồng Châu, nay thuộc Ninh Giang, Hải Dương, nổi dậy năm 905 chiếm phủ Tống Bình và tự xưng Tiết độ sứ; triều Đường phải công nhận và phong ông làm Tiết độ sứ Tĩnh Hải quân. Tuy vẫn mang danh hiệu quan lại nhà Đường, trên thực tế Khúc Thừa Dụ đã dựng nên một chính quyền tự chủ, chấm dứt hơn một nghìn năm Bắc thuộc. Sau khi ông mất năm 907, Khúc Hạo (907-917) và Khúc Thừa Mỹ (917-930) tiếp nối sự nghiệp với những cải cách nhằm củng cố nền tự chủ.",
+      "source": "Võ tướng Dương Đình Nghệ - người khởi binh đánh đuổi quân Nam Hán, giải phóng thành Đại La, giành quyền tự chủ cho nước Việt, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "http://baotanglichsu.vn/vi/Articles/3098/15781/vo-tuong-duong-djinh-nghe-nguoi-khoi-binh-djanh-djuoi-quan-nam-han-giai-phong-thanh-djai-la-gianh-quyen-tu-chu-cho-nuoc-viet.html"
     },
     {
       "id": 11,
@@ -597,8 +616,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "931",
       "title": "Dương Đình Nghệ đánh đuổi quân Nam Hán",
-      "description": "Sau khi nhà Nam Hán bắt Khúc Thừa Mỹ, tướng cũ của họ Khúc là Dương Đình Nghệ từ Ái Châu đem quân ra bắc. Ông đánh tan quân Nam Hán, giết viên tướng giữ thành và làm chủ phủ thành Đại La, rồi tự xưng Tiết độ sứ. Trong thời gian cầm quyền, ông nuôi dưỡng và đào tạo lớp tướng lĩnh người Việt, trong đó có Ngô Quyền, người về sau làm nên chiến thắng Bạch Đằng.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 931, Dương Đình Nghệ khởi binh từ quê nhà, nay là đất các xã Thiệu Dương, Thiệu Khánh, huyện Thiệu Hóa, đánh quân Nam Hán qua ba trận với các tướng Lý Khắc Chính, Lý Tiến và Trần Bảo. Ông giải phóng thành Đại La và tự xưng là Tiết độ sứ để quản lý công việc nước nhà.",
+      "source": "Võ tướng Dương Đình Nghệ, người khởi binh đánh đuổi quân Nam Hán giải phóng thành Đại La, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "http://baotanglichsu.vn/vi/Articles/3098/15781/vo-tuong-duong-djinh-nghe-nguoi-khoi-binh-djanh-djuoi-quan-nam-han-giai-phong-thanh-djai-la-gianh-quyen-tu-chu-cho-nuoc-viet.html"
     },
     {
       "id": 12,
@@ -607,8 +627,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "938",
       "title": "Ngô Quyền đại thắng Bạch Đằng",
-      "description": "Nghe tin quân Nam Hán do Lưu Hoằng Tháo chỉ huy kéo sang, Ngô Quyền cho đóng cọc gỗ đầu bịt sắt xuống lòng sông Bạch Đằng, lợi dụng thuỷ triều để giấu bãi cọc. Khi triều lên, ông cho thuyền nhỏ ra khiêu chiến nhử địch vượt qua bãi cọc. Triều rút, cọc nhô lên đâm thủng thuyền lớn, quân ta phản công tiêu diệt đạo binh xâm lược, chủ tướng Lưu Hoằng Tháo tử trận.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Sau khi nhà Đường sụp đổ, vua Nam Hán mở cuộc chiến tranh xâm lược nước ta. Ngô Quyền huy động nhân dân đẵn gỗ, vót nhọn, bịt sắt, đóng thành một bãi cọc ở cửa sông Bạch Đằng, bố trí quân thuỷ bộ mai phục bên trong. Khi thuỷ triều xuống, thuyền địch va vào cọc nhọn bịt sắt bị đâm thủng, chìm đắm gần hết; Lưu Hoằng Tháo tử trận.",
+      "source": "Ngô Quyền và Chiến thắng Bạch Đằng năm 938, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/13934/ngo-quyen-va-chien-thang-bach-djang-nam-938.html"
     },
     {
       "id": 13,
@@ -617,8 +638,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "939",
       "title": "Ngô Quyền xưng vương, lập nhà Ngô",
-      "description": "Một năm sau chiến thắng Bạch Đằng, Ngô Quyền bỏ chức Tiết độ sứ vốn là danh hiệu do phương Bắc phong, tự xưng vương và đóng đô ở Cổ Loa, kinh đô cũ của An Dương Vương. Ông đặt lại triều nghi, quan chế, quy định phẩm phục, xây dựng bộ máy cai trị của một quốc gia độc lập.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Mùa xuân năm 939, sau chiến thắng oanh liệt đánh tan quân Nam Hán trên sông Bạch Đằng, Ngô Quyền xưng Vương, lập nên nhà Ngô và chọn Cổ Loa làm kinh đô. Sự kiện này tạo bước ngoặt lớn của lịch sử, chấm dứt hơn một nghìn năm Bắc thuộc, mở ra kỷ nguyên độc lập, tự chủ của dân tộc. Ngô Quyền trị vì nước nhà độc lập từ năm 939 đến năm 944.",
+      "source": "Kỷ niệm 1085 năm đức vua Ngô Quyền xưng vương, định đô ở Cổ Loa, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/tu-tuong-van-hoa/ky-niem-1085-nam-duc-vua-ngo-quyen-xung-vuong-dinh-do-o-co-loa-663526.html"
     },
     {
       "id": 14,
@@ -627,8 +649,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "968",
       "title": "Đinh Bộ Lĩnh lập nước Đại Cồ Việt, đô Hoa Lư",
-      "description": "Sau khi nhà Ngô suy yếu, đất nước rơi vào cảnh mười hai sứ quân cát cứ. Đinh Bộ Lĩnh, người động Hoa Lư, lần lượt thu phục các thế lực, thống nhất giang sơn. Ông lên ngôi Hoàng đế, đặt quốc hiệu Đại Cồ Việt, đóng đô ở Hoa Lư, định niên hiệu Thái Bình, cho đúc tiền Thái Bình hưng bảo và tổ chức quân đội theo quy chế thống nhất.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 968, Đinh Bộ Lĩnh dẹp yên loạn 12 sứ quân, chấm dứt nạn cát cứ và thống nhất đất nước. Ông lên ngôi, xưng Đại Thắng Minh Hoàng Đế, đặt quốc hiệu Đại Cồ Việt, định đô ở Hoa Lư nay thuộc Ninh Bình, năm 970 đặt niên hiệu Thái Bình. Triều Đinh lập chế độ thập đạo quân, tổ chức quân sự thống nhất đầu tiên thời độc lập.",
+      "source": "Nhà Đinh với sự nghiệp thống nhất đất nước, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3096/10060/nha-djinh-voi-su-nghiep-thong-nhat-djat-nuoc.html"
     },
     {
       "id": 15,
@@ -637,8 +660,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "981",
       "title": "Lê Đại Hành đánh bại quân Tống lần thứ nhất",
-      "description": "Nhà Đinh gặp biến, Đinh Tiên Hoàng bị sát hại, vua nối ngôi còn nhỏ, nhà Tống nhân cơ hội đem quân sang xâm lược. Trước tình thế cấp bách, Thái hậu Dương Vân Nga trao áo long bào cho Thập đạo tướng quân Lê Hoàn; ông lên ngôi, lập nhà Tiền Lê. Lê Đại Hành trực tiếp chỉ huy chặn đánh trên cả đường thuỷ và đường bộ, phá tan quân Tống ở vùng Chi Lăng và Bạch Đằng.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 981, Lê Hoàn cùng tướng lĩnh và quân đội tổ chức thế trận phòng ngự vững chắc, với các điểm then chốt ở ải Bình Lỗ và cửa sông Bạch Đằng. Ông dự đoán chính xác hướng tiến công của các tướng Tống là Hầu Nhân Bảo, Tôn Toàn Hưng và Lưu Trừng nên chủ động bố trí lực lượng chặn đánh. Trong cuộc kháng chiến chống Tống lần thứ nhất, Lê Hoàn với năm vạn quân đã đánh bại mười vạn quân xâm lược, chia cắt thủy binh và bộ binh địch, đánh tan chúng ở Bạch Đằng và Chi Lăng, giết tướng Hầu Nhân Bảo năm 981.",
+      "source": "Nghệ thuật quân sự trong hai lần kháng chiến chống quân Tống, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-ttk/sa-ttdv-kienthucqp/sa-ttk-ktqp-ntqs/sa-ttk-ktqp-ntqs-vn/635c41dc-c8fb-4d79-8f20-0071a2ae4c1c"
     },
     {
       "id": 16,
@@ -647,8 +671,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "1010",
       "title": "Lý Công Uẩn dời đô về Thăng Long (Chiếu dời đô)",
-      "description": "Cho rằng Hoa Lư đất hẹp, chỉ hợp phòng thủ, Lý Công Uẩn ban Chiếu dời đô, chọn thành Đại La nằm giữa đồng bằng, tiện đường thuỷ bộ và có thể tính kế lâu dài cho con cháu. Chiếu viết rằng trên vâng mệnh trời, dưới theo lòng dân, nếu thấy thuận tiện thì thay đổi.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 1010, Lý Công Uẩn ban Thiên đô chiếu, dời đô từ Hoa Lư về thành Đại La và đổi tên là Thăng Long, với mong muốn đất nước bền lâu, phồn thịnh, nhân dân được hưởng thái bình. Hoàng thành Thăng Long được khởi dựng trong dịp này và hoàn thành năm 1011.",
+      "source": "1010 năm Thăng Long - Hà Nội: Tỏa rạng hào khí rồng bay, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/xay-dung-dang/1010-nam-thang-long-ha-noi-toa-rang-hao-khi-rong-bay-565323.html"
     },
     {
       "id": 17,
@@ -657,8 +682,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1054",
       "title": "Lý Thánh Tông đổi quốc hiệu Đại Việt",
-      "description": "Lý Thánh Tông đổi quốc hiệu từ Đại Cồ Việt thành Đại Việt, tên nước được dùng gần như liên tục trong hơn tám thế kỷ sau đó. Cùng thời gian này, triều Lý đẩy mạnh xây dựng thiết chế nhà nước, dựng Văn Miếu thờ Khổng Tử và mở Quốc Tử Giám, đặt nền cho chế độ khoa cử. Bộ máy hành chính, luật pháp và quân đội dần được kiện toàn theo quy chế thống nhất.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm Giáp Ngọ 1054, vua Lý Thánh Tông cho đổi tên nước là Đại Việt, thay cho quốc hiệu Đại Cồ Việt trước đó. Cũng dưới triều Lý, tháng 8 năm Canh Tuất 1070 vua cho lập Văn Miếu, và năm 1076 mở Quốc Tử Giám, trường đại học đầu tiên của nước ta, làm nơi đào tạo nhân tài cho đất nước.",
+      "source": "Những năm Ngọ vẻ vang trong lịch sử dân tộc, Báo Điện tử Chính phủ; và Vương triều Lý: Mở đầu thời kỳ hưng thịnh của nước Đại Việt, Báo Điện tử Chính phủ",
+      "sourceUrl": "https://baochinhphu.vn/nhung-nam-ngo-ve-vang-trong-lich-su-dan-toc-102158235.htm"
     },
     {
       "id": 18,
@@ -667,8 +693,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "1077",
       "title": "Chiến thắng Như Nguyệt và bài thơ Nam quốc sơn hà",
-      "description": "Nắm được ý đồ xâm lược của nhà Tống, Lý Thường Kiệt chủ trương ngồi yên đợi giặc không bằng đem quân đánh trước, đem quân sang phá các căn cứ hậu cần ở Ung Châu, Khâm Châu, Liêm Châu rồi rút về. Ông cho lập phòng tuyến vững chắc trên sông Như Nguyệt, tức sông Cầu ngày nay. Quân Tống bị chặn đứng nhiều tháng, tổn thất nặng, cuối cùng phải chấp nhận giảng hoà và rút quân.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Phòng tuyến Như Nguyệt bên bờ nam sông Cầu được xây dựng thành hệ thống liên hoàn từ Tam Đảo đến Yên Tử, gắn với các công trình phòng thủ ven biển đông bắc, dưới sự chỉ huy trực tiếp của Lý Thường Kiệt. Bài thơ Nam quốc sơn hà vang lên tại phòng tuyến này năm 1077, được đời sau coi là bản tuyên ngôn độc lập đầu tiên của dân tộc. Lý Thường Kiệt chủ động đề nghị giảng hòa, tướng Tống là Quách Quỳ chấp thuận và rút quân vào tháng ba năm Đinh Tỵ.",
+      "source": "Kỷ niệm 937 năm cuộc kháng chiến chống quân Tống lần thứ hai thắng lợi (1077-2014), Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3097/16199/ky-niem-937-nam-cuoc-khang-chien-chong-quan-tong-lan-thu-hai-thang-loi-1077-2014.html"
     },
     {
       "id": 19,
@@ -677,8 +704,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1226",
       "title": "Nhà Trần thành lập",
-      "description": "Nhà Lý suy yếu, quyền hành dần rơi vào tay họ Trần. Qua cuộc hôn nhân giữa Lý Chiêu Hoàng và Trần Cảnh, ngôi vua chuyển sang họ Trần mà không xảy ra nội chiến lớn. Nhà Trần chấn chỉnh quân đội, khuyến khích khẩn hoang, đắp đê Đỉnh Nhĩ trị thuỷ sông Hồng và đặt chức Hà đê sứ.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 10 tháng 1 năm 1226, Lý Chiêu Hoàng nhường ngôi cho chồng là Trần Cảnh; Trần Cảnh lên ngôi, tức Trần Thái Tông, lập nên nhà Trần. Khi đó Trần Cảnh mới tám tuổi. Nhà Trần trị vì từ năm 1226 đến năm 1400.",
+      "source": "Ngày này năm xưa 10/01, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/ngay-nay-nam-xua/ngay-nay-nam-xua-10-01-657761.html"
     },
     {
       "id": 20,
@@ -687,8 +715,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1258",
       "title": "Kháng chiến chống Mông Cổ lần I (Đông Bộ Đầu)",
-      "description": "Sau khi chiếm Đại Lý, quân Mông Cổ theo đường Vân Nam tiến xuống Đại Việt. Trước thế giặc mạnh, nhà Trần chủ trương rút khỏi Thăng Long, thực hiện kế thanh dã, tức vườn không nhà trống, khiến địch không có lương thực. Khi quân Mông Cổ mỏi mệt và thiếu tiếp tế, quân Trần phản công ở Đông Bộ Đầu, bến sông phía đông kinh thành, buộc chúng rút chạy sau khoảng nửa tháng chiếm đóng.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Trong cuộc kháng chiến lần thứ nhất năm 1258, sau các trận chặn đánh kỵ binh Mông Cổ ở biên giới tây bắc và nhất là trận Bình Lệ Nguyên, vua Trần và Lê Tần quyết định lui quân để bảo toàn lực lượng. Nhà Trần chủ trương không đánh trực diện mà bao vây, mai phục, huy động nhân dân thực hiện kế vườn không nhà trống, cô lập địch và cắt đường tiếp tế. Trận quyết chiến chiến lược Đông Bộ Đầu kết thúc thắng lợi cuộc kháng chiến.",
+      "source": "Nghệ thuật quân sự trong ba lần chống xâm lược Nguyên - Mông, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-ttk/sa-ttdv-kienthucqp/sa-ttk-ktqp-ntqs/sa-ttk-ktqp-ntqs-vn/03fb764f-4c1a-41d1-b0c5-37e88c332490"
     },
     {
       "id": 21,
@@ -697,8 +726,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1284",
       "title": "Hội nghị Diên Hồng",
-      "description": "Trước nguy cơ quân Nguyên xâm lược lần thứ hai, Thượng hoàng Trần Thánh Tông mời các bậc phụ lão trong cả nước về điện Diên Hồng ở kinh thành Thăng Long để hỏi kế đánh hay hoà. Các bô lão đồng thanh xin đánh. Trước đó, Hội nghị Bình Than đã bàn kế sách quân sự với vương hầu, tướng lĩnh.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Hội nghị Diên Hồng diễn ra mùa đông năm Giáp Thân 1284, các bô lão đồng thanh hô quyết đánh trước nguy cơ quân Nguyên Mông xâm lược lần thứ hai.",
+      "source": "Nghệ thuật quân sự trong ba lần chống xâm lược Nguyên - Mông, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-ttk/sa-ttdv-kienthucqp/sa-ttk-ktqp-ntqs/sa-ttk-ktqp-ntqs-vn/03fb764f-4c1a-41d1-b0c5-37e88c332490"
     },
     {
       "id": 22,
@@ -707,8 +737,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1285",
       "title": "Kháng chiến chống Nguyên Mông lần II",
-      "description": "Quân Nguyên chia nhiều đường tiến đánh, Thoát Hoan từ phía bắc, Toa Đô từ Chăm Pa đánh ngược lên, hòng kẹp Đại Việt vào giữa. Nhà Trần lại rút lui bảo toàn lực lượng, chờ thời cơ. Đến mùa hè, quân Trần phản công, lần lượt thắng lớn ở Hàm Tử, Chương Dương, Tây Kết và giải phóng Thăng Long.",
-      "source": "SGK Lịch sử lớp 7, Bộ Giáo dục và Đào tạo [năm không nêu trong tài liệu gốc]."
+      "description": "Cuộc kháng chiến lần thứ hai kéo dài từ cuối tháng Chạp năm Giáp Thân 1284 đến cuối tháng Tư năm Ất Dậu 1285. Dưới sự lãnh đạo của vua Trần và Quốc công tiết chế Trần Quốc Tuấn cùng các tướng Trần Quang Khải, Trần Bình Trọng, Phạm Ngũ Lão, quân dân ta đã đánh bại quân Nguyên Mông trong mùa xuân năm 1285.",
+      "source": "Nghệ thuật quân sự trong ba lần chống xâm lược Nguyên - Mông, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-ttk/sa-ttdv-kienthucqp/sa-ttk-ktqp-ntqs/sa-ttk-ktqp-ntqs-vn/03fb764f-4c1a-41d1-b0c5-37e88c332490"
     },
     {
       "id": 23,
@@ -717,8 +748,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "1288",
       "title": "Đại thắng Nguyên Mông trên sông Bạch Đằng",
-      "description": "Biết quân Nguyên lệ thuộc vào đường tiếp tế đường biển, Trần Khánh Dư tiêu diệt đoàn thuyền lương của Trương Văn Hổ ở Vân Đồn, đẩy địch vào thế thiếu đói. Trần Hưng Đạo cho tái dựng trận địa cọc trên sông Bạch Đằng theo cách Ngô Quyền từng làm. Toàn bộ thuỷ quân Nguyên bị tiêu diệt, tướng Ô Mã Nhi bị bắt sống, đạo quân bộ của Thoát Hoan phải tháo chạy qua đường Lạng Sơn.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Trần Khánh Dư bố trí trận địa mai phục ở Vân Đồn, tiêu diệt toàn bộ đoàn thuyền tải lương của Trương Văn Hổ. Trên sông Bạch Đằng, Trần Quốc Tuấn cho bố trí những trận địa cọc ngầm quy mô lớn, khi thủy triều xuống trở thành bãi cản mà thuyền lớn, thuyền nhỏ không thể vượt qua. Ngày 9 tháng 4 năm 1288, quân ta thu hơn 400 chiến thuyền của giặc, các tướng Ô Mã Nhi và Phàn Tiếp bị bắt, Thoát Hoan phải mở đường máu chạy thoát.",
+      "source": "Kỷ niệm 726 năm (1288-2014) - Chiến thắng quân Nguyên Mông lần thứ 3, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3097/15641/ky-niem-726-nam-1288-2014-chien-thang-quan-nguyen-mong-lan-thu-3.html"
     },
     {
       "id": 24,
@@ -727,8 +759,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1400",
       "title": "Hồ Quý Ly lập nhà Hồ, cải cách",
-      "description": "Hồ Quý Ly, một đại thần ngoại thích nắm thực quyền cuối thời Trần, phế vua lập nhà Hồ, đổi quốc hiệu thành Đại Ngu với nghĩa là sự yên vui, dời đô về Tây Đô ở Thanh Hoá. Ông tiến hành nhiều cải cách táo bạo: phát hành tiền giấy Thông bảo hội sao, đặt phép hạn điền và hạn nô, mở rộng khoa cử, đề cao chữ Nôm và chấn chỉnh quân đội.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 1400, Hồ Quý Ly lên ngôi, lập nên nhà Hồ, đặt niên hiệu Thánh Nguyên, quốc hiệu Đại Ngu, kinh đô đóng ở thành Tây Đô, Thanh Hóa. Ông tiến hành cải cách toàn diện và táo bạo trên các lĩnh vực chính trị, hành chính, quốc phòng, kinh tế, tài chính, văn hóa, giáo dục và xã hội, với những chính sách như phát hành tiền giấy Thông bảo hội sao, hạn điền, hạn nô, đề cao chữ Nôm và chấn chỉnh khoa cử.",
+      "source": "Cải cách Hồ Quý Ly, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3129/19687/cai-cach-ho-quy-ly.html"
     },
     {
       "id": 25,
@@ -737,8 +770,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1407",
       "title": "Nhà Minh xâm lược",
-      "description": "Lấy cớ phù Trần diệt Hồ, nhà Minh đưa đại quân sang xâm lược. Nhà Hồ tuy có thành Tây Đô kiên cố và súng thần cơ do Hồ Nguyên Trừng chế tạo nhưng không tập hợp được sức dân nên nhanh chóng thất bại. Đại Việt bị sáp nhập thành quận Giao Chỉ.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Tháng 9 năm Bính Tuất 1406, nhà Minh đưa 80 vạn quân, chưa kể một số đông dân cư và thổ binh tải lương, chia làm hai đạo tiến vào nước ta. Đến tháng 5 năm Đinh Hợi 1407, cuộc kháng chiến của nhà Hồ thất bại, Hồ Quý Ly bị bắt khi rút về vùng Nghệ An - Hà Tĩnh. Sau đó nhân dân ta ở nhiều nơi vẫn tiếp tục nổi dậy chống ách đô hộ của quân Minh.",
+      "source": "Thất bại của nhà Hồ trong cuộc kháng chiến chống quân Minh, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3096/11772/that-bai-cua-nha-ho-trong-cuoc-khang-chien-chong-quan-minh.html"
     },
     {
       "id": 26,
@@ -747,8 +781,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1418",
       "title": "Lê Lợi phát động khởi nghĩa Lam Sơn",
-      "description": "Lê Lợi, một hào trưởng đất Lam Sơn, dựng cờ khởi nghĩa và tự xưng Bình Định Vương. Những năm đầu lực lượng còn mỏng, nghĩa quân nhiều phen phải rút lên núi Chí Linh chịu đói khát; có lần Lê Lai phải đổi áo bào liều mình cứu chúa. Nguyễn Trãi dâng Bình Ngô sách, đề ra đường lối đánh vào lòng người, lấy đại nghĩa thắng hung tàn, lấy chí nhân thay cường bạo.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 7 tháng 2 năm 1418, Lê Lợi phát động khởi nghĩa Lam Sơn, chính thức mở đầu cuộc đấu tranh vũ trang chống quân Minh xâm lược. Cuộc khởi nghĩa do Lê Lợi lãnh đạo từ vùng núi phía tây Thanh Hóa, được nhân dân từ người Kinh đến các dân tộc thiểu số ủng hộ mạnh mẽ ngay từ đầu.",
+      "source": "Khởi nghĩa Lam Sơn (1418 - 1427) - Giá trị lịch sử và hiện thực, Bộ Quốc phòng",
+      "sourceUrl": "https://www.mod.gov.vn/vn/chi-tiet/sa-ttsk/sa-tt-qpan/71b0803a-ffd4-4b8b-80a3-12973eb01ead"
     },
     {
       "id": 27,
@@ -757,8 +792,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1427",
       "title": "Chiến thắng Chi Lăng – Xương Giang",
-      "description": "Nhà Minh cử hai đạo viện binh lớn sang cứu Vương Thông đang bị vây ở thành Đông Quan. Nghĩa quân Lam Sơn chủ trương diệt viện trước, bố trí phục binh ở ải Chi Lăng và chém chết chủ tướng Liễu Thăng, sau đó truy kích tiêu diệt tiếp ở Xương Giang. Đạo quân của Mộc Thạnh nghe tin hoảng sợ tự tan rã, buộc Vương Thông phải xin giảng hoà và rút quân về nước.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Nhà Minh cử hai đạo viện binh: Liễu Thăng chỉ huy mười vạn quân và hai vạn ngựa qua Quảng Tây vào Lạng Sơn, Mộc Thạnh chỉ huy năm vạn quân qua Vân Nam vào Lào Cai. Liễu Thăng bị phóng lao đâm chết ở sườn núi Mã Yên; Mộc Thạnh rút chạy khi biết tin thất bại. Trong 27 ngày từ 8 tháng 10 đến 3 tháng 11 năm 1427, quân Lam Sơn tiêu diệt mười vạn quân Liễu Thăng và đánh tan năm vạn quân Mộc Thạnh, buộc Vương Thông bị vây ở thành Đông Quan phải đầu hàng.",
+      "source": "Chiến thắng Chi Lăng - Xương Giang (8-10 đến 3-11-1427), Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3097/15231/chien-thang-chi-lang-xuong-giang-8-10-djen-3-11-1427.html"
     },
     {
       "id": 28,
@@ -767,8 +803,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "1428",
       "title": "Bình Ngô đại cáo",
-      "description": "Sau khi quân Minh rút hết, Nguyễn Trãi thay Lê Lợi soạn bài cáo bố cáo với thiên hạ về nền độc lập. Bài văn mở đầu bằng tư tưởng nhân nghĩa cốt ở yên dân, khẳng định nước Đại Việt ta từ trước vốn xưng nền văn hiến đã lâu, có núi sông bờ cõi đã chia, phong tục Bắc Nam cũng khác, mỗi bên xưng đế một phương, hào kiệt đời nào cũng có.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 10 tháng 12 năm 1427, Hội thề Đông Quan diễn ra giữa Lê Lợi và tướng Minh Vương Thông. Vương Thông cam kết rút hết quân về nước, không cướp bóc nhân dân trên đường rút và không bao giờ xâm phạm Đại Việt nữa; Lê Lợi bảo đảm tha cho quân địch được toàn tính mạng về nước. Quân Minh bắt đầu rút ngày 29 tháng 12 năm 1427 và ngày 3 tháng 1 năm 1428 đội binh cuối cùng lên đường; Nguyễn Trãi thảo Bình Ngô đại cáo, áng thiên cổ hùng văn tuyên cáo nền độc lập.",
+      "source": "Ngày 10-12-1427: Hội thề Đông Quan - Kết thúc thắng lợi cuộc kháng chiến chống quân Minh, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/2002/68094/ngay-10-12-1427-hoi-the-djong-quan-ket-thuc-thang-loi-cuoc-khang-chien-chong-quan-minh.html"
     },
     {
       "id": 29,
@@ -777,8 +814,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1460–1497",
       "title": "Lê Thánh Tông thịnh trị và Bộ luật Hồng Đức",
-      "description": "Lê Thánh Tông trị vì gần bốn mươi năm, đưa Đại Việt tới thời thịnh trị bậc nhất. Ông chia lại nước thành mười ba đạo thừa tuyên, lập bản đồ Hồng Đức, chấn chỉnh quan chế và đẩy mạnh khoa cử, cho dựng bia tiến sĩ ở Văn Miếu. Bộ Quốc triều hình luật, quen gọi là luật Hồng Đức, gồm hơn bảy trăm điều, trong đó nhiều điều bảo vệ quyền lợi phụ nữ và người yếu thế.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Lê Thánh Tông trị vì từ năm 1460 đến năm 1497. Ông cải tổ hành chính, chia cả nước từ 5 đạo thành 13 đạo thừa tuyên, đặt quan văn quan võ trông coi riêng từng lĩnh vực; cho biên soạn Bộ luật Hồng Đức, một trong những thành tựu đáng tự hào nhất của thời đại; hoàn thành tấm bản đồ đầy đủ đầu tiên của Đại Việt và mở mang bờ cõi về phương Nam năm 1471. Ông lập Hội Tao đàn gồm 28 hội viên; trong 38 năm trị vì có hơn 501 tiến sĩ đỗ đạt và ông đặt lệ dựng bia tiến sĩ ở Văn Miếu.",
+      "source": "Vua Lê Thánh Tông - đấng minh quân văn trị, vũ công toàn năng của Đại Việt (1442-1497), Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/16818/vua-le-thanh-tong-djang-minh-quan-van-tri-vu-cong-toan-nang-cua-djai-viet-1442-1497.html"
     },
     {
       "id": 30,
@@ -787,8 +825,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1527",
       "title": "Mạc Đăng Dung lập nhà Mạc, thời Nam Bắc triều",
-      "description": "Mạc Đăng Dung, một võ quan xuất thân từ nghề chài lưới, dần thâu tóm quyền lực rồi phế vua Lê, lập nhà Mạc, dựng Dương Kinh ở quê hương Cổ Trai. Các cựu thần nhà Lê không phục, tôn lập vua Lê ở Thanh Hoá, tạo thế Nam triều đối đầu Bắc triều kéo dài hơn sáu mươi năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đầu thế kỷ XVI, nhà Lê suy yếu; Mạc Đăng Dung cướp ngôi và lập nên nhà Mạc năm 1527. Nguyễn Kim, một bề tôi trung thành của nhà Lê, tập hợp lực lượng chống nhà Mạc và dựng nên thời Lê Trung hưng (1533-1788), mở đầu cục diện Nam - Bắc triều.",
+      "source": "Xứ Quảng Nam xưa: Dưới thời chúa Nguyễn, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3101/73276/xu-quang-nam-xua-duoi-thoi-chua-nguyen.html"
     },
     {
       "id": 31,
@@ -797,8 +836,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1600–1672",
       "title": "Phân tranh Trịnh – Nguyễn",
-      "description": "Sau khi nhà Mạc bị đánh bật lên Cao Bằng, quyền hành thực tế ở Đàng Ngoài thuộc về chúa Trịnh, vua Lê chỉ còn giữ danh nghĩa. Ở phía nam, Nguyễn Hoàng và con cháu xây dựng cơ nghiệp riêng tại Thuận Quảng. Hai bên giao tranh bảy lần lớn rồi lấy sông Gianh làm ranh giới.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 1579, Nguyễn Hoàng, con của Nguyễn Kim, được giao trấn thủ cả hai xứ Thuận Hóa và Quảng Nam; năm 1602 ông sắp đặt lại đơn vị hành chính hai xứ, đổi trấn Quảng Nam thành dinh Quảng Nam. Từ đó hình thành Đàng Trong dưới quyền các chúa Nguyễn, tách khỏi Đàng Ngoài của vua Lê - chúa Trịnh, dẫn tới cuộc phân tranh Trịnh - Nguyễn kéo dài, lấy sông Gianh làm giới tuyến giữa hai bên.",
+      "source": "Xứ Quảng Nam xưa: Dưới thời chúa Nguyễn, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3101/73276/xu-quang-nam-xua-duoi-thoi-chua-nguyen.html"
     },
     {
       "id": 32,
@@ -807,8 +847,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1771",
       "title": "Khởi nghĩa Tây Sơn",
-      "description": "Ba anh em Nguyễn Nhạc, Nguyễn Huệ, Nguyễn Lữ dựng cờ khởi nghĩa ở ấp Tây Sơn, nêu khẩu hiệu lấy của nhà giàu chia cho dân nghèo. Phong trào nhanh chóng lan rộng nhờ được nông dân và thương nhân ủng hộ. Nghĩa quân lần lượt lật đổ chính quyền chúa Nguyễn ở Đàng Trong, rồi tiến ra bắc diệt họ Trịnh, xoá bỏ tình trạng cát cứ kéo dài hai trăm năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Cuộc khởi nghĩa nông dân Tây Sơn bùng nổ mùa xuân năm 1771 và nhanh chóng phát triển mạnh mẽ, tiến tới đánh tan các thế lực phong kiến cát cứ, đưa đất nước vào ổn định.",
+      "source": "Mùa Xuân năm 1771 - Khởi nghĩa nông dân Tây Sơn bùng nổ, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/2001/68148/mua-xuan-nam-1771-khoi-nghia-nong-dan-tay-son-bung-no.html"
     },
     {
       "id": 33,
@@ -817,8 +858,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1785",
       "title": "Đại thắng quân Xiêm ở Rạch Gầm – Xoài Mút",
-      "description": "Nguyễn Ánh cầu viện vua Xiêm; quân Xiêm kéo sang với danh nghĩa giúp đỡ nhưng cướp phá dân chúng. Nguyễn Huệ chọn khúc sông Tiền giữa hai rạch Rạch Gầm và Xoài Mút, giấu quân hai bên bờ và trên các cù lao, dùng thuyền nhẹ nhử thuyền địch vào trận địa rồi đánh úp. Gần như toàn bộ đạo quân xâm lược bị tiêu diệt chỉ trong một đêm và một buổi sáng.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đầu năm 1785, quân Tây Sơn do Nguyễn Huệ chỉ huy đánh trận Rạch Gầm - Xoài Mút, tiêu diệt gần bốn vạn quân xâm lược Xiêm. Khi địch tấn công, một số thuyền quân Tây Sơn ra đánh chặn rồi giả thua, rút dần về phía Rạch Gầm - Xoài Mút nhằm dụ địch vào trận địa mai phục; quân Xiêm tưởng ta yếu, thúc quân đuổi theo và trúng kế.",
+      "source": "Nghệ thuật quân sự trong chiến tranh giữ nước cuối thế kỷ XVIII, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-ttk/sa-ttdv-kienthucqp/sa-ttk-ktqp-ntqs/sa-ttk-ktqp-ntqs-vn/5c3ff67f-c230-46ea-8f88-52e547cd2780"
     },
     {
       "id": 34,
@@ -827,8 +869,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "1789",
       "title": "Quang Trung đại phá 29 vạn quân Thanh ở Ngọc Hồi, Đống Đa",
-      "description": "Lê Chiêu Thống cầu viện nhà Thanh; Tôn Sĩ Nghị đem đại quân chiếm Thăng Long. Nguyễn Huệ lên ngôi hoàng đế, lấy hiệu Quang Trung, rồi thần tốc hành quân ra bắc, hẹn với ba quân ăn Tết khai hạ ở kinh thành vào mùng bảy. Các trận Ngọc Hồi và Đống Đa diễn ra chớp nhoáng; Sầm Nghi Đống thắt cổ tự tử, Tôn Sĩ Nghị bỏ cả ấn tín chạy về nước.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Nghệ thuật quân sự của Nguyễn Huệ và quân Tây Sơn được biểu hiện tập trung nhất trong việc tổ chức và thực hành trận quyết chiến chiến lược Ngọc Hồi - Đống Đa. Thắng lợi của cuộc kháng chiến chống quân Thanh xâm lược đầu xuân năm Kỷ Dậu 1789 là một trong những chiến công vĩ đại và hiển hách trong lịch sử chống ngoại xâm của dân tộc Việt Nam.",
+      "source": "Nghệ thuật quân sự trong chiến tranh giữ nước cuối thế kỷ XVIII, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-ttk/sa-ttdv-kienthucqp/sa-ttk-ktqp-ntqs/sa-ttk-ktqp-ntqs-vn/5c3ff67f-c230-46ea-8f88-52e547cd2780"
     },
     {
       "id": 35,
@@ -837,8 +880,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1802",
       "title": "Nguyễn Ánh lập nhà Nguyễn; quốc hiệu Việt Nam (1804)",
-      "description": "Sau khi Quang Trung mất sớm, triều Tây Sơn suy yếu vì mâu thuẫn nội bộ. Nguyễn Ánh phản công từ Gia Định ra bắc, thống nhất lãnh thổ từ ải Nam Quan tới mũi Cà Mau, lên ngôi lấy niên hiệu Gia Long và đóng đô ở Phú Xuân. Năm 1804, nhà Thanh chấp thuận quốc hiệu Việt Nam.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 1802, Nguyễn Phúc Ánh lên ngôi, lấy niên hiệu Gia Long, định đô ở Phú Xuân, sáng lập vương triều Nguyễn, triều đại phong kiến cuối cùng trong lịch sử Việt Nam. Năm 1804, quốc hiệu Việt Nam được đặt; theo Mộc bản triều Nguyễn, chiếu của vua Gia Long nêu mục đích dựng nền lớn truyền lâu dài về sau và quy định các văn thư bang giao đều dùng quốc hiệu Việt Nam thay cho An Nam. Năm 1815, ông ban hành Hoàng Việt luật lệ, tức Bộ luật Gia Long, gồm 398 điều.",
+      "source": "Gia Long - vị Hoàng đế đầu tiên sáng lập vương triều Nguyễn, và Quốc hiệu Việt Nam qua góc độ từ Mộc bản triều Nguyễn, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/15241/gia-long-vi-hoang-dje-djau-tien-sang-lap-vuong-trieu-nguyen-trieu-djai-phong-kien-cuoi-cung-trong-lich-su-viet-nam.html"
     },
     {
       "id": 36,
@@ -847,8 +891,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1/9/1858",
       "title": "Pháp nổ súng tấn công Đà Nẵng",
-      "description": "Liên quân Pháp và Tây Ban Nha nổ súng vào cửa biển Đà Nẵng, lấy cớ bảo vệ giáo sĩ. Kế hoạch đánh nhanh thắng nhanh của Pháp bị chặn lại bởi phòng tuyến do Nguyễn Tri Phương tổ chức, cùng bệnh dịch và khí hậu khắc nghiệt. Sau nhiều tháng giằng co không đạt mục tiêu, quân Pháp buộc phải chuyển hướng vào Gia Định, mở đầu quá trình xâm lược kéo dài gần ba mươi năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 1 tháng 9 năm 1858, liên quân Pháp và Tây Ban Nha nổ súng đánh thành Đà Nẵng, chiếm bán đảo Sơn Trà, mở đầu cuộc chiến tranh xâm lược Việt Nam. Trong gần ba mươi năm sau đó, quân Pháp lần lượt đánh chiếm Nam Kỳ, Bắc Kỳ rồi tiến đánh kinh đô Huế.",
+      "source": "Liên quân Pháp - Tây Ban Nha nổ súng đánh thành Đà Nẵng mở đầu cuộc xâm lược Việt Nam lần thứ nhất 9/1858, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3097/15072/lien-quan-phap-tay-ban-nha-no-sung-djanh-thanh-dja-nang-mo-djau-cuoc-xam-luoc-viet-nam-lan-thu-nhat-9-1858.html"
     },
     {
       "id": 37,
@@ -857,8 +902,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1859–1867",
       "title": "Kháng chiến chống Pháp ở Nam Kỳ",
-      "description": "Khi triều đình ký hoà ước nhượng ba tỉnh miền Đông Nam Kỳ năm 1862, nhân dân vẫn tiếp tục kháng chiến. Trương Định kháng lệnh bãi binh của triều đình, được nhân dân tôn làm Bình Tây Đại nguyên soái.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Khi Pháp đánh Gia Định năm 1859, Trương Định chiêu mộ nghĩa binh; đầu năm 1861 ông lập căn cứ Gò Công với khoảng một nghìn nghĩa quân. Tháng 6 năm 1862, triều đình Huế ký hòa ước với Pháp và ra lệnh bãi binh, Trương Định không tuân lệnh; nhân dân tôn ông là Bình Tây Đại nguyên soái. Từ năm 1861 đến năm 1864, nghĩa quân gây cho quân Pháp nhiều tổn thất; tháng 8 năm 1864, ông tuẫn tiết ở tuổi 44 chứ không chịu đầu hàng.",
+      "source": "Tháng 9/1861, Trương Định (Trương Công Định) khởi nghĩa chống Pháp ở Gia Định, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "http://baotanglichsu.vn/vi/Articles/3097/15047/thang-9-1861-truong-djinh-truong-cong-djinh-khoi-nghia-chong-phap-o-gia-djinh.html"
     },
     {
       "id": 38,
@@ -867,8 +913,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "6/6/1884",
       "title": "Hòa ước Patenôtre (Giáp Thân)",
-      "description": "Sau khi Pháp đánh chiếm Bắc Kỳ lần thứ hai và uy hiếp kinh đô, triều Nguyễn ký hoà ước với đại diện Pháp là Patenôtre. Theo hoà ước, Việt Nam bị chia thành ba kỳ với ba chế độ khác nhau: Nam Kỳ là thuộc địa, Trung Kỳ và Bắc Kỳ là xứ bảo hộ. Chiếc ấn bạc do nhà Thanh phong bị nấu chảy, chấm dứt quan hệ triều cống với phương Bắc.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 6 tháng 6 năm 1884, triều đình Nguyễn ký Hòa ước Giáp Thân, còn có tên khác là Hòa ước Patenôtre, với thực dân Pháp. Đây là bản hòa ước cuối cùng triều Nguyễn ký với thực dân Pháp, đánh dấu thời kỳ Việt Nam mất độc lập, tự do và trở thành một nước phụ thuộc vào Pháp.",
+      "source": "Cách đây 129 năm (6/6/1884-6/6/2013) - Triều đình Nguyễn ký Hòa ước Giáp Thân 1884, còn có tên khác là Hòa ước Patenôtre, với thực dân Pháp, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3097/14428/cach-djay-129-nam-6-6-1884-6-6-2013-trieu-djinh-nguyen-ky-hoa-uoc-giap-than-1884-con-co-ten-khac-la-hoa-uoc-patenotre-voi-thuc-dan-phap.html"
     },
     {
       "id": 39,
@@ -877,8 +924,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "13/7/1885",
       "title": "Vua Hàm Nghi ban Chiếu Cần Vương",
-      "description": "Sau cuộc phản công thất bại ở kinh thành Huế, Tôn Thất Thuyết đưa vua Hàm Nghi ra vùng núi Quảng Trị và nhân danh nhà vua ban chiếu kêu gọi văn thân, sĩ phu và nhân dân cả nước đứng lên giúp vua cứu nước. Nhà vua khi đó mới mười ba tuổi. Ba năm sau ông bị bắt và bị đày sang Algérie, nhưng phong trào do chiếu phát động vẫn tiếp tục nhiều năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Tháng 7 năm 1885, sau khi cuộc tấn công quân Pháp ở kinh thành Huế thất bại, Tôn Thất Thuyết cùng phái chủ chiến trong triều đình Nguyễn đưa vua Hàm Nghi ra vùng Tân Sở, Quảng Trị và Ấu Sơn, Hương Khê, Hà Tĩnh. Ngày 13 tháng 7 năm 1885, vua Hàm Nghi ban Chiếu Cần Vương tại Tân Sở, kêu gọi nhân dân tiếp tục chiến đấu, tạo nên phong trào chống Pháp rộng khắp cả nước.",
+      "source": "Tôn Thất Thuyết và phong trào Cần vương, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/12112/ton-that-thuyet-va-phong-trao-can-vuong.html"
     },
     {
       "id": 40,
@@ -887,8 +935,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1885–1896",
       "title": "Các cuộc khởi nghĩa Cần Vương",
-      "description": "Hưởng ứng chiếu Cần Vương, hàng loạt cuộc khởi nghĩa nổ ra khắp Trung Kỳ và Bắc Kỳ. Phạm Bành và Đinh Công Tráng giữ căn cứ Ba Đình ở Thanh Hoá; Nguyễn Thiện Thuật lập căn cứ Bãi Sậy giữa vùng đầm lầy Hưng Yên; Phan Đình Phùng cùng Cao Thắng duy trì khởi nghĩa Hương Khê hơn mười năm và tự chế được súng trường theo mẫu của Pháp.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Hưởng ứng lời kêu gọi của vua Hàm Nghi, các cuộc khởi nghĩa nổ ra khắp nơi trên lãnh thổ Việt Nam từ Bắc chí Nam chống thực dân Pháp. Khởi nghĩa Hương Khê do Phan Đình Phùng lãnh đạo là cuộc khởi nghĩa tiêu biểu nhất, quy mô trải trên bốn tỉnh Bắc Trung Bộ và kéo dài lâu nhất trong phong trào Cần Vương, từ năm 1885 đến năm 1896.",
+      "source": "Khởi nghĩa Hương Khê - đỉnh cao của phong trào Cần vương, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/ngay-nay-nam-xua/theo-dong-su-kien/khoi-nghia-huong-khe-dinh-cao-cua-phong-trao-can-vuong-678418.html"
     },
     {
       "id": 41,
@@ -897,8 +946,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1884–1913",
       "title": "Khởi nghĩa Yên Thế (Hoàng Hoa Thám)",
-      "description": "Hoàng Hoa Thám, quen gọi là Đề Thám, lãnh đạo nông dân vùng Yên Thế chống Pháp gần ba mươi năm, lâu nhất trong các phong trào vũ trang cùng thời. Nghĩa quân dựa vào địa hình rừng núi trung du, đánh du kích và nhiều lần buộc Pháp phải giảng hoà.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Khởi nghĩa Yên Thế là phong trào nông dân kéo dài gần ba mươi năm từ năm 1884 đến năm 1913. Cuộc khởi nghĩa bắt đầu tháng 3 năm 1884 do Đề Nắm lãnh đạo và nhanh chóng lan rộng khắp tỉnh Bắc Giang; từ năm 1892, Hoàng Hoa Thám, tức Đề Thám, trở thành người lãnh đạo, quy tụ các phong trào chống Pháp trong vùng. Ngày 10 tháng 2 năm 1913, Hoàng Hoa Thám bị sát hại tại rừng Tổ Cú thuộc căn cứ Phồn Xương, Yên Thế, Bắc Giang.",
+      "source": "Tướng quân Hoàng Hoa Thám, linh hồn của cuộc khởi nghĩa Yên Thế, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3098/15307/tuong-quan-hoang-hoa-tham-linh-hon-cua-cuoc-khoi-nghia-yen-the.html"
     },
     {
       "id": 42,
@@ -907,8 +957,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1904–1908",
       "title": "Phan Bội Châu lập Duy Tân hội và phong trào Đông Du",
-      "description": "Phan Bội Châu lập Duy Tân hội, chủ trương dùng bạo động giành độc lập và tranh thủ sự giúp đỡ từ bên ngoài. Ông tổ chức đưa thanh niên sang Nhật Bản du học để đào tạo lớp người có tri thức và kỹ thuật quân sự, gọi là phong trào Đông Du.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 1904, Phan Bội Châu sáng lập Duy Tân hội. Phong trào Đông Du đưa thanh niên sang Nhật Bản du học được xem là thành tựu lớn trong sự nghiệp cách mạng của Phan Bội Châu và Duy Tân hội; đến năm 1907 có khoảng 200 du học sinh ở Nhật Bản, trong đó một nửa đến từ Nam Kỳ.",
+      "source": "Phong trào Đông Du (1905 - 1908), một hình thức xây dựng lực lượng cách mạng những năm đầu thế kỷ XX, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3097/14624/phong-trao-djong-du-1905-1908-mot-hinh-thuc-xay-dung-luc-luong-cach-mang-nhung-nam-djau-the-ky-xx.html"
     },
     {
       "id": 43,
@@ -917,8 +968,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1906–1908",
       "title": "Phan Châu Trinh với phong trào Duy Tân và Đông Kinh Nghĩa Thục",
-      "description": "Khác với Phan Bội Châu, Phan Châu Trinh phản đối bạo động và cầu ngoại viện, chủ trương khai dân trí, chấn dân khí, hậu dân sinh, tức nâng cao hiểu biết, ý chí và đời sống của dân trước hết. Trường Đông Kinh Nghĩa Thục ở Hà Nội dạy chữ Quốc ngữ, khoa học thường thức và lịch sử nước nhà cho mọi người, không thu học phí, hoạt động chưa đầy một năm thì bị chính quyền thực dân đóng cửa.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Năm 1907, Đông Kinh Nghĩa Thục được thành lập, nằm trong phong trào Duy Tân cải cách giáo dục đầu thế kỷ XX; trường hoạt động từ tháng 3 năm 1907 đến tháng 12 năm 1907 thì bị buộc đóng cửa. Phan Châu Trinh cùng Trần Quý Cáp, Huỳnh Thúc Kháng và Lương Văn Can tiến hành sự nghiệp duy tân, canh tân đất nước. Pháp đàn áp phong trào Duy Tân và Đông Du, đóng cửa Đông Kinh Nghĩa Thục cùng các trường tư ở Quảng Nam, Quảng Ngãi và đày Phan Châu Trinh.",
+      "source": "Đông Kinh Nghĩa Thục và tư tưởng cải cách giáo dục, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3096/12524/djong-kinh-nghia-thuc-va-tu-tuong-cai-cach-giao-duc.html"
     },
     {
       "id": 44,
@@ -927,8 +979,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "5/6/1911",
       "title": "Bác Hồ ra đi tìm đường cứu nước",
-      "description": "Nguyễn Tất Thành, khi ấy hai mươi mốt tuổi, xuống tàu buôn Amiral Latouche Tréville tại bến cảng Nhà Rồng với tên gọi Văn Ba, nhận việc phụ bếp để có phương tiện đi. Khác các bậc tiền bối hướng sang Nhật Bản hoặc Trung Quốc, Người chọn sang phương Tây để tìm hiểu tận gốc điều ẩn sau khẩu hiệu tự do, bình đẳng, bác ái, rồi trở về giúp đồng bào.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Chiều ngày 5 tháng 6 năm 1911, từ bến cảng Nhà Rồng ở Sài Gòn, người thanh niên yêu nước Nguyễn Tất Thành lấy tên là Văn Ba, làm phụ bếp trên tàu Amiral Latouche Tréville, chính thức lên đường sang Pháp để tìm đường cứu nước. Hành trình đưa Người qua Singapore, Colombo, Djibouti, Port Said và Marseille, mở đầu chặng đường tìm đường cứu nước kéo dài hơn ba mươi năm.",
+      "source": "Người thanh niên yêu nước Nguyễn Tất Thành rời Việt Nam tìm đường cứu nước, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/c-mac-angghen-lenin-ho-chi-minh/ho-chi-minh/tieu-su-cuoc-doi-va-su-nghiep/nguoi-thanh-nien-yeu-nuoc-nguyen-tat-thanh-roi-viet-nam-tim-duong-cuu-nuoc-3490"
     },
     {
       "id": 45,
@@ -937,8 +990,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "2/1930",
       "title": "Khởi nghĩa Yên Bái (Nguyễn Thái Học)",
-      "description": "Việt Nam Quốc dân Đảng do Nguyễn Thái Học lãnh đạo phát động khởi nghĩa khi tổ chức đã bị lộ, với tinh thần không thành công cũng thành nhân. Cuộc nổi dậy ở Yên Bái và một số tỉnh bị dập tắt nhanh chóng. Mười ba lãnh tụ bị đưa lên máy chém tại Yên Bái, trong đó có Nguyễn Thái Học, người khi ấy mới hai mươi sáu tuổi.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Cuộc tổng khởi nghĩa do Việt Nam Quốc dân Đảng phát động dự kiến diễn ra đêm 9 rạng sáng 10 tháng 2 năm 1930, nổ ra ở Yên Bái, Hưng Hóa, Lâm Thao, Sơn Tây và Hà Nội, nhưng đều bị quân Pháp dập tắt nhanh chóng; 603 đảng viên bị đưa ra xét xử, 37 người lĩnh án tử hình. Sáng 17 tháng 6 năm 1930, tại Yên Bái, Nguyễn Thái Học cùng 12 đồng chí bị hành quyết với tinh thần \"Không thành công cũng thành nhân\". Khởi nghĩa thất bại đã chấm dứt vai trò lãnh đạo cách mạng của giai cấp tư sản dân tộc.",
+      "source": "17/6/1930 - kết cục bi tráng của các lãnh tụ Việt Nam Quốc dân đảng và giá trị lịch sử cuộc khởi nghĩa Yên Bái, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/2001/68170/17-6-1930-ket-cuc-bi-trang-cua-cac-lanh-tu-viet-nam-quoc-dan-djang-va-gia-tri-lich-su-cuoc-khoi-nghia-yen-bai.html"
     },
     {
       "id": 46,
@@ -947,8 +1001,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "3/2/1930",
       "title": "Đảng Cộng sản Việt Nam ra đời",
-      "description": "Nguyễn Ái Quốc chủ trì hội nghị tại Cửu Long, Hương Cảng, hợp nhất ba tổ chức cộng sản đang hoạt động riêng rẽ thành một chính đảng duy nhất, lấy tên Đảng Cộng sản Việt Nam. Hội nghị thông qua Chánh cương vắn tắt, Sách lược vắn tắt và Điều lệ vắn tắt do Người soạn thảo. Ngày 3 tháng 2 về sau được lấy làm ngày kỷ niệm thành lập Đảng theo quyết định của Đại hội III.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Từ ngày 3 đến ngày 7 tháng 2 năm 1930, hội nghị hợp nhất ba tổ chức cộng sản họp tại Cửu Long, Hương Cảng, dưới sự chủ trì của đồng chí Nguyễn Ái Quốc. Hội nghị nhất trí thành lập một đảng thống nhất lấy tên là Đảng Cộng sản Việt Nam, thông qua Chánh cương vắn tắt, Sách lược vắn tắt, Chương trình tóm tắt và Điều lệ vắn tắt của Đảng.",
+      "source": "Ngày thành lập Đảng Cộng sản Việt Nam 3-2-1930, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/ngay-thanh-lap-dang-cong-san-viet-nam-3-2-1930-3342"
     },
     {
       "id": 47,
@@ -957,8 +1012,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1930–1931",
       "title": "Cao trào Xô Viết Nghệ Tĩnh",
-      "description": "Trong bối cảnh khủng hoảng kinh tế thế giới và sưu thuế nặng nề, công nhân Vinh Bến Thuỷ cùng nông dân hai tỉnh Nghệ An, Hà Tĩnh liên tiếp biểu tình, bãi công. Chính quyền thực dân và phong kiến ở nhiều làng xã tan rã; các ban chấp hành nông hội đứng ra quản lý, chia lại ruộng công, bãi bỏ thuế thân và tổ chức đời sống theo hình thức chính quyền Xô viết.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Tháng 9 năm 1930 diễn ra phong trào Xô viết Nghệ Tĩnh, đỉnh cao của phong trào cách mạng 1930-1931 do Đảng Cộng sản Việt Nam lãnh đạo. Cuộc đấu tranh của nông dân hai tỉnh Nghệ An và Hà Tĩnh cùng phong trào công nhân trong cả nước mở ra thời kỳ mới của cách mạng Việt Nam dưới sự lãnh đạo của giai cấp công nhân.",
+      "source": "9/1930 - Diễn ra phong trào Xô viết Nghệ Tĩnh, đỉnh cao của phong trào cách mạng 1930-1931 do Đảng Cộng sản Việt Nam lãnh đạo, Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/3099/15056/9-1930-dien-ra-phong-trao-xo-viet-nghe-tinh-djinh-cao-cua-phong-trao-cach-mang-1930-1931-do-djang-cong-san-viet-nam-lanh-djao.html"
     },
     {
       "id": 48,
@@ -967,8 +1023,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1936–1939",
       "title": "Phong trào dân chủ",
-      "description": "Khi Mặt trận Bình dân lên cầm quyền ở Pháp, một số quyền tự do dân chủ được nới lỏng. Phong trào chuyển sang đấu tranh công khai và hợp pháp: lập các Uỷ ban hành động, vận động Đông Dương Đại hội, ra báo chí bằng tiếng Việt và tiếng Pháp, tham gia tranh cử vào các viện dân biểu.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Sau thời kỳ khôi phục tổ chức và đấu tranh 1932-1935, phong trào dân chủ diễn ra trong những năm 1936-1939. Đây là phong trào dân chủ trên phạm vi cả nước, huy động rộng rãi các tầng lớp nhân dân, từ công nhân, nông dân đến trí thức, công chức và các nhân sĩ dân chủ.",
+      "source": "Phong trào giải phóng dân tộc ở các nước thuộc địa và nửa thuộc địa (1918 - 1945), Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/phong-trao-giai-phong-dan-toc-o-cac-nuoc-thuoc-dia-va-nua-thuoc-dia-1918-1945-3363"
     },
     {
       "id": 49,
@@ -977,8 +1034,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "11/1940",
       "title": "Khởi nghĩa Nam Kỳ",
-      "description": "Nhân lúc Pháp thua Nhật ở Lạng Sơn và bắt lính người Việt sang đánh Xiêm, nhân dân Nam Kỳ nổi dậy ở nhiều tỉnh. Do kế hoạch bị lộ, cuộc khởi nghĩa bị đàn áp đẫm máu, nhiều cán bộ lãnh đạo bị bắt và hy sinh, trong đó có Nguyễn Thị Minh Khai và Hà Huy Tập. Chính trong dịp này, lá cờ đỏ với ngôi sao vàng năm cánh lần đầu xuất hiện.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đêm 22 rạng sáng ngày 23 tháng 11 năm 1940, cuộc khởi nghĩa Nam Kỳ bùng nổ đồng loạt ở nhiều địa phương, mạnh mẽ nhất ở Gia Định, Chợ Lớn, Mỹ Tho, Vĩnh Long. Tháng 9 năm 1940, Xứ ủy Nam Kỳ họp mở rộng, bàn kế hoạch khởi nghĩa và thực hiện di huấn của đồng chí Trần Phú là lấy cờ đỏ sao vàng làm lá cờ khởi nghĩa; lá cờ lần đầu tiên tung bay trong các cuộc biểu tình và ở những nơi đã thành lập được chính quyền cách mạng.",
+      "source": "Kỷ niệm 73 năm khởi nghĩa Nam Kỳ (23/11/1940 - 23/11/2013), Bảo tàng Lịch sử quốc gia",
+      "sourceUrl": "https://baotanglichsu.vn/vi/Articles/2002/68093/ky-niem-73-nam-khoi-nghia-nam-ky-23-11-1940-23-11-2013.html"
     },
     {
       "id": 50,
@@ -987,8 +1045,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "5/1941",
       "title": "Bác Hồ về nước; thành lập Mặt trận Việt Minh",
-      "description": "Sau ba mươi năm bôn ba, Nguyễn Ái Quốc trở về nước qua cột mốc 108 trên biên giới Cao Bằng và sống, làm việc tại hang Pác Bó. Người chủ trì Hội nghị Trung ương lần thứ tám, quyết định đặt nhiệm vụ giải phóng dân tộc lên trên hết và thành lập Việt Nam Độc lập Đồng minh, gọi tắt là Việt Minh, nhằm tập hợp mọi giai tầng yêu nước vào một mặt trận thống nhất.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 28 tháng 1 năm 1941, Nguyễn Ái Quốc về nước qua cột mốc 108 ở Cao Bằng để trực tiếp lãnh đạo cách mạng giải phóng dân tộc, sau đó chuyển đến ở và làm việc tại hang Cốc Bó. Hội nghị Trung ương lần thứ tám do Người chủ trì họp từ ngày 10 đến ngày 19 tháng 5 năm 1941 tại Pác Bó, Hà Quảng, Cao Bằng, đặt vấn đề giải phóng dân tộc lên hàng đầu và quyết định thành lập Mặt trận Việt Nam Độc lập Đồng minh, gọi tắt là Việt Minh, ngày 19 tháng 5 năm 1941.",
+      "source": "Hồ Chí Minh với sự ra đời Mặt trận Việt Minh và những chính sách vì dân tộc và nhân dân, Ban Quản lý Lăng Chủ tịch Hồ Chí Minh",
+      "sourceUrl": "https://bqllang.gov.vn/tin-tuc/tin-tong-hop/5742-ho-chi-minh-voi-su-ra-doi-mat-tran-viet-minh-va-nhung-chinh-sach-vi-dan-toc-va-nhan-dan.html"
     },
     {
       "id": 51,
@@ -997,8 +1056,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "22/12/1944",
       "title": "Thành lập Đội Việt Nam Tuyên truyền Giải phóng quân",
-      "description": "Theo chỉ thị của lãnh tụ Hồ Chí Minh, Võ Nguyên Giáp thành lập đội vũ trang tập trung đầu tiên tại khu rừng Trần Hưng Đạo, Cao Bằng, gồm ba mươi tư chiến sĩ với vũ khí thô sơ. Chỉ thị nêu rõ chính trị trọng hơn quân sự, tuyên truyền trọng hơn tác chiến. Chỉ vài ngày sau, đội đã đánh thắng hai trận Phai Khắt và Nà Ngần, mở đầu truyền thống đánh thắng trận đầu.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 22 tháng 12 năm 1944, Đội Việt Nam Tuyên truyền Giải phóng quân được thành lập, gồm 34 người với 31 nam và 3 nữ, tổ chức thành 3 tiểu đội, do Hoàng Sâm làm đội trưởng và Xích Thắng làm chính trị viên. Đội viên là những chiến sĩ được lựa chọn từ các đội du kích Cao Bắc Lạng và những người đã học quân sự ở nước ngoài. Ít lâu sau ngày thành lập, đội liên tiếp thắng hai trận Phai Khắt và Nà Ngần, mở đầu truyền thống đánh thắng trận đầu của Quân đội ta.",
+      "source": "Đội Việt Nam Tuyên truyền Giải phóng quân, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/home/intro/detailnews/"
     },
     {
       "id": 52,
@@ -1007,8 +1067,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "9/3/1945",
       "title": "Nhật đảo chính Pháp; cao trào kháng Nhật",
-      "description": "Nhật đảo chính lật đổ chính quyền thực dân Pháp trên toàn Đông Dương chỉ trong một đêm. Ban Thường vụ Trung ương Đảng ra chỉ thị Nhật, Pháp bắn nhau và hành động của chúng ta, xác định kẻ thù chính là phát xít Nhật và phát động cao trào kháng Nhật cứu nước. Phong trào phá kho thóc cứu đói lan rộng giữa lúc nạn đói khủng khiếp cướp đi sinh mạng của hàng triệu đồng bào.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 9 tháng 3 năm 1945, Nhật đảo chính, hất cẳng Pháp, giành quyền cai trị Đông Dương. Ban Thường vụ Trung ương Đảng Cộng sản Đông Dương họp và ban hành Chỉ thị Nhật Pháp bắn nhau và hành động của chúng ta, chủ trương phát động cao trào kháng Nhật cứu nước làm tiền đề cho Tổng khởi nghĩa.",
+      "source": "Ban Thường vụ Trung ương Đảng ra Chỉ thị Nhật - Pháp bắn nhau và hành động của chúng ta, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/tu-lieu-tham-khao-cuoc-thi-trac-nghiem-tim-hieu-90-nam-lich-su-ve-vang-cua-dang-cong-san-viet-nam/tu-lieu-cuoc-thi/ban-thuong-vu-trung-uong-dang-ra-chi-thi-nhat--phap-ban-nhau-va-hanh-dong-cua-chung-ta-536064.html"
     },
     {
       "id": 53,
@@ -1017,8 +1078,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "8/1945",
       "title": "Cách mạng Tháng Tám thành công",
-      "description": "Sau khi Nhật Bản đầu hàng Đồng minh, thời cơ chín muồi, Uỷ ban khởi nghĩa toàn quốc phát lệnh Tổng khởi nghĩa. Hà Nội giành chính quyền ngày 19 tháng 8, Huế ngày 23 và Sài Gòn ngày 25. Vua Bảo Đại thoái vị, trao ấn kiếm cho đại diện Chính phủ lâm thời, chấm dứt chế độ quân chủ tồn tại hàng nghìn năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đỉnh cao là ngày 19 tháng 8 năm 1945, cuộc tổng khởi nghĩa ở Hà Nội nổ ra với khí thế áp đảo; các đội tự vệ chiến đấu và quần chúng cách mạng chiếm phủ Khâm sai Bắc Bộ, Sở Cảnh sát, Sở Bưu điện, Trại Bảo an binh, chính quyền Bảo Đại - Trần Trọng Kim tan rã. Ngày 23 tháng 8, hàng vạn người tiến vào thành phố Huế, chiếm các công sở trọng yếu và giành chính quyền trong hòa bình; ngày 25 tháng 8, cuộc khởi nghĩa ở Sài Gòn thành công. Nhân dân Việt Nam đã đập tan xiềng xích nô lệ của thực dân Pháp, đánh đuổi quân phát xít Nhật và lật nhào chế độ phong kiến hàng nghìn năm.",
+      "source": "Cách mạng Tháng 8 và Quốc khánh 2/9/1945 của nước Việt Nam Dân chủ Cộng hòa, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/cach-mang-thang-8-va-quoc-khanh-291945-cua-nuoc-viet-nam-dan-chu-cong-hoa-3310"
     },
     {
       "id": 54,
@@ -1027,8 +1089,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "2/9/1945",
       "title": "Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa",
-      "description": "Tại Quảng trường Ba Đình, trước hàng chục vạn đồng bào, Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập. Bản Tuyên ngôn mở đầu bằng lời trích Tuyên ngôn Độc lập của Hoa Kỳ và Tuyên ngôn Nhân quyền và Dân quyền của Pháp, rồi khẳng định nước Việt Nam có quyền hưởng tự do và độc lập, và sự thật đã thành một nước tự do, độc lập.",
-      "source": "Tuyen Ngon Doc Lap.pdf [cơ quan ban hành và năm không nêu trong tài liệu gốc]."
+      "description": "Ngày 2 tháng 9 năm 1945, tại Quảng trường Ba Đình, Hà Nội, Chủ tịch Hồ Chí Minh trịnh trọng đọc bản Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa. Bản Tuyên ngôn được Người soạn thảo tại nhà số 48 Hàng Ngang, Hà Nội, trong đêm 28 tháng 8 năm 1945.",
+      "source": "Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hoà, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/hoc-tap-va-lam-theo-tam-guong-dao-duc-ho-chi-minh/van-kien-tu-lieu/chu-tich-ho-chi-minh-doc-tuyen-ngon-doc-lap-khai-sinh-nuoc-viet-nam-dan-chu-cong-hoa-535109.html"
     },
     {
       "id": 55,
@@ -1037,8 +1100,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "6/1/1946",
       "title": "Tổng tuyển cử bầu Quốc hội khóa I",
-      "description": "Chỉ hơn bốn tháng sau ngày độc lập, giữa lúc giặc đói, giặc dốt và giặc ngoại xâm cùng đe doạ, cuộc tổng tuyển cử đầu tiên được tổ chức trên cả nước theo nguyên tắc phổ thông, bình đẳng, trực tiếp và bỏ phiếu kín. Hơn tám mươi chín phần trăm cử tri đi bầu, chọn ra Quốc hội khoá I gồm đại biểu thuộc nhiều thành phần xã hội, tôn giáo và đảng phái.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Cuộc tổng tuyển cử diễn ra ngày 6 tháng 1 năm 1946 với tỷ lệ cử tri đi bầu đạt 89 phần trăm, bầu ra 333 đại biểu. Trong số đại biểu được bầu, 57 phần trăm là công nhân, nông dân và chiến sĩ cách mạng; có 10 đại biểu nữ và 34 đại biểu là người dân tộc thiểu số. Kỳ họp thứ nhất Quốc hội nước Việt Nam Dân chủ Cộng hòa khai mạc ngày 2 tháng 3 năm 1946.",
+      "source": "Những sự kiện trọng đại trong Cuộc Tổng tuyển cử đầu tiên, Quốc hội Việt Nam",
+      "sourceUrl": "https://quochoi.vn/tintuc/Pages/tin-hoat-dong-cua-quoc-hoi.aspx?ItemID=83774"
     },
     {
       "id": 56,
@@ -1047,8 +1111,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "19/12/1946",
       "title": "Toàn quốc kháng chiến bùng nổ",
-      "description": "Sau khi mọi nỗ lực đàm phán và nhân nhượng không giữ được hoà bình, Chủ tịch Hồ Chí Minh ra Lời kêu gọi toàn quốc kháng chiến, khẳng định thà hy sinh tất cả chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ. Tại Hà Nội, Trung đoàn Thủ đô chiến đấu giam chân địch sáu mươi ngày đêm để các cơ quan đầu não rút an toàn lên chiến khu Việt Bắc.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 18 và 19 tháng 12 năm 1946, Ban Thường vụ Trung ương Đảng họp mở rộng tại làng Vạn Phúc, Hà Đông, do Chủ tịch Hồ Chí Minh chủ trì, quyết định phát động toàn quốc kháng chiến. Lời kêu gọi thể hiện ý chí và quyết tâm của toàn Đảng, toàn quân, toàn dân: thà hy sinh tất cả chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ. 20 giờ ngày 19 tháng 12 năm 1946, quân và dân Hà Nội nổ súng mở đầu toàn quốc kháng chiến.",
+      "source": "Lời kêu gọi Toàn quốc kháng chiến của Chủ tịch Hồ Chí Minh, ngày 19/12/1946, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/tu-lieu-tham-khao-cuoc-thi-trac-nghiem-tim-hieu-90-nam-lich-su-ve-vang-cua-dang-cong-san-viet-nam/tu-lieu-cuoc-thi/loi-keu-goi-toan-quoc-khang-chien-cua-chu-tich-ho-chi-minh-ngay-19121946-535309.html"
     },
     {
       "id": 57,
@@ -1057,8 +1122,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1950",
       "title": "Chiến dịch Biên Giới",
-      "description": "Đây là chiến dịch tiến công lớn đầu tiên do ta chủ động mở, nhằm khai thông biên giới phía bắc để nối liền với hậu phương quốc tế và mở rộng căn cứ địa Việt Bắc. Ta chọn đánh cụm cứ điểm Đông Khê trước để cô lập Cao Bằng, buộc địch phải ứng cứu rồi tiêu diệt trên đường hành quân. Chủ tịch Hồ Chí Minh trực tiếp ra mặt trận theo dõi chiến dịch.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Chiến dịch Biên giới diễn ra từ ngày 16 tháng 9 đến ngày 17 tháng 10 năm 1950. Ngày 16 tháng 9, các trung đoàn 174 và 209 đánh chiếm cứ điểm Đông Khê nhằm cô lập Cao Bằng, uy hiếp Thất Khê và phá thế trận phòng thủ của quân Pháp trên đường số 4; đến ngày 18, Đông Khê hoàn toàn thất thủ. Sáng sớm ngày 16 tháng 9, từ vị trí quan sát trên núi Báo Đông, Chủ tịch Hồ Chí Minh theo dõi chặt chẽ diễn biến trận Đông Khê mở màn chiến dịch.",
+      "source": "Chiến dịch Biên giới 1950 (16/9 - 17/10/1950), Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/chien-dich-bien-gioi-1950-169-17101950-3367"
     },
     {
       "id": 58,
@@ -1067,8 +1133,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "7/5/1954",
       "title": "Chiến thắng Điện Biên Phủ",
-      "description": "Pháp xây Điện Biên Phủ thành tập đoàn cứ điểm mạnh nhất Đông Dương, tin rằng đối phương không thể đưa pháo lên. Đại tướng Võ Nguyên Giáp thay đổi phương châm từ đánh nhanh thắng nhanh sang đánh chắc tiến chắc, cho kéo pháo vào rồi kéo ra, đào hàng trăm cây số hào siết dần vòng vây. Sau năm mươi sáu ngày đêm, toàn bộ tập đoàn cứ điểm bị tiêu diệt, tướng De Castries bị bắt sống.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Chiến dịch Điện Biên Phủ bắt đầu ngày 13 tháng 3 và kết thúc ngày 7 tháng 5 năm 1954, trải qua 56 ngày đêm chiến đấu gian khổ. Đại tướng Võ Nguyên Giáp được cử làm Chỉ huy trưởng kiêm Bí thư Đảng ủy mặt trận; công tác chuẩn bị tiến hành khẩn trương với khẩu hiệu tất cả cho tiền tuyến, tất cả để chiến thắng. Từ ngày 1 đến ngày 7 tháng 5 năm 1954, quân ta đánh chiếm các cứ điểm phía đông và mở đợt tổng công kích.",
+      "source": "Chiến thắng lịch sử Điện Biên Phủ (7/5/1954), Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/chien-thang-lich-su-dien-bien-phu-751954-3368"
     },
     {
       "id": 59,
@@ -1077,8 +1144,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "21/7/1954",
       "title": "Hiệp định Genève",
-      "description": "Hội nghị Genève bàn về chấm dứt chiến tranh, lập lại hoà bình ở Đông Dương, kết thúc một ngày sau chiến thắng Điện Biên Phủ. Các bên tham gia công nhận độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Việt Nam. Vĩ tuyến 17 được lấy làm giới tuyến quân sự tạm thời, không phải ranh giới chính trị hay lãnh thổ; hai miền dự kiến hiệp thương tổng tuyển cử thống nhất sau hai năm.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 20 tháng 7 năm 1954, Hiệp định đình chỉ chiến sự ở Đông Dương được ký sau 8 phiên toàn thể và 23 phiên hẹp; ngày 21 tháng 7 năm 1954, các bên tham dự ra Tuyên bố cuối cùng của Hội nghị Genève. Hiệp định khẳng định độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Việt Nam, quy định quân đội nước ngoài rút khỏi Đông Dương. Vĩ tuyến 17 được lấy làm giới tuyến quân sự, các bên nhấn mạnh đây không thể coi là ranh giới chính trị hay lãnh thổ.",
+      "source": "Hiệp định Giơnevơ năm 1954 về đình chỉ chiến tranh, lập lại hòa bình Đông Dương, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/hiep-dinh-gionevo-nam-1954-ve-dinh-chi-chien-tranh-lap-lai-hoa-binh-dong-duong-3369"
     },
     {
       "id": 60,
@@ -1087,8 +1155,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1959–1960",
       "title": "Phong trào Đồng Khởi",
-      "description": "Trước chính sách tố cộng, diệt cộng và Luật 10-59 đặt những người yêu nước ra ngoài vòng pháp luật, Hội nghị Trung ương lần thứ mười lăm xác định con đường dùng bạo lực cách mạng. Phong trào bùng nổ mạnh nhất ở Bến Tre với ba mũi giáp công gồm chính trị, quân sự và binh vận, rồi lan nhanh khắp miền Nam. Cuối năm 1960, Mặt trận Dân tộc Giải phóng miền Nam Việt Nam ra đời.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Nghị quyết số 15 của Trung ương tháng 1 năm 1959 thể hiện đường lối và phương pháp cách mạng giải phóng miền Nam do Đảng đề ra dưới sự lãnh đạo của Chủ tịch Hồ Chí Minh, mở đường cho phong trào Đồng Khởi. Ngày 1 tháng 1 năm 1960 tại Mỏ Cày, Nguyễn Thị Định, Phó Bí thư Tỉnh ủy, truyền đạt Nghị quyết 15 và chủ trương của Khu ủy khu 8 để phát động quần chúng nổi dậy. Ngày 17 tháng 1 năm 1960, tại ba xã thuộc huyện Mỏ Cày, lực lượng du kích và đấu tranh vũ trang mở đầu phong trào Đồng Khởi.",
+      "source": "Du kích và tự vệ Bến Tre trong phong trào Đồng khởi năm 1960, Bộ Quốc phòng",
+      "sourceUrl": "https://mod.gov.vn/vn/noi-dung/sa-qdndvn/sa-qdndvn-lstt/sa-qdndvn-lstt-cdtd/b8e51e66-4971-4317-99a5-fa9d9bbbbfc0"
     },
     {
       "id": 61,
@@ -1097,8 +1166,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1968",
       "title": "Tổng tiến công và nổi dậy Tết Mậu Thân",
-      "description": "Đêm giao thừa Tết Mậu Thân, quân giải phóng đồng loạt tiến công vào hầu hết các đô thị miền Nam, trong đó có Toà đại sứ Hoa Kỳ ở Sài Gòn, và làm chủ thành phố Huế trong hai mươi lăm ngày.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đêm giao thừa Tết Mậu Thân, rạng sáng ngày 30 tháng 1 năm 1968, các lực lượng đồng loạt tiến công và nổi dậy trên toàn miền Nam. Mục tiêu chủ yếu là các thành phố, thị xã và cơ quan đầu não, với ba trọng điểm Sài Gòn, Huế và Đà Nẵng; quân giải phóng đánh vào Tòa đại sứ Mỹ, Dinh Độc Lập, Bộ Tư lệnh Hải quân, Bộ Tổng Tham mưu và làm chủ thành phố Huế trong 25 ngày.",
+      "source": "Cuộc Tổng tiến công và nổi dậy Xuân Mậu Thân 1968 - sự thống nhất giữa ý Đảng và lòng dân, Bộ Quốc phòng",
+      "sourceUrl": "https://www.mod.gov.vn/vn/chi-tiet/sa-ttsk/sa-tt-qpan/21afb6eb-8c86-4ffa-bf1f-f2ee25df635c"
     },
     {
       "id": 62,
@@ -1107,8 +1177,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "12/1972",
       "title": "Chiến thắng Điện Biên Phủ trên không",
-      "description": "Nhằm ép ta nhượng bộ tại Hội nghị Paris, Hoa Kỳ mở chiến dịch Linebacker II, dùng máy bay chiến lược B-52 ném bom rải thảm Hà Nội, Hải Phòng và nhiều địa phương suốt mười hai ngày đêm cuối tháng Chạp. Bộ đội tên lửa, không quân, pháo cao xạ cùng lực lượng phòng không nhân dân đã bắn rơi ba mươi tư máy bay B-52, đập tan cuộc tập kích đường không chiến lược.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 18 tháng 12 năm 1972, quân đội Mỹ mở cuộc tập kích đường không chiến lược vào Hà Nội và nhiều địa phương ở miền Bắc, mang tên Linebacker II. Trong 12 ngày đêm cuối tháng 12 năm 1972, quân và dân ta bắn rơi 81 máy bay, trong đó có 34 chiếc B-52. Ngày 30 tháng 12 năm 1972, Tổng thống Mỹ buộc phải tuyên bố chấm dứt cuộc tập kích đường không chiến lược vào Hà Nội, Hải Phòng và miền Bắc, chấp nhận trở lại bàn đàm phán ở Paris.",
+      "source": "Hà Nội - Điện Biên Phủ trên không: Nghệ thuật tác chiến phòng không và tầm vóc thời đại, Báo Chính phủ",
+      "sourceUrl": "https://media.chinhphu.vn/ha-noi-dien-bien-phu-tren-khong-nghe-thuat-tac-chien-phong-khong-va-tam-voc-thoi-dai-102221219140641637.htm"
     },
     {
       "id": 63,
@@ -1117,8 +1188,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "27/1/1973",
       "title": "Hiệp định Paris",
-      "description": "Hiệp định về chấm dứt chiến tranh, lập lại hoà bình ở Việt Nam được ký kết sau gần năm năm đàm phán, cuộc thương lượng dài nhất trong lịch sử ngoại giao thế kỷ XX. Hoa Kỳ cam kết tôn trọng độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Việt Nam, rút hết quân trong vòng sáu mươi ngày và không tiếp tục dính líu quân sự vào công việc nội bộ của miền Nam.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 27 tháng 1 năm 1973, Hiệp định về chấm dứt chiến tranh, lập lại hòa bình ở Việt Nam được ký kết tại phòng khánh tiết Trung tâm Hội nghị quốc tế Kléber, Paris, với bốn vị Bộ trưởng Ngoại giao của Việt Nam Dân chủ Cộng hòa, Chính phủ Cách mạng lâm thời miền Nam Việt Nam, Hoa Kỳ và Việt Nam Cộng hòa. Hiệp định buộc Mỹ phải thừa nhận độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Việt Nam, rút hết quân Mỹ và quân chư hầu ra khỏi miền Nam Việt Nam.",
+      "source": "Hiệp định Pari năm 1973 - Chấm dứt chiến tranh, lập lại hoà bình ở Việt Nam, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/hiep-dinh-pari-nam-1973-cham-dut-chien-tranh-lap-lai-hoa-binh-o-viet-nam-3379"
     },
     {
       "id": 64,
@@ -1127,8 +1199,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "30/4/1975",
       "title": "Giải phóng miền Nam, thống nhất đất nước",
-      "description": "Sau chiến thắng Tây Nguyên và Huế, Đà Nẵng, Bộ Chính trị quyết định mở chiến dịch giải phóng Sài Gòn mang tên Chiến dịch Hồ Chí Minh, với phương châm thần tốc, táo bạo, bất ngờ, chắc thắng. Năm cánh quân đồng loạt tiến vào thành phố; xe tăng quân giải phóng húc đổ cổng Dinh Độc Lập lúc gần trưa ngày 30 tháng 4, Tổng thống chính quyền Sài Gòn tuyên bố đầu hàng không điều kiện.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Từ Hiệp định Paris, quân xâm lược Mỹ phải rút khỏi Việt Nam, tạo thế xoay chuyển có lợi cho cách mạng Việt Nam. Cuộc kháng chiến tiến lên với đỉnh cao là Chiến dịch Hồ Chí Minh lịch sử, ngày toàn thắng 30 tháng 4 năm 1975 giải phóng hoàn toàn miền Nam, thống nhất đất nước, mở ra kỷ nguyên hòa bình, độc lập, thống nhất và phát triển ở Việt Nam.",
+      "source": "Hiệp định Pari năm 1973 - Chấm dứt chiến tranh, lập lại hoà bình ở Việt Nam, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/ho-so-su-kien-nhan-chung/su-kien-va-nhan-chung/hiep-dinh-pari-nam-1973-cham-dut-chien-tranh-lap-lai-hoa-binh-o-viet-nam-3379"
     },
     {
       "id": 65,
@@ -1137,8 +1210,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "2/7/1976",
       "title": "Đổi tên nước thành Cộng hòa Xã hội chủ nghĩa Việt Nam",
-      "description": "Kỳ họp thứ nhất Quốc hội khoá VI, Quốc hội chung của cả nước sau tổng tuyển cử thống nhất, đã quyết định những yếu tố căn bản của quốc gia. Tên nước là Cộng hòa Xã hội chủ nghĩa Việt Nam, thủ đô là Hà Nội, Quốc kỳ là cờ đỏ sao vàng, Quốc ca là bài Tiến quân ca, cùng Quốc huy. Thành phố Sài Gòn, Gia Định được đổi tên thành Thành phố Hồ Chí Minh.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Kỳ họp thứ nhất Quốc hội khóa VI diễn ra từ ngày 24 tháng 6 đến ngày 3 tháng 7 năm 1976 tại Hà Nội. Tại kỳ họp này, Quốc hội thông qua Nghị quyết về tên nước, quốc kỳ, quốc huy, quốc ca và tổ chức Nhà nước, quyết định đổi tên nước từ Việt Nam Dân chủ Cộng hòa thành nước Cộng hòa xã hội chủ nghĩa Việt Nam và chính thức đặt tên thành phố Sài Gòn - Gia Định là Thành phố Hồ Chí Minh.",
+      "source": "Quốc hội khoá VI (1976-1981), Quốc hội Việt Nam",
+      "sourceUrl": "https://quochoi.vn/tulieuquochoi/tulieu/quochoicackhoa/Pages/khoasau.aspx?ItemID=23993"
     },
     {
       "id": 66,
@@ -1147,8 +1221,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "12/1978",
       "title": "Chiến tranh bảo vệ biên giới Tây Nam",
-      "description": "Từ sau năm 1975, tập đoàn Khmer Đỏ liên tiếp đánh phá các đảo và tuyến biên giới Tây Nam, gây nhiều vụ thảm sát dân thường, nặng nề nhất là ở Ba Chúc, An Giang. Cuối tháng 12 năm 1978, quân và dân ta mở cuộc phản công tự vệ, đẩy lùi lực lượng xâm lấn ra khỏi lãnh thổ. Sau đó, theo yêu cầu của lực lượng cách mạng Campuchia, quân tình nguyện Việt Nam giúp nước bạn thoát khỏi hoạ diệt chủng.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Sau khi cuộc kháng chiến chống Mỹ kết thúc, chế độ diệt chủng do Pol Pot cầm đầu ở Campuchia kích động hằn thù dân tộc và tiến hành chiến tranh xâm lấn biên giới Tây Nam của Việt Nam. Ngày 23 tháng 12 năm 1978, Quân đội nhân dân Việt Nam mở cuộc phản công chiến lược, đập tan cuộc tiến công của quân Pol Pot.",
+      "source": "Kỷ niệm 45 năm Ngày chiến thắng chiến tranh bảo vệ biên giới Tây Nam, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/thoi-su/ky-niem-45-nam-ngay-chien-thang-chien-tranh-bao-ve-bien-gioi-tay-nam-657334.html"
     },
     {
       "id": 67,
@@ -1157,8 +1232,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "2/1979",
       "title": "Chiến tranh bảo vệ biên giới phía Bắc",
-      "description": "Rạng sáng ngày 17 tháng 2 năm 1979, quân Trung Quốc mở cuộc tiến công quy mô lớn trên toàn tuyến biên giới phía Bắc, đánh vào sáu tỉnh từ Quảng Ninh đến Lai Châu. Quân dân biên giới cùng lực lượng vũ trang tại chỗ đã chặn đánh quyết liệt ở Lạng Sơn, Cao Bằng, Lào Cai. Xung đột còn kéo dài nhiều năm sau đó tại một số điểm cao, trong đó có mặt trận Vị Xuyên, Hà Giang.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đầu năm 1979, hơn 50 vạn quân cùng nhiều phương tiện chiến tranh đồng loạt tiến công trên toàn tuyến biên giới phía Bắc Việt Nam. Quân và dân sáu tỉnh biên giới phía Bắc gồm Hoàng Liên Sơn, Lai Châu, Hà Tuyên, Cao Bằng, Lạng Sơn và Quảng Ninh đã đứng lên chiến đấu chống quân xâm lược.",
+      "source": "Sự thật lịch sử, tính chính nghĩa của cuộc chiến đấu bảo vệ biên giới phía Bắc, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/tu-tuong-van-hoa/su-that-lich-su-tinh-chinh-nghia-cua-cuoc-chien-dau-bao-ve-bien-gioi-phia-bac-513471.html"
     },
     {
       "id": 68,
@@ -1167,8 +1243,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "12/1986",
       "title": "Đại hội VI khởi xướng công cuộc Đổi mới",
-      "description": "Trước tình trạng lạm phát phi mã, thiếu lương thực và mô hình kế hoạch hoá tập trung quan liêu, bao cấp bộc lộ bế tắc, Đại hội đại biểu toàn quốc lần thứ VI của Đảng chủ trương nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật. Đại hội xác định đổi mới tư duy, trước hết là tư duy kinh tế, thừa nhận nền kinh tế nhiều thành phần và từng bước xoá bỏ cơ chế bao cấp.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Đại hội đại biểu toàn quốc lần thứ VI của Đảng họp tại Hà Nội từ ngày 15 đến ngày 18 tháng 12 năm 1986. Đại hội xác định thái độ nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật, nghiêm khắc chỉ ra nguyên nhân chủ quan của tình trạng khó khăn từ những sai lầm, khuyết điểm trong lãnh đạo và quản lý. Đại hội đề ra đường lối đổi mới toàn diện đất nước.",
+      "source": "Đại hội đại biểu toàn quốc lần thứ VI, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://daihoi13.dangcongsan.vn/cac-ky-dai-hoi/tu-dai-hoi-den-dai-hoi/dai-hoi-dai-bieu-toan-quoc-lan-thu-vi-250"
     },
     {
       "id": 69,
@@ -1177,8 +1254,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "14/3/1988",
       "title": "Sự kiện Gạc Ma, bảo vệ chủ quyền biển đảo",
-      "description": "Trong khi cán bộ, chiến sĩ Hải quân nhân dân Việt Nam đang làm nhiệm vụ xây dựng và bảo vệ các bãi đá Gạc Ma, Cô Lin, Len Đao thuộc quần đảo Trường Sa, tàu chiến nước ngoài đã dùng hoả lực bắn vào lực lượng ta. Ta giữ được Cô Lin và Len Đao.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 14 tháng 3 năm 1988, 64 cán bộ, chiến sĩ Hải quân nhân dân Việt Nam đã anh dũng giữ vững vị trí, chiến đấu chống quân xâm lược và hy sinh trong trận chiến bảo vệ đảo Gạc Ma thuộc quần đảo Trường Sa của Việt Nam, tại khu vực biển Cô Lin, Len Đao, Gạc Ma.",
+      "source": "Dâng hương tưởng niệm các liệt sĩ hy sinh bảo vệ đảo Gạc Ma, Báo điện tử Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://dangcongsan.vn/tu-tuong-van-hoa/dang-huong-tuong-niem-cac-liet-si-hy-sinh-bao-ve-dao-gac-ma-633361.html"
     },
     {
       "id": 70,
@@ -1187,8 +1265,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1992",
       "title": "Ban hành Hiến pháp 1992",
-      "description": "Hiến pháp năm 1992 thay thế Hiến pháp năm 1980, thể chế hoá đường lối Đổi mới do Đại hội VI khởi xướng. Văn bản thừa nhận nền kinh tế hàng hoá nhiều thành phần vận hành theo cơ chế thị trường có sự quản lý của Nhà nước, theo định hướng xã hội chủ nghĩa; bảo hộ quyền sở hữu hợp pháp và quyền thừa kế; đồng thời tạo cơ sở pháp lý cho việc thu hút đầu tư nước ngoài.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Kể từ năm 1986, Đảng chủ trương tiến hành đổi mới kinh tế, phát triển nền kinh tế hàng hóa nhiều thành phần theo cơ chế thị trường có sự quản lý của Nhà nước. Trong điều kiện phát triển mới của đất nước, Hiến pháp năm 1992 được ban hành thay thế cho Hiến pháp năm 1980, tạo cơ sở pháp lý vững chắc để xây dựng nền kinh tế thị trường định hướng xã hội chủ nghĩa và bảo vệ các quyền, lợi ích hợp pháp của công dân.",
+      "source": "Hiến pháp năm 1992, Tư liệu văn kiện, Đảng Cộng sản Việt Nam",
+      "sourceUrl": "https://tulieuvankien.dangcongsan.vn/he-thong-van-ban/van-ban-quy-pham-phap-luat/hien-phap-nam-1992-240"
     },
     {
       "id": 71,
@@ -1197,8 +1276,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "28/7/1995",
       "title": "Gia nhập ASEAN (thành viên thứ 7)",
-      "description": "Việt Nam chính thức trở thành thành viên thứ bảy của Hiệp hội các quốc gia Đông Nam Á tại Bandar Seri Begawan, Brunei. Từ chỗ đứng ở hai phía đối lập trong thời kỳ chiến tranh lạnh, Việt Nam cùng các nước láng giềng xây dựng quan hệ hợp tác khu vực.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 28 tháng 7 năm 1995, lễ trọng thể kết nạp Việt Nam làm thành viên thứ bảy của ASEAN diễn ra tại Brunei. Cùng dịp này, Việt Nam lần đầu tham dự Hội nghị Ngoại trưởng ASEAN lần thứ 28 với tư cách thành viên đầy đủ.",
+      "source": "Thông tin cơ bản về ASEAN và quan hệ Việt Nam - ASEAN, Bộ Ngoại giao",
+      "sourceUrl": "https://mofa.gov.vn/tin-chi-tiet/chi-tiet/thong-tin-co-ban-ve-asean-va-quan-he-viet-nam-asean-589.html"
     },
     {
       "id": 72,
@@ -1207,8 +1287,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "13/7/2000",
       "title": "Ký Hiệp định Thương mại song phương Việt Nam – Hoa Kỳ (BTA)",
-      "description": "Hiệp định được ký tại Washington ngày 13 tháng 7 năm 2000 và có hiệu lực từ tháng 12 năm 2001. Hoa Kỳ dành cho Việt Nam quy chế quan hệ thương mại bình thường, đưa thuế nhập khẩu đánh vào hàng hoá Việt Nam từ mức khoảng bốn mươi phần trăm xuống còn vài phần trăm. Để thực thi cam kết, Việt Nam sửa đổi hàng loạt quy định về thương mại, đầu tư và sở hữu trí tuệ.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 13 tháng 7 năm 2000 tại Washington, Hiệp định Thương mại Việt Nam - Hoa Kỳ được ký kết và có hiệu lực từ ngày 10 tháng 12 năm 2001. Hiệp định quy định chi tiết cam kết mở cửa thương mại hàng hóa, thương mại dịch vụ, thương mại liên quan đến đầu tư và quyền sở hữu trí tuệ. Sau khi hiệp định có hiệu lực, Hoa Kỳ áp dụng Quy chế quan hệ thương mại bình thường, giảm mức thuế quan trung bình đánh vào hàng nhập khẩu từ Việt Nam từ 40 phần trăm xuống 4 phần trăm.",
+      "source": "Quan hệ thương mại và đầu tư Việt - Mỹ trong 1/4 thế kỷ, Trung tâm WTO và Hội nhập, VCCI",
+      "sourceUrl": "https://trungtamwto.vn/hiep-dinh-khac/15707-quan-he-thuong-mai-va-dau-tu-viet--my-trong-14-the-ky"
     },
     {
       "id": 73,
@@ -1217,8 +1298,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "11/1/2007",
       "title": "Gia nhập Tổ chức Thương mại Thế giới (WTO)",
-      "description": "Sau mười một năm đàm phán, Việt Nam trở thành thành viên thứ một trăm năm mươi của Tổ chức Thương mại Thế giới. Việc gia nhập đòi hỏi sửa đổi, bổ sung hàng loạt luật lệ cho phù hợp chuẩn mực quốc tế và mở cửa thị trường hàng hoá, dịch vụ theo lộ trình cam kết.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 11 tháng 1 năm 2007, Việt Nam chính thức trở thành thành viên thứ 150 của Tổ chức Thương mại Thế giới. Việc gia nhập WTO thúc đẩy Việt Nam cải cách và hoàn thiện chính sách, pháp luật về thương mại và đầu tư cho phù hợp với cam kết quốc tế, cải thiện môi trường kinh doanh.",
+      "source": "18 năm Việt Nam gia nhập WTO: Bước ngoặt lớn thúc đẩy tăng trưởng xuất khẩu, thu hút FDI, Trung tâm WTO và Hội nhập, VCCI",
+      "sourceUrl": "https://trungtamwto.vn/tin-tuc/28020-18-nam-viet-nam-gia-nhap-wto-buoc-ngoat-lon-thuc-day-tang-truong-xuat-khau-thu-hut-fdi"
     },
     {
       "id": 74,
@@ -1227,8 +1309,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "2008–2009",
       "title": "Lần đầu là Ủy viên không thường trực HĐBA LHQ",
-      "description": "Việt Nam lần đầu được bầu làm Uỷ viên không thường trực Hội đồng Bảo an Liên hợp quốc, cơ quan có thẩm quyền cao nhất về duy trì hoà bình và an ninh quốc tế. Trong nhiệm kỳ, Việt Nam hai lần đảm nhiệm vai trò Chủ tịch luân phiên, tham gia xử lý nhiều hồ sơ quốc tế phức tạp và thúc đẩy đối thoại, giải quyết tranh chấp bằng biện pháp hoà bình.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Việt Nam lần đầu được bầu làm Ủy viên không thường trực Hội đồng Bảo an Liên hợp quốc trong nhiệm kỳ 2008-2009.",
+      "source": "Việt Nam lần thứ hai trúng cử làm Ủy viên không thường trực Hội đồng Bảo an Liên hợp quốc, Bộ Ngoại giao",
+      "sourceUrl": "https://mofa.gov.vn/tin-chi-tiet/chi-tiet/-viet-nam-lan-thu-hai-trung-cu-lam-uy-vien-khong-thuong-truc-hoi-dong-bao-an-lien-hop-quoc--139.html"
     },
     {
       "id": 75,
@@ -1237,8 +1320,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "2015",
       "title": "Cộng đồng ASEAN hình thành; ký các FTA thế hệ mới",
-      "description": "Cộng đồng ASEAN chính thức hình thành trên ba trụ cột chính trị an ninh, kinh tế và văn hoá xã hội, hướng tới một thị trường và cơ sở sản xuất thống nhất trong khu vực. Cùng giai đoạn này, Việt Nam kết thúc đàm phán hoặc ký nhiều hiệp định thương mại tự do thế hệ mới, với cam kết sâu hơn về lao động, môi trường, mua sắm công và sở hữu trí tuệ.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Cộng đồng ASEAN chính thức hình thành ngày 31 tháng 12 năm 2015, được xây dựng trên ba trụ cột gồm Cộng đồng Chính trị - An ninh, Cộng đồng Kinh tế và Cộng đồng Văn hóa - Xã hội. Lễ ký Tuyên bố Kuala Lumpur 2015 về thành lập Cộng đồng ASEAN công bố chính thức với thế giới thành tựu của quá trình liên kết và hội nhập ASEAN.",
+      "source": "Cộng đồng ASEAN chính thức ra đời, Báo Chính phủ",
+      "sourceUrl": "https://baochinhphu.vn/cong-dong-asean-chinh-thuc-ra-doi-102196315.htm"
     },
     {
       "id": 76,
@@ -1247,8 +1331,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "2019",
       "title": "Trúng cử Ủy viên không thường trực HĐBA LHQ 2020–2021",
-      "description": "Việt Nam được bầu làm Uỷ viên không thường trực Hội đồng Bảo an Liên hợp quốc nhiệm kỳ 2020 và 2021 với một trăm chín mươi hai trên một trăm chín mươi ba phiếu ủng hộ, mức cao gần như tuyệt đối và là kỷ lục trong lịch sử bầu cử vào cơ quan này.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 7 tháng 6 năm 2019, Việt Nam trúng cử Ủy viên không thường trực Hội đồng Bảo an Liên hợp quốc nhiệm kỳ 2020-2021 với số phiếu 192 trên 193, ngay sau vòng bỏ phiếu đầu tiên. Tiếp theo nhiệm kỳ đầu tiên 2008-2009, đây là lần thứ hai Việt Nam được bầu làm thành viên cơ quan này; Việt Nam chính thức đảm nhiệm vai trò từ ngày 1 tháng 1 năm 2020.",
+      "source": "Việt Nam trúng cử Ủy viên không thường trực HĐBA với số phiếu 192/193, Báo Chính phủ",
+      "sourceUrl": "https://baochinhphu.vn/viet-nam-trung-cu-uy-vien-khong-thuong-truc-hdba-voi-so-phieu-192-193-102257048.htm"
     },
     {
       "id": 77,
@@ -1257,8 +1342,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "2020",
       "title": "Chủ tịch ASEAN; ký EVFTA, RCEP",
-      "description": "Việt Nam đảm nhiệm vai trò Chủ tịch ASEAN đúng năm đại dịch bùng phát, đã chuyển toàn bộ hội nghị sang hình thức trực tuyến và giữ được nhịp hợp tác khu vực. Trong năm này, Hiệp định Thương mại tự do Việt Nam và Liên minh châu Âu chính thức có hiệu lực, còn Hiệp định Đối tác Kinh tế Toàn diện Khu vực được ký kết tại Hà Nội, tạo khu vực thương mại tự do lớn nhất thế giới.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Việt Nam đảm nhiệm vai trò Chủ tịch ASEAN năm 2020. Trong năm này, Hiệp định Thương mại tự do Việt Nam - Liên minh châu Âu chính thức có hiệu lực từ ngày 1 tháng 8 năm 2020, sau khi được Nghị viện châu Âu phê chuẩn ngày 12 tháng 2 và Quốc hội Việt Nam phê chuẩn ngày 8 tháng 6 năm 2020. Hiệp định Đối tác Kinh tế Toàn diện Khu vực giữa 10 nước ASEAN và 5 đối tác được ký ngày 15 tháng 11 năm 2020.",
+      "source": "Hiệp định Thương mại tự do Việt Nam - EU (EVFTA) chính thức có hiệu lực và tiến trình thực thi trong thời gian tới, Bộ Công Thương",
+      "sourceUrl": "https://moit.gov.vn/tin-tuc/thi-truong-nuoc-ngoai/hiep-dinh-thuong-mai-tu-do-viet-nam-eu-evfta-chinh-thuc-co-h.html"
     },
     {
       "id": 78,
@@ -1267,8 +1353,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "9/2023",
       "title": "Nâng cấp Đối tác chiến lược toàn diện với Hoa Kỳ",
-      "description": "Trong chuyến thăm cấp Nhà nước của Tổng thống Hoa Kỳ tới Hà Nội, hai nước nâng quan hệ vượt hai bậc, từ Đối tác toàn diện lên Đối tác Chiến lược Toàn diện, mức cao nhất trong thang bậc quan hệ đối ngoại của Việt Nam. Hợp tác được mở rộng sang các lĩnh vực khoa học công nghệ, công nghiệp bán dẫn, đào tạo nhân lực chất lượng cao và ứng phó với biến đổi khí hậu.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Ngày 10 tháng 9 năm 2023, Tổng Bí thư Nguyễn Phú Trọng và Tổng thống Hoa Kỳ Joseph R. Biden Jr. hội đàm tại Hà Nội, nâng quan hệ hai nước lên Đối tác Chiến lược Toàn diện vì hòa bình, hợp tác và phát triển bền vững. Hai nước quyết định đẩy mạnh hợp tác về khoa học, công nghệ và đổi mới sáng tạo trong lĩnh vực số, đồng thời công bố khởi động các sáng kiến phát triển nguồn nhân lực trong lĩnh vực bán dẫn.",
+      "source": "Toàn văn Tuyên bố chung về nâng cấp quan hệ Việt Nam - Hoa Kỳ lên Đối tác Chiến lược Toàn diện, Báo Chính phủ",
+      "sourceUrl": "https://baochinhphu.vn/toan-van-tuyen-bo-chung-ve-nang-cap-quan-he-viet-nam-hoa-ky-len-doi-tac-chien-luoc-toan-dien-102230911170243626.htm"
     },
     {
       "id": 79,
@@ -1277,8 +1364,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "30/4/2025",
       "title": "Kỷ niệm 50 năm thống nhất đất nước",
-      "description": "Nửa thế kỷ sau ngày thống nhất, đất nước tổ chức trọng thể lễ kỷ niệm với chương trình diễu binh, diễu hành tại Thành phố Hồ Chí Minh.",
-      "source": "Diễn văn của Tổng Bí thư [cơ quan ban hành và năm không nêu trong tài liệu gốc]."
+      "description": "Sáng 30 tháng 4 năm 2025, Ban Chấp hành Trung ương Đảng, Quốc hội, Chủ tịch nước, Chính phủ, Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam và Thành phố Hồ Chí Minh tổ chức trọng thể Lễ kỷ niệm 50 năm Ngày Giải phóng miền Nam, thống nhất đất nước (30/4/1975 - 30/4/2025). Lễ kỷ niệm mở đầu bằng nghi thức chào cờ cùng 21 loạt đại bác tại bến Bạch Đằng, Quận 1; Tổng Bí thư Tô Lâm đọc diễn văn kỷ niệm. Chương trình diễu binh, diễu hành bắt đầu lúc 6 giờ 30 phút với 4 khối nghi trượng, 36 khối diễu binh và 12 khối diễu hành, cùng các khối quân đội Trung Quốc, Lào và Campuchia.",
+      "source": "Kỷ niệm trọng thể 50 năm Giải phóng miền Nam, thống nhất đất nước, Báo Điện tử Chính phủ",
+      "sourceUrl": "https://baochinhphu.vn/truc-tiep-ky-niem-trong-the-50-nam-giai-phong-mien-nam-thong-nhat-dat-nuoc-102250429120220339.htm"
     },
     {
       "id": 80,
@@ -1287,8 +1375,9 @@ class Component extends DCLogic {
       "spine": false,
       "date": "1/7/2025",
       "title": "Sắp xếp lại đơn vị hành chính cấp tỉnh",
-      "description": "Kỳ họp thứ chín Quốc hội khoá XV thông qua nghị quyết sắp xếp lại đơn vị hành chính cấp tỉnh, hợp nhất nhiều tỉnh, thành phố để cả nước còn ba mươi tư đơn vị, gồm hai mươi tám tỉnh và sáu thành phố trực thuộc trung ương.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Sáng ngày 12 tháng 6 năm 2025, tại kỳ họp thứ chín, Quốc hội khóa XV thông qua Nghị quyết số 202/2025/QH15 về việc sắp xếp đơn vị hành chính cấp tỉnh, với 461 trên 465 đại biểu có mặt tán thành. Cả nước có 34 đơn vị hành chính cấp tỉnh, gồm 28 tỉnh và 6 thành phố, trong đó 19 tỉnh và 4 thành phố hình thành sau sắp xếp. Chính quyền địa phương ở các tỉnh, thành phố hình thành sau sắp xếp chính thức hoạt động từ ngày 1 tháng 7 năm 2025.",
+      "source": "Nghị quyết số 202/2025/QH15 về việc sắp xếp đơn vị hành chính cấp tỉnh, Quốc hội khóa XV",
+      "sourceUrl": "https://vanban.chinhphu.vn/?pageid=27160&docid=213930"
     },
     {
       "id": 81,
@@ -1297,8 +1386,9 @@ class Component extends DCLogic {
       "spine": true,
       "date": "2/9/2026",
       "title": "Kỷ niệm 81 năm Quốc khánh",
-      "description": "Ngày 2 tháng 9 năm 2026 là kỷ niệm 81 năm Quốc khánh.",
-      "source": "[Chưa có nguồn trích dẫn trong tài liệu gốc]"
+      "description": "Tối 28 tháng 8 năm 2026, tại Nhà hát Hồ Gươm, Hà Nội, Tổng Bí thư, Chủ tịch nước Tô Lâm chủ trì Lễ kỷ niệm 81 năm Quốc khánh nước Cộng hòa xã hội chủ nghĩa Việt Nam (2/9/1945 - 2/9/2026). Trong diễn văn, Tổng Bí thư, Chủ tịch nước nhắc lại thời khắc 81 năm trước Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập tại Quảng trường Ba Đình, khai sinh nước Việt Nam Dân chủ Cộng hòa, nay là nước Cộng hòa xã hội chủ nghĩa Việt Nam.",
+      "source": "Tổng Bí thư, Chủ tịch nước Tô Lâm chủ trì Lễ kỷ niệm 81 năm Quốc khánh 2/9, Báo Điện tử Chính phủ",
+      "sourceUrl": "https://baochinhphu.vn/tong-bi-thu-chu-tich-nuoc-to-lam-chu-tri-le-ky-niem-81-nam-quoc-khanh-2-9-102260828214543734.htm"
     }
   ]
 };
@@ -1482,6 +1572,8 @@ class Component extends DCLogic {
           return {
             id: e.id, date: e.date, title: e.title,
             description: e.description, source: e.source,
+            sourceUrl: e.sourceUrl || '', hasUrl: !!e.sourceUrl,
+            sourceHost: e.sourceUrl ? e.sourceUrl.split('/')[2] : '',
             code: this.code(e.date),
             img: this.IMAGES[e.id] || '', hasImg: !!this.IMAGES[e.id], noImg: !this.IMAGES[e.id],
             caption: this.CAPTIONS[e.id] || '', hasCaption: !!(this.CAPTIONS[e.id] && this.IMAGES[e.id]),
