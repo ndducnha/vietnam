@@ -531,11 +531,11 @@ button{font:inherit;color:inherit;margin:0}
               <b>[{{ im.n }}]</b>
               <div>
                 <span>{{ im.title }}</span>
+                <sc-if value="{{ im.hasNote }}" hint-placeholder-val="{{ false }}">
+                  <i>{{ im.note }}</i>
+                </sc-if>
                 <sc-if value="{{ im.hasUrl }}" hint-placeholder-val="{{ true }}">
                   <a href="{{ im.url }}" target="_blank" rel="noopener">{{ im.label }}</a>
-                </sc-if>
-                <sc-if value="{{ im.noUrl }}" hint-placeholder-val="{{ false }}">
-                  <i>{{ im.label }}</i>
                 </sc-if>
               </div>
             </div>
@@ -877,12 +877,18 @@ class Component extends DCLogic {
     const imgRefs = Object.keys(this.IMGSRC)
       .map(Number).sort((a, b) => a - b)
       .map(n => {
+        // Giá trị là chuỗi (URL, hoặc tên tài liệu giấy), hoặc {note, url} khi
+        // ảnh gốc nằm trong sách nhưng được lấy lại từ một trang trên mạng.
         const v = this.IMGSRC[n];
-        const isUrl = /^https?:\/\//.test(v);
+        const obj = typeof v === 'object' && v !== null;
+        const raw = obj ? (v.url || '') : v;
+        const isUrl = /^https?:\/\//.test(raw);
+        const note = obj ? (v.note || '') : (isUrl ? '' : v);
         return {
           n, title: byId[n] || '',
-          url: isUrl ? v : '', hasUrl: isUrl, noUrl: !isUrl,
-          label: isUrl ? v.split('/')[2].replace(/^www\./, '') : v
+          url: isUrl ? raw : '', hasUrl: isUrl,
+          note, hasNote: !!note,
+          label: isUrl ? raw.split('/')[2].replace(/^www\./, '') : ''
         };
       });
 
