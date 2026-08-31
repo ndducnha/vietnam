@@ -411,7 +411,7 @@ button{font:inherit;color:inherit;margin:0}
                     <sc-if value="{{ ev.hasVideo }}" hint-placeholder-val="{{ true }}">
                       <button type="button" class="media-btn {{ ev.vidCls }}" sc-camel-on-click="{{ ev.toggleVid }}" aria-expanded="{{ ev.vidOpen }}">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
-                        <b>Nghe đọc</b><i>{{ ev.vidSign }}</i>
+                        <b>{{ ev.videoLabel }}</b><i>{{ ev.vidSign }}</i>
                       </button>
                     </sc-if>
                   </div>
@@ -466,7 +466,7 @@ button{font:inherit;color:inherit;margin:0}
                   <sc-if value="{{ ev.hasVideo }}" hint-placeholder-val="{{ true }}">
                     <button type="button" class="media-btn {{ ev.vidCls }}" sc-camel-on-click="{{ ev.toggleVid }}" aria-expanded="{{ ev.vidOpen }}">
                       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
-                      <b>Nghe đọc</b><i>{{ ev.vidSign }}</i>
+                      <b>{{ ev.videoLabel }}</b><i>{{ ev.vidSign }}</i>
                     </button>
                   </sc-if>
                 </div>
@@ -713,6 +713,7 @@ class Component extends DCLogic {
           docLabel: 'Đọc toàn văn', video: 'xRKUB3fUTJM' },
     56: { doc: 'https://thuvienphapluat.vn/hoi-dap-phap-luat/loi-keu-goi-toan-quoc-khang-chien-19121946-ban-thao-loi-keu-goi-toan-quoc-khang-chien-duoc-cong-nha-138039645.html',
           docLabel: 'Đọc toàn văn', video: 'bh5CgWnXmzM' },
+    64: { video: 'SpK4hTcVDqE', videoLabel: 'Nghe tin chiến thắng' },
     79: { doc: 'https://special.nhandan.vn/dien-van-Tong-Bi-thu-ky-niem-50-nam-thong-nhat-dat-nuoc/index.html',
           docLabel: 'Diễn văn của Tổng Bí thư' }
   };
@@ -836,6 +837,7 @@ class Component extends DCLogic {
             hasDoc: !!(media && media.doc), docHref: (media && media.doc) || '',
             docLabel: (media && media.docLabel) || 'Đọc toàn văn',
             hasVideo: !!(media && media.video),
+            videoLabel: (media && media.videoLabel) || 'Nghe đọc',
             showVid: !!(media && media.video) && !!this.state.vid[e.id],
             embedSrc: media ? 'https://www.youtube-nocookie.com/embed/' + media.video : '',
             vidOpen: !!this.state.vid[e.id],
